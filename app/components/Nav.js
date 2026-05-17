@@ -34,10 +34,10 @@ export default function Nav() {
         TW
       </span>
       <div style={{ display: 'flex', gap: '1.25rem' }}>
-        {['Lineup', 'Stories'].map((label, i) => (
+        {[{ label: 'Lineup', href: '#lineup' }, { label: 'Stories', href: '#stories' }].map(({ label, href }) => (
           <a
             key={label}
-            href={i === 0 ? '#lineup' : '#stories'}
+            href={href}
             style={{
               color: textColor,
               textDecoration: 'none',

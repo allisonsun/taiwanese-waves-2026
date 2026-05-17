@@ -13,8 +13,6 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-archivo)', 'sans-serif'],
-        serif: ['var(--font-archivo)', 'sans-serif'],
-        mono: ['var(--font-archivo)', 'sans-serif'],
       },
     },
   },

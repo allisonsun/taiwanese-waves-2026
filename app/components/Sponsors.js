@@ -79,7 +79,6 @@ export default function Sponsors() {
                 {Array.from({ length: tier.count }).map((_, i) => (
                   <div
                     key={i}
-                    className="grayscale hover:grayscale-0 transition-all"
                     style={{
                       width: 120,
                       height: 60,

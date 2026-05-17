@@ -57,7 +57,6 @@ export default function ArtistModal({ artist, onClose }) {
             {/* Close button */}
             <button
               onClick={onClose}
-              className="font-mono"
               style={{
                 position: 'absolute',
                 top: '1rem',
@@ -90,7 +89,6 @@ export default function ArtistModal({ artist, onClose }) {
               }}
             >
               <span
-                className="font-mono"
                 style={{ fontSize: '0.7rem', letterSpacing: '0.2em', color: '#fff', opacity: 0.5 }}
               >
                 PHOTO

@@ -84,7 +84,6 @@ export default function Lineup() {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gridTemplateRows: 'repeat(2, 1fr)',
             gap: '1.5rem',
           }}
         >
