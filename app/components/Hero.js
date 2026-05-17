@@ -36,6 +36,7 @@ function WaveLayer({ speed, color, opacity, top, height, zIndex }) {
 export default function Hero() {
   return (
     <section
+      className="snap-section"
       style={{
         position: 'relative',
         height: '100vh',

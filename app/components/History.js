@@ -23,6 +23,8 @@ function AutoScrollCarousel({ children, style }) {
           if (pos >= maxScroll) pos = 0
           el.scrollLeft = pos
         }
+      } else {
+        pos = el.scrollLeft
       }
       rafId = requestAnimationFrame(step)
     }
@@ -124,13 +126,14 @@ export default function History() {
           .history-artists-mobile { display: block !important; }
           .history-artists-mobile span { font-size: 16px !important; }
           .history-carousel-motion { padding-bottom: 4px !important; }
+          .history-year-inner { gap: 8px !important; }
           .history-section-inner { padding: 0 1.5rem !important; }
           .history-header-pad { padding: 0 1.5rem 2rem !important; }
         }
       `}</style>
 
       {/* Header */}
-      <div className="history-header-pad" style={{ padding: '0 4rem 3rem', textAlign: 'center' }}>
+      <div className="history-header-pad" style={{ padding: '0 4rem 24px', textAlign: 'center' }}>
         <h2 style={{ fontSize: 32, fontWeight: 700, lineHeight: '32px', letterSpacing: '1.1px', color: '#fff' }}>
           Waves throughout the years
         </h2>
@@ -138,9 +141,6 @@ export default function History() {
 
       {/* Accordion list */}
       <div className="history-section-inner" style={{ maxWidth: 1400, margin: '0 auto', padding: '0 3rem' }}>
-
-        {/* Top divider */}
-        <div style={{ height: 1, background: '#fff', marginBottom: 0 }} />
 
         {YEARS.map((y, i) => {
           const isActive = activeIndex === i
@@ -158,7 +158,7 @@ export default function History() {
                   cursor: 'pointer',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <div className="history-year-inner" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                   {isActive && <AnimatedWave />}
                   <span className="history-year-num" style={{ fontSize: 24, fontWeight: 700, color: '#fff', letterSpacing: '1px' }}>
                     {y.year}
@@ -219,7 +219,7 @@ export default function History() {
               </AnimatePresence>
 
               {/* Divider */}
-              <div style={{ height: 1, background: '#fff' }} />
+              {i < YEARS.length - 1 && <div style={{ height: 1, background: '#fff' }} />}
             </div>
           )
         })}

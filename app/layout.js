@@ -10,6 +10,7 @@ const archivo = localFont({
 export const metadata = {
   title: 'Taiwanese Waves 2026',
   description: 'A celebration of Taiwanese music and culture — August 2026, Central Park, NYC',
+  icons: { icon: '/favicon.png' },
 }
 
 export default function RootLayout({ children }) {

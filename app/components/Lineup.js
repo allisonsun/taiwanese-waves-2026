@@ -73,7 +73,8 @@ export default function Lineup() {
   return (
     <section
       id="lineup"
-      style={{ padding: '6rem 2rem', background: '#000' }}
+      className="snap-section"
+      style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '4rem 2rem', background: '#000' }}
     >
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <h2 style={{ fontSize: 32, fontWeight: 700, lineHeight: '32px', letterSpacing: '1.1px', color: '#fff', marginBottom: '3rem' }}>

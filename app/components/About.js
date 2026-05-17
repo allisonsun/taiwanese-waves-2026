@@ -1,8 +1,13 @@
 export default function About() {
   return (
     <section
+      className="snap-section"
       style={{
-        padding: '8rem 2rem',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '4rem 2rem',
         background: '#000',
       }}
     >
