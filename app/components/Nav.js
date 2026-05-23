@@ -2,16 +2,37 @@
 
 import { useState, useEffect } from 'react'
 
+const NAV_LINKS = [
+  { label: 'Lineup', href: '#lineup' },
+  { label: 'History', href: '#history' },
+  { label: 'Memories', href: '#stories' },
+]
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
+  const [overHistory, setOverHistory] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.8)
+    const handleScroll = () => {
+      const next = window.scrollY > window.innerHeight * 0.8
+      setScrolled(next)
+    }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const textColor = scrolled ? '#fff' : '#000'
+  useEffect(() => {
+    const el = document.getElementById('history')
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setOverHistory(entry.isIntersecting),
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  const textColor = (!scrolled || overHistory) ? '#000' : '#fff'
 
   return (
     <nav
@@ -34,7 +55,7 @@ export default function Nav() {
         TW
       </span>
       <div style={{ display: 'flex', gap: '1.25rem' }}>
-        {[{ label: 'Lineup', href: '#lineup' }, { label: 'Stories', href: '#stories' }].map(({ label, href }) => (
+        {NAV_LINKS.map(({ label, href }) => (
           <a
             key={label}
             href={href}

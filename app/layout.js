@@ -7,6 +7,12 @@ const archivo = localFont({
   display: 'swap',
 })
 
+const rationalDisplay = localFont({
+  src: './fonts/Rational Display Semi Bold.otf',
+  variable: '--font-rational',
+  display: 'swap',
+})
+
 export const metadata = {
   title: 'Taiwanese Waves 2026',
   description: 'A celebration of Taiwanese music and culture — August 2026, Central Park, NYC',
@@ -15,8 +21,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={archivo.variable}>
-      <body style={{ background: '#000', color: '#fff', fontFamily: 'var(--font-archivo), sans-serif' }}>
+    <html lang="en" className={`${archivo.variable} ${rationalDisplay.variable}`}>
+      <body style={{ color: '#fff', fontFamily: 'var(--font-archivo), sans-serif' }}>
         {children}
       </body>
     </html>

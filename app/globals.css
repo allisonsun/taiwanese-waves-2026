@@ -3,19 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --background: #000;
+  --background: #fdf108;
   --foreground: #fff;
   --accent: #fdf108;
+}
+
+h2 {
+  font-family: var(--font-rational), sans-serif;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
+  overflow-x: hidden;
+  background: #fdf108;
 }
 
 .snap-section {
@@ -32,4 +39,38 @@ html {
   h2 {
     font-size: 22px !important;
   }
+
+  /* Lineup */
+  .lineup-trio { flex-direction: column !important; width: 100% !important; padding: 0 1.5rem 2rem !important; gap: 4rem !important; }
+  .lineup-trio-item { flex: none !important; width: 100% !important; }
+  .lineup-trio-text { padding: 1rem 0.5rem !important; text-align: left !important; }
+  .lineup-trio-text h3, .lineup-solo-row h3 { font-size: 28px !important; line-height: 28px !important; }
+  .lineup-trio-text .lineup-social { justify-content: flex-start !important; }
+  .lineup-social { gap: 12px !important; margin: 12px 0 !important; }
+  .lineup-social a { width: auto !important; height: auto !important; }
+  .social-icon { width: 28px !important; height: 28px !important; }
+  .social-icon-spotify { width: 24px !important; height: 28px !important; }
+  .social-icon-youtube { width: 32px !important; height: 32px !important; }
+  .lineup-solo-container { padding: 4rem 1.5rem 0 !important; }
+  .lineup-solo-list { gap: 0 !important; }
+
+  /* About */
+  .about-video-container { width: 100vw !important; aspect-ratio: 1 / 2 !important; border-radius: 32px !important; }
+  .about-video-title { font-size: 28px !important; line-height: 34px !important; width: 80vw !important; -webkit-text-stroke: 2px #000 !important; }
+
+  /* History */
+  #history { padding: 40px 0 !important; }
+  .history-header-pad { padding: 0 1.5rem 12px !important; }
+  .history-year-row { flex-direction: column !important; align-items: flex-start !important; gap: 0; padding: 18px 0 !important; }
+  .history-year-row .history-year-num { font-size: 18px !important; }
+  .history-year-row .history-tagline { font-size: 18px !important; }
+  .history-artists-desktop { display: none !important; }
+  .history-artists-mobile { display: block !important; }
+  .history-artists-mobile span { font-size: 16px !important; }
+  .history-carousel-motion { padding-bottom: 4px !important; }
+  .history-year-inner { gap: 8px !important; }
+  .history-year-inner svg { margin-right: 4px !important; }
+  .history-section-inner { padding: 0 1.5rem !important; }
+  .lineup-solo-row { flex-direction: column !important; gap: 1.5rem !important; padding: 40px 0 !important; }
+  .lineup-solo-img { width: 100% !important; height: auto !important; aspect-ratio: 4 / 3; }
 }

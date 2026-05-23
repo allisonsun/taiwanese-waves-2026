@@ -1,135 +1,181 @@
 'use client'
 
-import { useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
-import ArtistModal from './ArtistModal'
 
-const artists = [
+const soloArtists = [
   {
     id: 1,
-    nameEn: 'CHEN YU',
-    nameZh: '陳宇',
-    shortBio: 'Blending Taiwanese folk with ambient electronics, Chen Yu creates soundscapes that feel like mountain mist.',
-    fullBio: 'Chen Yu grew up in the foothills of Alishan, where the sounds of traditional Taiwanese folk music mingled with the static of late-night radio broadcasts. His debut album "山霧" (Mountain Mist) received critical acclaim across East Asia, earning him a place at international festivals from Seoul to Amsterdam. His live performances are meditative experiences, layering traditional pipa samples with contemporary electronic production.',
-    bgColor: '#2a3a4a',
-    socialLinks: [{ icon: 'Instagram', url: '#' }, { icon: 'Spotify', url: '#' }],
-    youtubeId: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-  },
-  {
-    id: 2,
-    nameEn: 'LIN MEI',
-    nameZh: '林美',
-    shortBio: 'Indie-pop songwriting meets classical piano training in Lin Mei\'s introspective, genre-defying work.',
-    fullBio: 'Lin Mei studied classical piano at the National Taiwan University of Arts before turning to songwriting in her mid-twenties. Her music is a delicate negotiation between the formal discipline of her training and the emotional rawness of personal narrative. Her 2024 EP "靜水" (Still Water) spent three months on Taiwan\'s independent music charts, introducing her vulnerable, literary lyrics to a growing international audience.',
-    bgColor: '#3a2a4a',
-    socialLinks: [{ icon: 'Instagram', url: '#' }, { icon: 'YouTube', url: '#' }],
-    youtubeId: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    nameEn: 'Mong Tong',
+    nameZh: '夢東',
+    photo: '/artists/mong-tong.jpg',
+    shortBio: 'Blending Taiwanese folk with ambient electronics, Mong Tong creates soundscapes that feel like mountain mist.',
+    socialLinks: [{ icon: 'Instagram', url: 'https://www.instagram.com/mongtongband/' }, { icon: 'Spotify', url: 'https://open.spotify.com/artist/61QVaGjYK4UNd6uTz7Lzuo?si=4HkeQ9tHQIaoV92Q1ilZNw' }, { icon: 'YouTube', url: 'https://youtube.com/@mongtongband?si=2Gj5YytCU6r9XCwy' }],
   },
   {
     id: 3,
-    nameEn: 'WANG HAO',
-    nameZh: '王浩',
-    shortBio: 'Post-rock architect. Wang Hao\'s guitar work has been called "the sound of a city that never sleeps."',
-    fullBio: 'Wang Hao is the guitarist and primary composer behind Taiwan\'s most celebrated post-rock act. His compositions build from silence into towering walls of sound, drawing comparisons to Mogwai and Godspeed You! Black Emperor while maintaining a distinctly Taiwanese sensibility — threading in traditional erhu motifs and pentatonic scales. His solo project explores more intimate territory, with acoustic pieces that reveal the quieter side of his musical imagination.',
-    bgColor: '#4a3a2a',
-    socialLinks: [{ icon: 'Instagram', url: '#' }, { icon: 'Bandcamp', url: '#' }],
-    youtubeId: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    nameEn: 'Chance Emerson',
+    nameZh: '',
+    photo: '/artists/chance-emerson.jpg',
+    shortBio: 'Post-rock architect. Chance Emerson\'s guitar work has been called "the sound of a city that never sleeps."',
+    socialLinks: [{ icon: 'Instagram', url: 'https://www.instagram.com/chance.s.emerson/' }, { icon: 'Spotify', url: 'https://open.spotify.com/artist/2qabc8edZgoWe8DY4HIGED?si=A_q_mw4sTX-S_9lZ3Y81Ag' }, { icon: 'YouTube', url: 'https://youtube.com/@chanceemersonmusic?si=RpPA-wZXpBchABId' }],
   },
   {
     id: 4,
-    nameEn: 'HSU LING',
-    nameZh: '許玲',
-    shortBio: 'Jazz vocalist and composer, Hsu Ling weaves Mandarin poetry into modern jazz frameworks.',
-    fullBio: 'Hsu Ling is one of Taiwan\'s most distinctive jazz voices — a vocalist and composer who treats Mandarin poetry as the raw material for musical exploration. Trained at Berklee College of Music, she returned to Taipei to lead a quartet that has redefined what Taiwanese jazz can sound like. Her 2025 album "朝露" (Morning Dew) features settings of classical Tang poetry alongside original compositions in a hybrid language that is entirely her own.',
-    bgColor: '#2a4a3a',
-    socialLinks: [{ icon: 'Instagram', url: '#' }, { icon: 'Apple Music', url: '#' }],
-    youtubeId: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-  },
-  {
-    id: 5,
-    nameEn: 'KAO JUN',
-    nameZh: '高峻',
-    shortBio: 'Electronic producer and DJ, Kao Jun bridges Taiwanese temple music with contemporary club culture.',
-    fullBio: 'Kao Jun began his musical life playing percussion in Taiwanese temple ceremonies, an experience that would define his approach to rhythm and ritual. Now based between Taipei and Berlin, he produces music that fuses the hypnotic patterns of traditional ceremony with the forward momentum of contemporary electronic dance music. His sets are immersive, often incorporating field recordings from across Taiwan\'s diverse landscape.',
-    bgColor: '#3a4a2a',
-    socialLinks: [{ icon: 'Instagram', url: '#' }, { icon: 'SoundCloud', url: '#' }],
-    youtubeId: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-  },
-  {
-    id: 6,
-    nameEn: 'WU FANG',
-    nameZh: '吳芳',
-    shortBio: 'Multi-instrumentalist and vocalist, Wu Fang\'s music is a dialogue between Hakka heritage and modern R&B.',
-    fullBio: 'Wu Fang grew up in a Hakka-speaking household in Hsinchu County, surrounded by the distinctive folk traditions of that community. Her music is a conversation between that heritage and the contemporary R&B and soul influences she absorbed through years of performing in Taipei\'s live music circuit. Her voice — warm, precise, and emotionally direct — has made her one of Taiwan\'s most sought-after collaborators.',
-    bgColor: '#4a2a3a',
-    socialLinks: [{ icon: 'Instagram', url: '#' }, { icon: 'Spotify', url: '#' }],
-    youtubeId: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    nameEn: 'Chinatown Records',
+    nameZh: '唐人街唱片',
+    photo: '/artists/chinatown-records.jpg',
+    shortBio: 'Chinatown Records is a homegrown community effort to celebrate the sonic tapestry of music, memory, & history that comes with inherited family collections. Homebased in NYC\'s Manhattan Chinatown, DJ historian yiuyiu 瑶瑶 takes on her childhood name to care for & activate the Chinatown Records archive of over 30 record/CD/tape collections inherited from her family & neighbors.\n\nyiuyiu 瑶瑶 has the most fun playing records of golden songs at senior centers, leading karaoke dance floors with families & neighbors on the streets of Chinatown, & heating up club nights – as a dancer & DJ – with all genres of Chinese dance music. Spanning across Chinatown block parties, sonic histories, living room listenings, and beyond, Chinatown Records 華埠錄音 is an ever-growing record of the people we love, who bring all this music to life with us.',
+    socialLinks: [{ icon: 'Instagram', url: 'https://www.instagram.com/chinatownrecordsproject/' }, { icon: 'Website', url: 'https://www.chinatownrecords.us/' }],
   },
 ]
 
-export default function Lineup() {
-  const [activeArtist, setActiveArtist] = useState(null)
+const trioArtists = [
+  {
+    id: 2,
+    nameEn: '9m88',
+    nameZh: '',
+    photo: '/artists/9m88.jpg',
+    shortBio: "Indie-pop songwriting meets soul and jazz in 9m88's introspective, genre-defying work.",
+    socialLinks: [{ icon: 'Instagram', url: 'https://www.instagram.com/9m88/' }, { icon: 'Spotify', url: 'https://open.spotify.com/artist/4PjY2961rc0MHE9zHYWEnH?si=_OZ5dOSSQ3qTAseakQm99w' }, { icon: 'YouTube', url: 'https://www.youtube.com/channel/UCo95y8CD2JpOR5eePxB1a7w' }],
+  },
+  {
+    id: 5,
+    nameEn: 'ØZI',
+    nameZh: '',
+    photo: '/artists/ozi.jpg',
+    shortBio: 'Electronic producer and DJ, OZI bridges Taiwanese hip-hop with contemporary club culture.',
+    socialLinks: [{ icon: 'Instagram', url: 'https://www.instagram.com/ozifp/?hl=en' }, { icon: 'Spotify', url: 'https://open.spotify.com/artist/7Icsejk4pdIhkq2KO5A0jD?si=vtKs7TKgQ8-oGWbhEkIL5g' }, { icon: 'YouTube', url: 'https://youtube.com/@ozifp?si=p5dn-7Gp1BBtKMzx' }],
+  },
+  {
+    id: 6,
+    nameEn: 'Yellow',
+    nameZh: '黃宣',
+    photo: '/artists/yellow.jpg',
+    shortBio: "Multi-instrumentalist and vocalist, Yellow's music is a dialogue between Taiwanese heritage and modern R&B.",
+    socialLinks: [{ icon: 'Instagram', url: 'https://www.instagram.com/y3loooooo/' }, { icon: 'Spotify', url: 'https://open.spotify.com/artist/6iUs0Aijnu60VAAf8Aj2YM?si=fwczfdz2TYuNCvdwqLty-A' }, { icon: 'YouTube', url: 'https://youtube.com/@yellow9819?si=bpB0nVLGMvpI_OBB' }],
+  },
+]
 
+const ICON_MAP = { Instagram: '/instagram.svg', Spotify: '/spotify.svg', YouTube: '/youtube.svg', Website: '/globe.svg' }
+const ICON_SIZE_MAP = {
+  Instagram: { width: 32, height: 32 },
+  Spotify:   { width: 28, height: 32 },
+  YouTube:   { width: 35, height: 35 },
+  Website:   { width: 30, height: 30 },
+}
+
+const MOTION_PROPS = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5 },
+}
+
+function ArtistName({ nameEn, nameZh, inline }) {
+  return (
+    <>
+      <h3 style={{ fontSize: 40, fontWeight: 800, lineHeight: '40px', color: '#fff', margin: 0 }}>
+        {nameEn}
+        {inline && nameZh && <span style={{ fontSize: 24, fontWeight: 500, color: '#fff', marginLeft: 10 }}>{nameZh}</span>}
+      </h3>
+      {!inline && nameZh && <p style={{ fontSize: 24, fontWeight: 500, lineHeight: '24px', color: '#fff', margin: '4px 0 0' }}>{nameZh}</p>}
+    </>
+  )
+}
+
+function SocialLinks({ links, style }) {
+  return (
+    <div className="lineup-social" style={{ display: 'flex', gap: 8, alignItems: 'center', margin: '16px 0', ...style }}>
+      {links.map(link => {
+        const src = ICON_MAP[link.icon]
+        if (!src) return null
+        return (
+          <a key={link.icon} href={link.url} target="_blank" rel="noopener noreferrer"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, flexShrink: 0 }}
+          >
+            <img
+              src={src}
+              alt={link.icon}
+              className={`social-icon social-icon-${link.icon.toLowerCase()}`}
+              style={{ ...(ICON_SIZE_MAP[link.icon] ?? { width: 24, height: 24 }), display: 'block' }}
+            />
+          </a>
+        )
+      })}
+    </div>
+  )
+}
+
+export default function Lineup() {
   return (
     <section
       id="lineup"
       className="snap-section"
-      style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '4rem 2rem', background: '#000' }}
+      style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '4rem 0', background: '#000', color: '#fff' }}
     >
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <h2 style={{ fontSize: 32, fontWeight: 700, lineHeight: '32px', letterSpacing: '1.1px', color: '#fff', marginBottom: '3rem' }}>
-          Artists 2026
+        <h2 style={{ fontSize: 32, fontWeight: 600, lineHeight: '32px', letterSpacing: 'normal', color: '#fff', marginBottom: '3rem', textAlign: 'center' }}>
+          Lineup
         </h2>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1.5rem',
-          }}
-        >
-          {artists.map((artist, i) => (
-            <motion.div
-              key={artist.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.6)' }}
-              onClick={() => setActiveArtist(artist)}
-              style={{
-                borderRadius: 16,
-                overflow: 'hidden',
-                cursor: 'pointer',
-                background: artist.bgColor,
-                boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
-              }}
-            >
-              <img
-                src={`https://picsum.photos/seed/${artist.id}/480/720`}
-                alt={artist.nameEn}
-                style={{ display: 'block', width: '100%', height: 280, objectFit: 'cover' }}
-              />
-              <div style={{ padding: '0.75rem 1rem', background: '#111' }}>
-                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: '0.15rem' }}>
-                  {artist.nameEn}
-                </h3>
-                <p style={{ fontSize: 13, fontWeight: 500, color: '#fff', opacity: 0.5, marginBottom: '0.35rem' }}>
-                  {artist.nameZh}
-                </p>
-                <p style={{ fontSize: 11, lineHeight: '16px', color: '#fff', opacity: 0.65 }}>
-                  {artist.shortBio}
-                </p>
-                <p style={{ fontSize: 9, letterSpacing: '2px', textTransform: 'uppercase', color: '#fff', opacity: 0.4, marginTop: '0.5rem' }}>
-                  View profile →
-                </p>
+        {/* Trio row: 9m88, ØZI, Yellow */}
+          <motion.div {...MOTION_PROPS} className="lineup-trio" style={{ display: 'flex', gap: 2, padding: '0 0 3rem', width: '80vw', margin: '0 auto' }}>
+            {trioArtists.map((artist, i) => {
+              return (
+              <div
+                key={artist.id}
+                className="lineup-trio-item"
+                style={{ flex: 1, minWidth: 0 }}
+              >
+                <div className="lineup-trio-img-wrapper" style={{ position: 'relative', width: '100%', aspectRatio: '3 / 3.3', borderRadius: 0, overflow: 'hidden', background: '#111' }}>
+                  <Image src={artist.photo} alt={artist.nameEn} fill style={{ objectFit: 'cover' }} priority />
+                </div>
+                <div className="lineup-trio-text" style={{ padding: '2.5rem 3.5rem 1.5rem', textAlign: 'center' }}>
+                  <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} inline />
+                  <SocialLinks links={artist.socialLinks} style={{ justifyContent: 'center' }} />
+                  <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '24px', color: '#ffffffd9', textAlign: 'left' }}>{artist.shortBio}</p>
+                </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+            )})}
+          </motion.div>
 
-      <ArtistModal artist={activeArtist} onClose={() => setActiveArtist(null)} />
+        <div style={{ maxWidth: 1400, margin: '0 auto', width: '100%', padding: '12rem 4rem 10rem' }} className="lineup-solo-container">
+        <div className="lineup-solo-list" style={{ display: 'flex', flexDirection: 'column', gap: '16rem' }}>
+          {soloArtists.map((artist, i) => {
+            const isSquare = i === 1
+            return (
+              <motion.div
+                key={artist.id}
+                {...MOTION_PROPS}
+                className="lineup-solo-row"
+                style={{
+                  display: 'flex',
+                  flexDirection: i % 2 === 0 ? 'row' : 'row-reverse',
+                  alignItems: 'flex-start',
+                  gap: '4rem',
+                }}
+              >
+                <Image
+                  src={artist.photo}
+                  alt={artist.nameEn}
+                  width={isSquare ? 480 : i === 0 ? 560 : 640}
+                  height={isSquare ? 480 : i === 0 ? 400 : 420}
+                  className="lineup-solo-img"
+                  style={{ objectFit: 'cover', flexShrink: 0, display: 'block' }}
+                />
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '0.5rem' }}>
+                  <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} />
+                  <SocialLinks links={artist.socialLinks} />
+                  <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '26px', color: '#ffffffd9', maxWidth: 440, whiteSpace: 'pre-line' }}>{artist.shortBio}</p>
+                </div>
+              </motion.div>
+            )
+          })}
+
+        </div>
+        </div>
+
+
     </section>
   )
 }

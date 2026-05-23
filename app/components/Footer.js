@@ -7,9 +7,10 @@ const LINKS = [
 export default function Footer() {
   return (
     <footer
+      id="footer"
       style={{
-        padding: '3rem 2rem',
-        background: '#000',
+        padding: '1.5rem 2rem',
+        background: '#fdf108',
         textAlign: 'center',
       }}
     >
@@ -20,9 +21,9 @@ export default function Footer() {
             href={href}
             target={href.startsWith('mailto') ? undefined : '_blank'}
             rel="noopener noreferrer"
-            style={{ color: '#fff', fontSize: 18, letterSpacing: '0.3px', textDecoration: 'none', transition: 'color 0.2s' }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#fdf108')}
-            onMouseLeave={e => (e.currentTarget.style.color = '#fff')}
+            style={{ color: '#000', fontSize: 18, letterSpacing: '0.3px', textDecoration: 'none', transition: 'opacity 0.2s' }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
+            onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
           >
             {label}
           </a>

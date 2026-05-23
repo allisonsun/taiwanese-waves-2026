@@ -3,17 +3,21 @@
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function StoryModal({ story, onClose }) {
+export default function StoryModal({ story, onClose, onNext, onPrev }) {
   useEffect(() => {
     if (!story) return
-    const handleKey = (e) => { if (e.key === 'Escape') onClose() }
+    const handleKey = (e) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowRight') onNext()
+      if (e.key === 'ArrowLeft') onPrev()
+    }
     document.addEventListener('keydown', handleKey)
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', handleKey)
       document.body.style.overflow = ''
     }
-  }, [story, onClose])
+  }, [story, onClose, onNext, onPrev])
 
   return (
     <AnimatePresence>
@@ -33,9 +37,12 @@ export default function StoryModal({ story, onClose }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            gap: '1rem',
             padding: '2rem',
           }}
         >
+          <button aria-label="Previous" onClick={e => { e.stopPropagation(); onPrev() }} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '2rem', cursor: 'pointer', padding: '0.5rem' }}>‹</button>
+
           <motion.div
             key="panel"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -48,27 +55,29 @@ export default function StoryModal({ story, onClose }) {
               color: '#111',
               maxWidth: 520,
               width: '100%',
-              padding: '3rem',
+              padding: '1.5rem',
               position: 'relative',
+              borderRadius: 16,
               boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
             }}
           >
             <button
+              aria-label="Close"
               onClick={onClose}
               style={{
                 position: 'absolute',
-                top: '1rem',
-                right: '1rem',
+                top: '1.5rem',
+                right: '1.5rem',
                 background: 'none',
                 border: 'none',
-                fontSize: '1.25rem',
+                fontSize: '2rem',
                 cursor: 'pointer',
-                color: '#333',
+                color: story.photo ? '#fdf108' : '#000',
                 lineHeight: 1,
-                opacity: 0.5,
+                zIndex: 10,
               }}
-              onMouseEnter={e => (e.target.style.opacity = 1)}
-              onMouseLeave={e => (e.target.style.opacity = 0.5)}
+              onMouseEnter={e => (e.currentTarget.style.opacity = 0.7)}
+              onMouseLeave={e => (e.currentTarget.style.opacity = 1)}
             >
               ×
             </button>
@@ -76,48 +85,22 @@ export default function StoryModal({ story, onClose }) {
               <img
                 src={story.photo}
                 alt=""
-                style={{
-                  width: '100%',
-                  aspectRatio: '4/3',
-                  objectFit: 'cover',
-                  marginBottom: '1.5rem',
-                  display: 'block',
-                }}
+                style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block', marginBottom: '1rem' }}
               />
             ) : (
-              <div
-                style={{
-                  width: '100%',
-                  aspectRatio: '4/3',
-                  background: '#fdf108',
-                  marginBottom: '1.5rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <span style={{ fontSize: '5rem', color: 'rgba(0,0,0,0.12)', lineHeight: 1 }}>"</span>
-              </div>
+              <div style={{ width: '100%', aspectRatio: '4/3', background: '#fdf108', marginBottom: '1rem' }} />
             )}
             {story.name && (
-              <p
-                style={{
-                  fontSize: 12,
-                  letterSpacing: '2px',
-                  textTransform: 'uppercase',
-                  color: '#c8a96e',
-                  marginBottom: '0.5rem',
-                }}
-              >
+              <p style={{ fontSize: 12, letterSpacing: '0.3px', color: '#999', marginBottom: '0.4rem' }}>
                 {story.name}
               </p>
             )}
-            <p
-              style={{ fontSize: 17, fontWeight: 400, lineHeight: '24px', color: '#222' }}
-            >
+            <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '24px', color: '#222' }}>
               {story.story}
             </p>
           </motion.div>
+
+          <button aria-label="Next" onClick={e => { e.stopPropagation(); onNext() }} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '2rem', cursor: 'pointer', padding: '0.5rem' }}>›</button>
         </motion.div>
       )}
     </AnimatePresence>
