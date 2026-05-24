@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import useIsMobile from '../hooks/useIsMobile'
 
 const WAVE_PERIOD = 52
 const NUM_PERIODS = 16
@@ -16,6 +17,7 @@ const WAVE_PATH = (() => {
 
 export default function Loader() {
   const [done, setDone] = useState(false)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const img = new window.Image()
@@ -43,23 +45,23 @@ export default function Loader() {
             overflow: 'hidden',
           }}
         >
-          <svg
-            width="40vw"
-            height="32"
-            viewBox={`0 0 ${WAVE_PERIOD * NUM_PERIODS} 32`}
-            preserveAspectRatio="xMidYMid meet"
-            style={{ overflow: 'hidden' }}
-          >
-            <motion.path
-              d={WAVE_PATH}
-              fill="none"
-              stroke="#000"
-              strokeWidth="3"
-              strokeLinecap="round"
-              animate={{ x: [0, -WAVE_PERIOD] }}
-              transition={{ duration: 0.9, repeat: Infinity, ease: 'linear' }}
-            />
-          </svg>
+          <div style={{ width: isMobile ? '40vw' : '20vw', height: 32, overflow: 'hidden' }}>
+            <svg
+              width={WAVE_PERIOD * NUM_PERIODS}
+              height="32"
+              viewBox={`0 0 ${WAVE_PERIOD * NUM_PERIODS} 32`}
+            >
+              <motion.path
+                d={WAVE_PATH}
+                fill="none"
+                stroke="#000"
+                strokeWidth="3"
+                strokeLinecap="round"
+                animate={{ x: [0, -WAVE_PERIOD] }}
+                transition={{ duration: 0.9, repeat: Infinity, ease: 'linear' }}
+              />
+            </svg>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
