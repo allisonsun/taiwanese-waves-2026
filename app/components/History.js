@@ -56,6 +56,8 @@ function AutoScrollCarousel({ children, style }) {
       ref={ref}
       onMouseEnter={() => { isPaused.current = true }}
       onMouseLeave={() => { isPaused.current = false }}
+      onTouchStart={() => { isPaused.current = true }}
+      onTouchEnd={() => { isPaused.current = false }}
       style={style}
     >
       {children}
