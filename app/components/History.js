@@ -91,22 +91,22 @@ function AnimatedWave() {
 
 const YEARS = [
   {
-    year: 2016, tagline: 'The inauguration', poster: '/poster-2016.gif',
+    year: 2016, tagline: 'The inauguration', poster: '/poster-2016.mp4',
     artists: ['Sunset Rollercoaster', 'Anpu', 'Wonfu'],
     photos: ['/photos/2016/2016-1.jpg', '/photos/2016/2016-2.jpg', '/photos/2016/2016-3.jpg', '/photos/2016/2016-4.jpg', '/photos/2016/2016-5.jpg', '/photos/2016/2016-6.jpg', '/photos/2016/2016-7.jpg', '/photos/2016/2016-8.jpg', '/photos/2016/2016-9.jpg'],
   },
   {
-    year: 2017, tagline: 'Diversity in language and culture', poster: '/poster-2017.gif',
+    year: 2017, tagline: 'Diversity in language and culture', poster: '/poster-2017.mp4',
     artists: ['Fire Ex.', 'Sangpuy', 'Dadado Huang & Berry j'],
     photos: ['/photos/2017/2017-1.jpg', '/photos/2017/2017-2.jpg', '/photos/2017/2017-3.jpg', '/photos/2017/2017-4.jpg', '/photos/2017/2017-5.jpg', '/photos/2017/2017-6.jpg', '/photos/2017/2017-7.jpg', '/photos/2017/2017-8.jpg', '/photos/2017/2017-9.jpg', '/photos/2017/2017-10.jpg'],
   },
   {
-    year: 2018, tagline: 'Diversity in genre', poster: '/poster-2018.gif',
+    year: 2018, tagline: 'Diversity in genre', poster: '/poster-2018.mp4',
     artists: ['Sheng-Xiang & Band', 'Soft Lipa', 'Elephant Gym'],
     photos: ['/photos/2018/2018-1.jpg', '/photos/2018/2018-2.jpg', '/photos/2018/2018-3.jpg', '/photos/2018/2018-4.jpg', '/photos/2018/2018-5.jpg', '/photos/2018/2018-6.jpg', '/photos/2018/2018-8.jpg', '/photos/2018/2018-9.jpg'],
   },
   {
-    year: 2019, tagline: 'Women make waves', poster: '/poster-2019.gif',
+    year: 2019, tagline: 'Women make waves', poster: '/poster-2019.mp4',
     artists: ['ABAO', 'Wan Fang', '9m88', 'Tizzy Bac'],
     photos: ['/photos/2019/2019-1.jpg', '/photos/2019/2019-2.jpg', '/photos/2019/2019-3.jpg', '/photos/2019/2019-4.jpg', '/photos/2019/2019-5.jpg', '/photos/2019/2019-6.jpg', '/photos/2019/2019-7.jpg'],
   },
@@ -116,7 +116,7 @@ const YEARS = [
     photos: ['/photos/2023/2023-1.jpg', '/photos/2023/2023-2.jpg', '/photos/2023/2023-3.jpg', '/photos/2023/2023-4.jpg', '/photos/2023/2023-5.jpg', '/photos/2023/2023-6.jpg', '/photos/2023/2023-7.jpg'],
   },
   {
-    year: 2025, tagline: 'Celebration of friendship', poster: '/poster-2025.gif',
+    year: 2025, tagline: 'Celebration of friendship', poster: '/poster-2025.mp4',
     artists: ['Enno Cheng', 'ABAO & Nanguaq Girls', 'Bulareyaung Dance Company', 'Chinatown Records'],
     photos: ['/photos/2025/2025-1.jpg', '/photos/2025/2025-2.jpg', '/photos/2025/2025-3.jpg', '/photos/2025/2025-4.jpg', '/photos/2025/2025-5.jpg', '/photos/2025/2025-6.jpg', '/photos/2025/2025-7.jpg', '/photos/2025/2025-8.jpg', '/photos/2025/2025-9.jpg'],
   },
@@ -221,8 +221,12 @@ export default function History() {
                       }}
                     >
                       {y.poster && (
-                        <div style={{ flexShrink: 0, aspectRatio: '1000 / 1428', height: '100%', overflow: 'hidden', border: '1px solid #000', position: 'relative' }}>
-                          <Image src={y.poster} alt={`${y.year} poster`} fill sizes="300px" style={{ objectFit: 'contain' }} />
+                        <div style={{ flexShrink: 0, aspectRatio: '1000 / 1428', height: '100%', overflow: 'hidden', border: '1px solid #000' }}>
+                          {y.poster.endsWith('.mp4') ? (
+                            <video src={y.poster} autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                          ) : (
+                            <img src={y.poster} alt={`${y.year} poster`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                          )}
                         </div>
                       )}
                       {y.photos?.map((photo, pi) => (
