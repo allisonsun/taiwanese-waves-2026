@@ -29,7 +29,7 @@ export default function Loader() {
     img.onerror = () => { imgDone = true; tryFinish() }
     img.src = '/hero/double-circle.png'
 
-    const min = setTimeout(() => { timerDone = true; tryFinish() }, 1500)
+    const min = setTimeout(() => { timerDone = true; tryFinish() }, 1000)
     const fallback = setTimeout(() => setDone(true), 5000)
     return () => { clearTimeout(min); clearTimeout(fallback) }
   }, [])
