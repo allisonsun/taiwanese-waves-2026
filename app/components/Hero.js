@@ -12,12 +12,12 @@ const dateContent = (color, isMobile) => {
   const BASE  = { position: 'absolute', fontSize: 'var(--hero-font-large)', lineHeight: 'var(--hero-font-large-line)', margin: 0 }
   return (
     <>
-      <p style={{ ...BASE, ...BOLD, bottom: isMobile ? '8rem' : '2rem', left: '2rem', color }}>
+      <p style={{ ...BASE, ...BOLD, bottom: isMobile ? '8rem' : '2rem', left: isMobile ? '1rem' : '2rem', color }}>
         2026 <span style={LIGHT}>Aug 16</span>
         <br />
         <span style={SMALL}>Rumsey Playfield, Central Park</span>
       </p>
-      <p style={{ ...BASE, ...LIGHT, bottom: '2rem', right: '2rem', color, textAlign: 'right' }}>
+      <p style={{ ...BASE, ...LIGHT, bottom: '2rem', right: isMobile ? '1rem' : '2rem', color, textAlign: 'right' }}>
         SummerStage
         <br />
         <span style={SMALL}>NYC</span>
