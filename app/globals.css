@@ -194,6 +194,10 @@ html {
   :root {
     --spinner-top: 30%;
     --spinner-size: 60vw;
+    --hero-font-large: 44px;
+    --hero-font-large-line: 48px;
+    --hero-font-small: 28px;
+    --hero-font-small-line: 32px;
   }
 }
 
