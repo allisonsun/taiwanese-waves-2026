@@ -190,32 +190,10 @@ html {
   .about-video-title { font-size: 36px !important; line-height: 42px !important; width: 75vw !important; }
 }
 
-@media (min-width: 769px) and (max-width: 1180px) and (orientation: landscape) {
-  /* Landscape browser windows — revert to desktop natural sizing */
-  .hero-circle {
-    width: 100vw;
-    height: auto;
-    object-fit: unset;
-  }
-
+@media (min-width: 769px) and (max-width: 1180px) {
   :root {
-    --spinner-top: 50%;
-    --spinner-size: 55vw;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1180px) and (orientation: portrait) {
-  /* Hero — iPad Pro portrait */
-  .hero-circle {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    object-position: center top;
-  }
-
-  :root {
-    --spinner-top: 26vh;
-    --spinner-size: 65vw;
+    --spinner-top: 30%;
+    --spinner-size: 60vw;
   }
 }
 
