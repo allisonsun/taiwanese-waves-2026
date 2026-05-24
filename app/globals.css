@@ -216,7 +216,7 @@ html {
   /* Lineup */
   .lineup-trio { flex-direction: column !important; width: 100% !important; padding: 0 1.5rem 2rem !important; gap: 4rem !important; }
   .lineup-trio-item { flex: none !important; width: 100% !important; }
-  .lineup-trio-text { padding: 1rem 0.5rem !important; text-align: left !important; }
+  .lineup-trio-text { padding: 2rem 0.5rem 1rem !important; text-align: left !important; }
   .lineup-trio-text h3, .lineup-solo-row h3 { font-size: 28px !important; line-height: 28px !important; }
   .lineup-trio-text .lineup-social { justify-content: flex-start !important; }
   .lineup-social { gap: 12px !important; margin: 12px 0 !important; }
