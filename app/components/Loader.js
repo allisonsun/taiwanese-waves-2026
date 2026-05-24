@@ -44,7 +44,7 @@ export default function Loader() {
           }}
         >
           <svg
-            width="80vw"
+            width="40vw"
             height="32"
             viewBox={`0 0 ${WAVE_PERIOD * NUM_PERIODS} 32`}
             preserveAspectRatio="xMidYMid meet"
