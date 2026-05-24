@@ -23,6 +23,11 @@ export const metadata = {
   title: 'Taiwanese Waves 2026',
   description: 'A celebration of Taiwanese music and culture — August 2026, Central Park, NYC',
   icons: { icon: '/favicon.png' },
+  openGraph: {
+    title: 'Taiwanese Waves 2026',
+    description: 'A celebration of Taiwanese music and culture — August 2026, Central Park, NYC',
+    images: [{ url: '/og-image.jpg', width: 1440, height: 1800 }],
+  },
 }
 
 export default function RootLayout({ children }) {
