@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import useIsMobile from '../hooks/useIsMobile'
 
 const soloArtists = [
   {
@@ -57,7 +58,7 @@ const trioArtists = [
   },
 ]
 
-const ICON_MAP = { Instagram: '/instagram.svg', Spotify: '/spotify.svg', YouTube: '/youtube.svg', Website: '/globe.svg' }
+const ICON_MAP = { Instagram: '/socials/instagram.svg', Spotify: '/socials/spotify.svg', YouTube: '/socials/youtube.svg', Website: '/socials/globe.svg' }
 const ICON_SIZE_MAP = {
   Instagram: { width: 32, height: 32 },
   Spotify:   { width: 28, height: 32 },
@@ -108,6 +109,7 @@ function SocialLinks({ links, style }) {
 }
 
 export default function Lineup() {
+  const isMobile = useIsMobile()
   return (
     <section
       id="lineup"
@@ -119,7 +121,7 @@ export default function Lineup() {
         </h2>
 
         {/* Trio row: 9m88, ØZI, Yellow */}
-          <motion.div {...MOTION_PROPS} className="lineup-trio" style={{ display: 'flex', gap: 2, padding: '0 0 3rem', width: '80vw', margin: '0 auto' }}>
+          <motion.div {...MOTION_PROPS} className="lineup-trio" style={{ display: 'flex', gap: 2, padding: '0 0 3rem', width: '85vw', margin: '0 auto' }}>
             {trioArtists.map((artist, i) => {
               return (
               <div
@@ -127,41 +129,45 @@ export default function Lineup() {
                 className="lineup-trio-item"
                 style={{ flex: 1, minWidth: 0 }}
               >
-                <div className="lineup-trio-img-wrapper" style={{ position: 'relative', width: '100%', aspectRatio: '3 / 3.3', borderRadius: 0, overflow: 'hidden', background: '#111' }}>
-                  <Image src={artist.photo} alt={artist.nameEn} fill style={{ objectFit: 'cover' }} priority />
+                <div className="lineup-trio-img-wrapper" style={{ width: '100%', aspectRatio: '3 / 3.3', overflow: 'hidden', background: '#111' }}>
+                  <Image src={artist.photo} alt={artist.nameEn} width={600} height={660} sizes="(max-width: 768px) 100vw, 33vw" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} priority />
                 </div>
-                <div className="lineup-trio-text" style={{ padding: '2.5rem 3.5rem 1.5rem', textAlign: 'center' }}>
+                <div className="lineup-trio-text" style={{ position: 'relative', padding: '2.5rem 1.5rem 1.5rem', textAlign: 'center' }}>
                   <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} inline />
                   <SocialLinks links={artist.socialLinks} style={{ justifyContent: 'center' }} />
                   <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '24px', color: '#ffffffd9', textAlign: 'left' }}>{artist.shortBio}</p>
+                  {i < trioArtists.length - 1 && (
+                    <span className="lineup-trio-plus" style={{ position: 'absolute', right: 0, top: 'calc(2.5rem - 6px)', fontSize: 40, fontWeight: 700, color: '#fff', lineHeight: '40px', transform: 'translateX(50%)', zIndex: 1 }}>+</span>
+                  )}
                 </div>
               </div>
             )})}
           </motion.div>
 
         <div style={{ maxWidth: 1400, margin: '0 auto', width: '100%', padding: '12rem 4rem 10rem' }} className="lineup-solo-container">
-        <div className="lineup-solo-list" style={{ display: 'flex', flexDirection: 'column', gap: '16rem' }}>
+        <div className="lineup-solo-list" style={{ display: 'flex', flexDirection: 'column', gap: '12rem' }}>
           {soloArtists.map((artist, i) => {
             const isSquare = i === 1
             return (
+              <div key={artist.id}>
               <motion.div
-                key={artist.id}
                 {...MOTION_PROPS}
                 className="lineup-solo-row"
                 style={{
                   display: 'flex',
                   flexDirection: i % 2 === 0 ? 'row' : 'row-reverse',
                   alignItems: 'flex-start',
-                  gap: '4rem',
+                  gap: '3rem',
                 }}
               >
                 <Image
                   src={artist.photo}
                   alt={artist.nameEn}
-                  width={isSquare ? 480 : i === 0 ? 560 : 640}
-                  height={isSquare ? 480 : i === 0 ? 400 : 420}
+                  width={isSquare ? 560 : i === 0 ? 800 : 640}
+                  height={isSquare ? 560 : i === 0 ? 420 : 420}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="lineup-solo-img"
-                  style={{ objectFit: 'cover', flexShrink: 0, display: 'block' }}
+                  style={{ objectFit: 'cover', flexShrink: 0, display: 'block', ...(i === 0 && !isMobile && { marginLeft: 'calc(-4rem - max(0px, (100vw - 1400px) / 2))', height: 600 }), ...(i === 1 && { marginRight: '4rem' }) }}
                 />
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '0.5rem' }}>
                   <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} />
@@ -169,6 +175,7 @@ export default function Lineup() {
                   <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '26px', color: '#ffffffd9', maxWidth: 440, whiteSpace: 'pre-line' }}>{artist.shortBio}</p>
                 </div>
               </motion.div>
+              </div>
             )
           })}
 

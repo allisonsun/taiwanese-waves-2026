@@ -68,16 +68,6 @@ export default function Sponsors() {
                       justifyContent: 'center',
                     }}
                   >
-                    <span
-                      style={{
-                        fontSize: 12,
-                        letterSpacing: '0.3px',
-                        color: '#fff',
-                        opacity: 0.4,
-                      }}
-                    >
-                      Sponsor
-                    </span>
                   </div>
                 ))}
               </div>

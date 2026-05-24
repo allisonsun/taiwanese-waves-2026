@@ -9,7 +9,7 @@ export default function Footer() {
     <footer
       id="footer"
       style={{
-        padding: '1.5rem 2rem',
+        padding: '1rem 2rem',
         background: '#fdf108',
         textAlign: 'center',
       }}

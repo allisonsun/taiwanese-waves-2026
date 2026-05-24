@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51.68 383.77">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .67em;
+      }
+
+      .cls-2 {
+        fill: #010101;
+        font-family: LatinoElongatedStd, 'Latino Elongated Std';
+        font-size: 49.24px;
+      }
+
+      .cls-3 {
+        letter-spacing: .62em;
+      }
+
+      .cls-4 {
+        letter-spacing: .64em;
+      }
+
+      .cls-5 {
+        letter-spacing: .65em;
+      }
+
+      .cls-6 {
+        letter-spacing: .65em;
+      }
+
+      .cls-7 {
+        letter-spacing: .65em;
+      }
+
+      .cls-8 {
+        letter-spacing: .65em;
+      }
+
+      .cls-9 {
+        letter-spacing: .64em;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <text class="cls-2" transform="translate(11.07 31.47) rotate(45)"><tspan class="cls-3" x="0" y="0">M</tspan><tspan class="cls-5" x="33.59" y="30.91">o</tspan><tspan class="cls-4" x="62.67" y="60.97">n</tspan><tspan class="cls-8" x="93.74" y="91.01">g</tspan><tspan class="cls-1" x="124.23" y="119.56"> </tspan><tspan class="cls-9" x="150.28" y="148.66">T</tspan><tspan class="cls-6" x="181.44" y="178.76">o</tspan><tspan class="cls-4" x="210.52" y="208.82">n</tspan><tspan class="cls-7" x="241.59" y="238.86">g</tspan></text>
+  </g>
+</svg>

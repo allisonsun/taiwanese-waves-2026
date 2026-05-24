@@ -35,6 +35,179 @@ html {
   }
 }
 
+.hero-circle {
+  width: 100vw;
+  height: auto;
+  object-fit: unset;
+}
+
+.hero-mask-layer {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: url(/hero/double-circle.svg);
+  -webkit-mask-size: 100vw auto;
+  -webkit-mask-position: 0 0;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url(/hero/double-circle.svg);
+  mask-size: 100vw auto;
+  mask-position: 0 0;
+  mask-repeat: no-repeat;
+}
+
+@media (max-width: 1180px) {
+  .hero-mask-layer {
+    -webkit-mask-size: cover;
+    -webkit-mask-position: center top;
+    mask-size: cover;
+    mask-position: center top;
+  }
+}
+
+:root {
+  --spinner-top: 50%;
+  --spinner-size: 55vw;
+  --hero-font-large: 64px;
+  --hero-font-large-line: 68px;
+  --hero-font-small: 44px;
+  --hero-font-small-line: 48px;
+}
+
+@media (max-width: 768px) {
+  .hero-circle {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  :root {
+    --spinner-top: 27vh;
+    --spinner-size: 96vw;
+    --hero-font-large: 40px;
+    --hero-font-large-line: 44px;
+    --hero-font-small: 26px;
+    --hero-font-small-line: 30px;
+  }
+}
+
+/* iPhone 12 Pro (390×844) */
+@media (min-width: 376px) and (max-width: 390px) {
+  :root {
+    --spinner-top: 27vh;
+    --spinner-size: 96vw;
+    --hero-font-large: 36px;
+    --hero-font-large-line: 40px;
+    --hero-font-small: 22px;
+    --hero-font-small-line: 26px;
+  }
+}
+
+/* iPad Mini (744×1133, 768×1024) */
+@media (min-width: 744px) and (max-width: 768px) {
+  .hero-circle {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  :root {
+    --spinner-top: 26vh;
+    --spinner-size: 65vw;
+    --hero-font-large: 52px;
+    --hero-font-large-line: 56px;
+    --hero-font-small: 34px;
+    --hero-font-small-line: 38px;
+  }
+}
+
+/* iPad Air (820×1180) — refines the iPad Pro breakpoint */
+@media (min-width: 800px) and (max-width: 850px) {
+  :root {
+    --spinner-top: 22vh;
+    --spinner-size: 64vw;
+    --hero-font-large: 52px;
+    --hero-font-large-line: 56px;
+    --hero-font-small: 34px;
+    --hero-font-small-line: 38px;
+  }
+}
+
+/* iPhone SE (375×667) */
+@media (min-width: 361px) and (max-width: 375px) {
+  :root {
+    --spinner-top: 26vh;
+    --spinner-size: 80vw;
+    --hero-font-large: 28px;
+    --hero-font-large-line: 32px;
+    --hero-font-small: 18px;
+    --hero-font-small-line: 22px;
+  }
+}
+
+/* Samsung Galaxy S8 (360×740) */
+@media (max-width: 360px) {
+  :root {
+    --spinner-top: 26vh;
+    --spinner-size: 92vw;
+    --hero-font-large: 26px;
+    --hero-font-large-line: 36px;
+    --hero-font-small: 24px;
+    --hero-font-small-line: 21px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+  /* Lineup trio — show as 3 columns since 744px can fit them */
+  .lineup-trio { flex-direction: row !important; padding: 0 1.5rem 2rem !important; gap: 4px !important; }
+  .lineup-trio-item { flex: 1 !important; width: auto !important; }
+  .lineup-trio-text { padding: 1rem 1rem !important; text-align: center !important; }
+  .lineup-trio-text .lineup-social { justify-content: center !important; }
+  .lineup-trio-text h3 { font-size: 22px !important; line-height: 22px !important; }
+
+  /* Lineup solo — show as row */
+  .lineup-solo-container { padding: 4rem 1.5rem 2rem !important; }
+  .lineup-solo-list { gap: 4rem !important; }
+  .lineup-solo-row { flex-direction: row !important; gap: 1.5rem !important; padding: 0 !important; }
+  .lineup-solo-img { width: 45% !important; height: auto !important; aspect-ratio: unset; }
+  .lineup-solo-row h3 { font-size: 24px !important; line-height: 24px !important; }
+  .lineup-solo-row p { max-width: none !important; }
+
+  /* About */
+  .about-video-container { aspect-ratio: 2 / 1 !important; border-radius: 48px !important; }
+  .about-video-title { font-size: 36px !important; line-height: 42px !important; width: 75vw !important; }
+}
+
+@media (min-width: 769px) and (max-width: 1180px) {
+  /* Hero — iPad Pro portrait */
+  .hero-circle {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  :root {
+    --spinner-top: 26vh;
+    --spinner-size: 65vw;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  /* Lineup */
+  .lineup-trio { padding: 0 1.5rem 3rem !important; }
+  .lineup-trio-text { padding: 1.5rem 1.25rem 1rem !important; }
+  .lineup-trio-text h3 { font-size: 28px !important; line-height: 28px !important; }
+  .lineup-solo-container { padding: 6rem 2rem 6rem !important; }
+  .lineup-solo-list { gap: 8rem !important; }
+  .lineup-solo-row { gap: 2rem !important; }
+  .lineup-solo-img { max-width: 45% !important; height: auto !important; }
+  .lineup-solo-row h3 { font-size: 28px !important; line-height: 28px !important; }
+
+  /* About */
+  .about-video-title { font-size: 44px !important; line-height: 50px !important; }
+}
+
 @media (max-width: 768px) {
   h2 {
     font-size: 22px !important;
@@ -51,7 +224,7 @@ html {
   .social-icon { width: 28px !important; height: 28px !important; }
   .social-icon-spotify { width: 24px !important; height: 28px !important; }
   .social-icon-youtube { width: 32px !important; height: 32px !important; }
-  .lineup-solo-container { padding: 4rem 1.5rem 0 !important; }
+  .lineup-solo-container { padding: 0 1.5rem 0 !important; }
   .lineup-solo-list { gap: 0 !important; }
 
   /* About */
@@ -73,4 +246,5 @@ html {
   .history-section-inner { padding: 0 1.5rem !important; }
   .lineup-solo-row { flex-direction: column !important; gap: 1.5rem !important; padding: 40px 0 !important; }
   .lineup-solo-img { width: 100% !important; height: auto !important; aspect-ratio: 4 / 3; }
+  .lineup-trio-plus { display: none !important; }
 }

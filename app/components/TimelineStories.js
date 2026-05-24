@@ -34,48 +34,37 @@ const PLACEHOLDER_STORIES = [
   { name: 'Eric H.', photo: '/photos/2025/2025-5.jpg', story: 'Itaque earum rerum hic tenetur a sapiente delectus ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores.' },
 ]
 
-const ORIENTATIONS = ['v', 'v', 'h', 'v', 'h', 'v', 'v', 'h', 'v', 'h', 'v', 'v', 'h', 'v', 'h', 'v', 'h', 'v', 'v', 'h']
-const POSITIONS = [
-  { top: '3%',  left: '1%'  },
-  { top: '4%',  left: '38%' },
-  { top: '2%',  left: '72%' },
-  { top: '38%', left: '0%'  },
-  { top: '36%', left: '80%' },
-  { top: '62%', left: '18%' },
-  { top: '70%', left: '4%'  },
-  { top: '68%', left: '44%' },
-  { top: '63%', left: '74%' },
-  { top: '18%', left: '14%' },
-  { top: '16%', left: '58%' },
-  { top: '22%', left: '84%' },
-  { top: '48%', left: '-2%' },
-  { top: '50%', left: '88%' },
-  { top: '80%', left: '56%' },
-  { top: '8%',  left: '26%' },
-  { top: '6%',  left: '88%' },
-  { top: '52%', left: '70%' },
-  { top: '78%', left: '26%' },
-  { top: '84%', left: '74%' },
-]
 
-const MOBILE_POSITIONS = [
-  { top: '2%',  left: '-2%' },
-  { top: '1%',  left: '55%' },
-  { top: '14%', left: '20%' },
-  { top: '12%', left: '68%' },
-  { top: '28%', left: '-4%' },
-  { top: '30%', left: '78%' },
-  { top: '44%', left: '-3%' },
-  { top: '42%', left: '80%' },
-  { top: '58%', left: '-3%' },
-  { top: '56%', left: '76%' },
-  { top: '70%', left: '5%'  },
-  { top: '68%', left: '58%' },
-  { top: '78%', left: '25%' },
-  { top: '76%', left: '62%' },
-  { top: '84%', left: '42%' },
+const STRIP_VW = 480        // total strip width in vw
+const STEP_VW = 25          // how much to pan per button press
+const MAX_SCROLL_VW = 380   // STRIP_VW - 100vw visible
+
+const ALL_SLOTS = [
+  // Group 0
+  { top: '8%',  leftVw: -1,   width: 380, height: 255, zIndex: 2 },
+  { top: '22%', leftVw: 19,   width: 380, height: 255, zIndex: 4 },
+  { top: '50%', leftVw: 10,   width: 380, height: 255, zIndex: 3 },
+  { top: '5%',  leftVw: 61,   width: 380, height: 255, zIndex: 2 },
+  { top: '32%', leftVw: 82,   width: 380, height: 255, zIndex: 4 },
+  // Group 1
+  { top: '35%', leftVw: 122,  width: 380, height: 255, zIndex: 3 },
+  { top: '5%',  leftVw: 140,  width: 380, height: 255, zIndex: 4 },
+  { top: '55%', leftVw: 130,  width: 380, height: 255, zIndex: 2 },
+  { top: '15%', leftVw: 183,  width: 380, height: 255, zIndex: 4 },
+  { top: '48%', leftVw: 205,  width: 380, height: 255, zIndex: 3 },
+  // Group 2
+  { top: '12%', leftVw: 242,  width: 380, height: 255, zIndex: 4 },
+  { top: '50%', leftVw: 255,  width: 380, height: 255, zIndex: 2 },
+  { top: '28%', leftVw: 265,  width: 380, height: 255, zIndex: 3 },
+  { top: '8%',  leftVw: 308,  width: 380, height: 255, zIndex: 3 },
+  { top: '40%', leftVw: 328,  width: 380, height: 255, zIndex: 2 },
+  // Group 3
+  { top: '18%', leftVw: 362,  width: 380, height: 255, zIndex: 2 },
+  { top: '48%', leftVw: 378,  width: 380, height: 255, zIndex: 4 },
+  { top: '5%',  leftVw: 390,  width: 380, height: 255, zIndex: 3 },
+  { top: '32%', leftVw: 428,  width: 380, height: 255, zIndex: 4 },
+  { top: '10%', leftVw: 448,  width: 380, height: 255, zIndex: 2 },
 ]
-const MOBILE_ROTATIONS = [-4, 3, 1, -3, -2, 5, 4, -1, -3, 2, -5, 4, 3, -4, 2]
 
 function pickRandom(arr, n) {
   const a = [...arr]
@@ -84,31 +73,6 @@ function pickRandom(arr, n) {
     [a[i], a[j]] = [a[j], a[i]]
   }
   return a.slice(0, Math.min(n, a.length))
-}
-
-function StoriesCenter() {
-  const isMobile = useIsMobile()
-  return (
-    <>
-      <svg
-        viewBox="0 0 700 300"
-        style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 50, overflow: 'visible', pointerEvents: 'none', width: isMobile ? 320 : '50vw', height: isMobile ? 240 : '50vh' }}
-      >
-        <ellipse cx="350" cy="150" rx="350" ry="150" fill="none" stroke="#fdf108" strokeWidth="2" />
-      </svg>
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', zIndex: 51, width: isMobile ? 220 : 440, pointerEvents: 'none' }}>
-        <h2 style={{ fontSize: isMobile ? 28 : 36, fontWeight: 600, lineHeight: isMobile ? '32px' : '36px', letterSpacing: 'normal', color: '#fdf108', marginBottom: isMobile ? '0.75rem' : '1rem' }}>
-          Share your memories
-        </h2>
-        <p style={{ fontSize: isMobile ? 14 : 18, color: '#fdf108', lineHeight: isMobile ? '20px' : '24px', letterSpacing: '0.3px', maxWidth: 480, marginBottom: isMobile ? '1.25rem' : '1.5rem' }}>
-          Memories from fans, artists, and volunteers who've been part of our journey. If you were there, we'd love to hear yours.
-        </p>
-        <div style={{ pointerEvents: 'auto' }}>
-          <ShareButton fontSize={isMobile ? 14 : undefined} iconSize={isMobile ? 16 : undefined} padding={isMobile ? '10px 18px' : undefined} />
-        </div>
-      </div>
-    </>
-  )
 }
 
 function ShareButton({ fontSize = 18, iconSize = 22, padding = '12px 25px' }) {
@@ -145,8 +109,8 @@ function ShareButton({ fontSize = 18, iconSize = 22, padding = '12px 25px' }) {
 
 export default function TimelineStories() {
   const [displayedStories, setDisplayedStories] = useState(null)
+  const [scrollVw, setScrollVw] = useState(0)
   const [activeIndex, setActiveIndex] = useState(null)
-  const [raisedIndices, setRaisedIndices] = useState([])
   const isMobile = useIsMobile()
 
   useEffect(() => {
@@ -159,87 +123,130 @@ export default function TimelineStories() {
   }, [])
 
   const displayStories = displayedStories ?? []
+
+  const handleScrollPrev = () => setScrollVw(v => Math.max(0, v - STEP_VW))
+  const handleScrollNext = () => setScrollVw(v => Math.min(MAX_SCROLL_VW, v + STEP_VW))
+
   const activeStory = activeIndex !== null ? displayStories[activeIndex] : null
   const handleClose = useCallback(() => setActiveIndex(null), [])
-  const handleNext = useCallback(() => setActiveIndex(i => (i + 1) % displayStories.length), [displayStories.length])
-  const handlePrev = useCallback(() => setActiveIndex(i => (i - 1 + displayStories.length) % displayStories.length), [displayStories.length])
-  const modal = (
-    <StoryModal
-      story={activeStory}
-      onClose={handleClose}
-      onNext={handleNext}
-      onPrev={handlePrev}
-    />
-  )
+  const handleModalNext = useCallback(() => setActiveIndex(i => (i + 1) % displayStories.length), [displayStories.length])
+  const handleModalPrev = useCallback(() => setActiveIndex(i => (i - 1 + displayStories.length) % displayStories.length), [displayStories.length])
 
   if (isMobile) {
     return (
-      <section id="stories" style={{ position: 'relative', minHeight: '100vh', background: '#000' }}>
-        {displayStories.slice(0, MOBILE_POSITIONS.length).map((story, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.06 }}
-            onClick={() => setActiveIndex(i)}
-            style={{ position: 'absolute', top: MOBILE_POSITIONS[i].top, left: MOBILE_POSITIONS[i].left, rotate: MOBILE_ROTATIONS[i], cursor: 'pointer', zIndex: 4 }}
-          >
-            <div style={{ background: '#fff', padding: 5, borderRadius: 6, lineHeight: 0 }}>
+      <section id="stories" className="snap-section" style={{ background: '#000', height: '100dvh', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '3rem 0 2.5rem' }}>
+        {/* CTA */}
+        <div style={{ textAlign: 'center', padding: '0 2rem 2.5rem' }}>
+          <h2 style={{ fontSize: 28, fontWeight: 800, color: '#fdf108', marginBottom: '0.75rem', fontFamily: 'var(--font-archivo), sans-serif' }}>
+            Share your memories
+          </h2>
+          <p style={{ fontSize: 16, color: '#fdf108', lineHeight: '24px', marginBottom: '1.25rem' }}>
+            Memories from fans, artists, and volunteers. If you were there, we'd love to hear yours.
+          </p>
+          <ShareButton fontSize={14} iconSize={16} padding="10px 18px" />
+        </div>
+        {/* Horizontal scroll strip */}
+        <div style={{ display: 'flex', gap: 6, overflowX: 'auto', padding: '0 1.5rem 0.5rem', scrollbarWidth: 'none' }}>
+          {displayStories.slice(0, 12).map((story, i) => (
+            <div key={i} style={{ flexShrink: 0, width: 150, height: 110, overflow: 'hidden', cursor: 'pointer', position: 'relative' }}
+              onClick={() => setActiveIndex(i)}>
               {story.photo
-                ? <Image src={story.photo} alt="" width={100} height={120} style={{ objectFit: 'cover', display: 'block' }} />
-                : <div style={{ width: 100, height: 120, background: '#d9d9d9' }} />}
+                ? <Image src={story.photo} alt="" fill sizes="150px" style={{ objectFit: 'cover' }} />
+                : <div style={{ width: '100%', height: '100%', background: '#222' }} />}
             </div>
-          </motion.div>
-        ))}
-
-        <StoriesCenter />
-
-        {modal}
+          ))}
+        </div>
+        <StoryModal story={activeStory} onClose={handleClose} onNext={handleModalNext} onPrev={handleModalPrev} />
       </section>
     )
   }
 
   return (
-    <section id="stories" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '4rem 0', background: '#000' }}>
-      <div style={{ width: '90vw', margin: '0 auto' }}>
-        <div style={{ position: 'relative', width: '100%', height: '75vh' }}>
-
-          <StoriesCenter />
-
+    <section id="stories" className="snap-section" style={{ background: '#000', height: '100dvh', overflow: 'hidden' }}>
+      {/* Continuous collage strip with centered CTA overlay */}
+      <div style={{ position: 'relative', width: '100%', height: '100dvh', overflow: 'hidden' }}>
+        <motion.div
+          animate={{ x: `${-scrollVw}vw` }}
+          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          style={{ position: 'absolute', top: 0, left: 0, width: `${STRIP_VW}vw`, height: '100%' }}
+        >
           {displayStories.map((story, i) => {
-            const isHorizontal = ORIENTATIONS[i % ORIENTATIONS.length] === 'h'
-            const pos = POSITIONS[i % POSITIONS.length]
+            const slot = ALL_SLOTS[i]
+            if (!slot) return null
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08, rotate: { duration: 0.15, delay: 0 } }}
-                whileHover={{ y: -8, rotate: i % 2 === 0 ? 2 : -2 }}
-                onHoverStart={() => setRaisedIndices(prev => [...prev.filter(x => x !== i), i])}
-                onHoverEnd={() => setRaisedIndices(prev => prev.filter(x => x !== i))}
+                whileHover={{ scale: 1.04, zIndex: 10 }}
                 onClick={() => setActiveIndex(i)}
                 style={{
                   position: 'absolute',
-                  top: pos.top,
-                  left: pos.left,
+                  top: slot.top,
+                  left: `${slot.leftVw}vw`,
+                  width: slot.width,
+                  height: slot.height,
+                  zIndex: slot.zIndex,
                   cursor: 'pointer',
-                  zIndex: (() => { const ri = raisedIndices.indexOf(i); return ri !== -1 ? 4 + ri + 1 : 4 })(),
+                  overflow: 'hidden',
                 }}
               >
-                <div style={{ background: '#fff', padding: 6, borderRadius: 8, lineHeight: 0 }}>
-                  {story.photo
-                    ? <Image src={story.photo} alt="" width={isHorizontal ? 213 : 180} height={isHorizontal ? 180 : 213} style={{ objectFit: 'cover', display: 'block' }} />
-                    : <div style={{ width: isHorizontal ? 213 : 180, height: isHorizontal ? 180 : 213, background: '#d9d9d9' }} />}
-                </div>
+                {story.photo
+                  ? <Image src={story.photo} alt="" fill sizes={`${slot.width}px`} style={{ objectFit: 'cover' }} />
+                  : <div style={{ width: '100%', height: '100%', background: '#222' }} />}
               </motion.div>
             )
           })}
+        </motion.div>
+
+        {/* Centered CTA overlay */}
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          textAlign: 'center', zIndex: 20, pointerEvents: 'none',
+          width: '40vw',
+        }}>
+          <div style={{ mixBlendMode: 'difference' }}>
+            <h2 style={{ fontSize: 40, fontWeight: 800, lineHeight: '44px', color: '#fff', marginBottom: '1rem', fontFamily: 'var(--font-archivo), sans-serif' }}>
+              Share your memories
+            </h2>
+            <p style={{ fontSize: 18, color: '#fff', lineHeight: '26px', letterSpacing: '0.3px', marginBottom: '1.5rem' }}>
+              Memories from fans, artists, and volunteers who've been part of our journey. If you were there, we'd love to hear yours.
+            </p>
+          </div>
+          <div style={{ pointerEvents: 'auto' }}>
+            <ShareButton />
+          </div>
         </div>
+
+        {/* Arrows */}
+        <button
+          onClick={handleScrollPrev}
+          disabled={scrollVw === 0}
+          style={{
+            position: 'absolute', bottom: 16, right: 88, zIndex: 10,
+            background: 'none', border: '1.5px solid #fff', borderRadius: '50%',
+            width: 40, height: 40, cursor: scrollVw === 0 ? 'not-allowed' : 'pointer',
+            opacity: scrollVw === 0 ? 0.25 : 0.7,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button
+          onClick={handleScrollNext}
+          disabled={scrollVw >= MAX_SCROLL_VW}
+          style={{
+            position: 'absolute', bottom: 16, right: 40, zIndex: 10,
+            background: 'none', border: '1.5px solid #fff', borderRadius: '50%',
+            width: 40, height: 40, cursor: scrollVw >= MAX_SCROLL_VW ? 'not-allowed' : 'pointer',
+            opacity: scrollVw >= MAX_SCROLL_VW ? 0.25 : 0.7,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
-      {modal}
+
+      <StoryModal story={activeStory} onClose={handleClose} onNext={handleModalNext} onPrev={handleModalPrev} />
     </section>
   )
 }

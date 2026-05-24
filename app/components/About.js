@@ -28,7 +28,7 @@ export default function About() {
         }}
       >
         <video
-          src="/2016-video.mov"
+          src="/2016-video.mp4"
           autoPlay
           muted
           loop

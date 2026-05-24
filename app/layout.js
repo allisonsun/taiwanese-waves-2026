@@ -13,6 +13,12 @@ const rationalDisplay = localFont({
   display: 'swap',
 })
 
+const rationalDisplayLight = localFont({
+  src: './fonts/Rational Display Light.otf',
+  variable: '--font-rational-light',
+  display: 'swap',
+})
+
 export const metadata = {
   title: 'Taiwanese Waves 2026',
   description: 'A celebration of Taiwanese music and culture — August 2026, Central Park, NYC',
@@ -21,7 +27,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${rationalDisplay.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${rationalDisplay.variable} ${rationalDisplayLight.variable}`}>
       <body style={{ color: '#fff', fontFamily: 'var(--font-archivo), sans-serif' }}>
         {children}
       </body>

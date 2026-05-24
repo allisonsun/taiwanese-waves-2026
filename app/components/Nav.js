@@ -17,7 +17,7 @@ export default function Nav() {
       const next = window.scrollY > window.innerHeight * 0.8
       setScrolled(next)
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -49,11 +49,11 @@ export default function Nav() {
         justifyContent: 'space-between',
       }}
     >
-      <span
-        style={{ color: textColor, fontSize: 14, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', transition: 'color 0.3s' }}
-      >
-        TW
-      </span>
+      <img
+        src="/logo.svg"
+        alt="Taiwanese Waves"
+        style={{ height: 32, width: 'auto', display: 'block' }}
+      />
       <div style={{ display: 'flex', gap: '1.25rem' }}>
         {NAV_LINKS.map(({ label, href }) => (
           <a

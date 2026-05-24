@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import useIsMobile from '../hooks/useIsMobile'
 
 function AutoScrollCarousel({ children, style }) {
@@ -92,32 +93,32 @@ const YEARS = [
   {
     year: 2016, tagline: 'The inauguration', poster: '/poster-2016.gif',
     artists: ['Sunset Rollercoaster', 'Anpu', 'Wonfu'],
-    photos: ['/photos/2016/2016-1.jpg', '/photos/2016/2016-2.jpg', '/photos/2016/2016-3.jpg', '/photos/2016/2016-4.jpg', '/photos/2016/2016-5.jpg'],
+    photos: ['/photos/2016/2016-1.jpg', '/photos/2016/2016-2.jpg', '/photos/2016/2016-3.jpg', '/photos/2016/2016-4.jpg', '/photos/2016/2016-5.jpg', '/photos/2016/2016-6.jpg', '/photos/2016/2016-7.jpg', '/photos/2016/2016-8.jpg', '/photos/2016/2016-9.jpg'],
   },
   {
     year: 2017, tagline: 'Diversity in language and culture', poster: '/poster-2017.gif',
     artists: ['Fire Ex.', 'Sangpuy', 'Dadado Huang & Berry j'],
-    photos: ['/photos/2017/2017-1.jpg', '/photos/2017/2017-2.jpg', '/photos/2017/2017-3.jpg', '/photos/2017/2017-4.jpg', '/photos/2017/2017-5.jpg', '/photos/2017/2017-6.jpg'],
+    photos: ['/photos/2017/2017-1.jpg', '/photos/2017/2017-2.jpg', '/photos/2017/2017-3.jpg', '/photos/2017/2017-4.jpg', '/photos/2017/2017-5.jpg', '/photos/2017/2017-6.jpg', '/photos/2017/2017-7.jpg', '/photos/2017/2017-8.jpg', '/photos/2017/2017-9.jpg', '/photos/2017/2017-10.jpg'],
   },
   {
     year: 2018, tagline: 'Diversity in genre', poster: '/poster-2018.gif',
     artists: ['Sheng-Xiang & Band', 'Soft Lipa', 'Elephant Gym'],
-    photos: ['/photos/2018/2018-1.jpg', '/photos/2018/2018-2.jpg', '/photos/2018/2018-3.jpg', '/photos/2018/2018-4.jpg', '/photos/2018/2018-5.jpg', '/photos/2018/2018-6.jpg'],
+    photos: ['/photos/2018/2018-1.jpg', '/photos/2018/2018-2.jpg', '/photos/2018/2018-3.jpg', '/photos/2018/2018-4.jpg', '/photos/2018/2018-5.jpg', '/photos/2018/2018-6.jpg', '/photos/2018/2018-8.jpg', '/photos/2018/2018-9.jpg'],
   },
   {
-    year: 2019, tagline: 'Women empowerment', poster: '/poster-2019.gif',
+    year: 2019, tagline: 'Women make waves', poster: '/poster-2019.gif',
     artists: ['ABAO', 'Wan Fang', '9m88', 'Tizzy Bac'],
-    photos: ['/photos/2019/2019-1.jpg', '/photos/2019/2019-2.jpg', '/photos/2019/2019-3.jpg', '/photos/2019/2019-4.jpg', '/photos/2019/2019-5.jpg'],
+    photos: ['/photos/2019/2019-1.jpg', '/photos/2019/2019-2.jpg', '/photos/2019/2019-3.jpg', '/photos/2019/2019-4.jpg', '/photos/2019/2019-5.jpg', '/photos/2019/2019-6.jpg', '/photos/2019/2019-7.jpg'],
   },
   {
-    year: 2023, tagline: 'Our comeback', poster: '/poster-2023.jpg',
+    year: 2023, tagline: 'The waves return', poster: '/poster-2023.jpg',
     artists: ['Waa Wei', 'The Dinosaur\'s Skin', 'DJ Mr. Skin'],
-    photos: ['/photos/2023/2023-1.jpg', '/photos/2023/2023-2.jpg', '/photos/2023/2023-3.jpg', '/photos/2023/2023-4.jpg'],
+    photos: ['/photos/2023/2023-1.jpg', '/photos/2023/2023-2.jpg', '/photos/2023/2023-3.jpg', '/photos/2023/2023-4.jpg', '/photos/2023/2023-5.jpg', '/photos/2023/2023-6.jpg', '/photos/2023/2023-7.jpg'],
   },
   {
     year: 2025, tagline: 'Celebration of friendship', poster: '/poster-2025.gif',
     artists: ['Enno Cheng', 'ABAO & Nanguaq Girls', 'Bulareyaung Dance Company', 'Chinatown Records'],
-    photos: ['/photos/2025/2025-1.jpg', '/photos/2025/2025-2.jpg', '/photos/2025/2025-3.jpg', '/photos/2025/2025-4.jpg', '/photos/2025/2025-5.jpg'],
+    photos: ['/photos/2025/2025-1.jpg', '/photos/2025/2025-2.jpg', '/photos/2025/2025-3.jpg', '/photos/2025/2025-4.jpg', '/photos/2025/2025-5.jpg', '/photos/2025/2025-6.jpg', '/photos/2025/2025-7.jpg', '/photos/2025/2025-8.jpg', '/photos/2025/2025-9.jpg'],
   },
 ]
 
@@ -139,7 +140,7 @@ export default function History() {
   const carouselHeight = isMobile ? 220 : CAROUSEL_HEIGHT
 
   return (
-    <section id="history" style={{ background: '#fdf108', padding: '5rem 0' }}>
+    <section id="history" style={{ background: `url('/hero/background.svg') center / cover no-repeat`, padding: '5rem 0' }}>
       {/* Header */}
       <div className="history-header-pad" style={{ padding: '0 4rem 24px', textAlign: 'center' }}>
         <h2 style={{ fontSize: 32, fontWeight: 600, lineHeight: '32px', letterSpacing: 'normal', color: '#000' }}>
@@ -211,7 +212,7 @@ export default function History() {
                     <AutoScrollCarousel
                       style={{
                         display: 'flex',
-                        gap: 6,
+                        gap: 4,
                         overflowX: 'auto',
                         height: carouselHeight,
                         paddingBottom: 12,
@@ -220,14 +221,12 @@ export default function History() {
                       }}
                     >
                       {y.poster && (
-                        <div style={{ flexShrink: 0, aspectRatio: '1000 / 1428', height: '100%', borderRadius: 8, overflow: 'hidden', border: '1px solid #000' }}>
-                          <img src={y.poster} alt={`${y.year} poster`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                        <div style={{ flexShrink: 0, aspectRatio: '1000 / 1428', height: '100%', overflow: 'hidden', border: '1px solid #000', position: 'relative' }}>
+                          <Image src={y.poster} alt={`${y.year} poster`} fill sizes="300px" style={{ objectFit: 'contain' }} />
                         </div>
                       )}
                       {y.photos?.map((photo, pi) => (
-                        <div key={pi} style={{ flexShrink: 0, aspectRatio: '4 / 3', height: '100%', borderRadius: 8, overflow: 'hidden' }}>
-                          <img src={photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        </div>
+                        <img key={pi} src={photo} alt="" loading="lazy" style={{ flexShrink: 0, height: '100%', width: 'auto', objectFit: 'cover', display: 'block' }} />
                       ))}
                     </AutoScrollCarousel>
                   </motion.div>
