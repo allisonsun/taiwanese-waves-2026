@@ -20,12 +20,18 @@ export default function Loader() {
   const isMobile = useIsMobile()
 
   useEffect(() => {
+    let imgDone = false
+    let timerDone = false
+    const tryFinish = () => { if (imgDone && timerDone) setDone(true) }
+
     const img = new window.Image()
-    img.onload = () => setDone(true)
-    img.onerror = () => setDone(true)
+    img.onload = () => { imgDone = true; tryFinish() }
+    img.onerror = () => { imgDone = true; tryFinish() }
     img.src = '/hero/double-circle.png'
+
+    const min = setTimeout(() => { timerDone = true; tryFinish() }, 1500)
     const fallback = setTimeout(() => setDone(true), 5000)
-    return () => clearTimeout(fallback)
+    return () => { clearTimeout(min); clearTimeout(fallback) }
   }, [])
 
   return (
