@@ -53,7 +53,7 @@ export default function Nav() {
           right: 0,
           zIndex: 50,
           background: 'transparent',
-          padding: '1rem 2rem',
+          padding: '1rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
