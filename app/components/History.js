@@ -140,7 +140,7 @@ export default function History() {
   const carouselHeight = isMobile ? 220 : CAROUSEL_HEIGHT
 
   return (
-    <section id="history" style={{ background: `url('/hero/background.svg') center / cover no-repeat`, padding: '5rem 0' }}>
+    <section id="history" style={{ background: `url('/hero/background.jpg') center / cover no-repeat`, padding: '5rem 0' }}>
       {/* Header */}
       <div className="history-header-pad" style={{ padding: '0 4rem 24px', textAlign: 'center' }}>
         <h2 style={{ fontSize: 32, fontWeight: 600, lineHeight: '32px', letterSpacing: 'normal', color: '#000' }}>

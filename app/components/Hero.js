@@ -48,7 +48,7 @@ export default function Hero() {
         position: 'relative',
         height: '100vh',
         overflow: 'hidden',
-        background: `url('/hero/background.svg') center / cover no-repeat`,
+        background: `url('/hero/background.jpg') center / cover no-repeat`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
