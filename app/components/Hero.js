@@ -56,7 +56,7 @@ export default function Hero() {
     >
       {/* Double circle — full width */}
       <motion.img
-        src="/hero/double-circle.svg"
+        src="/hero/double-circle.png"
         alt=""
         className="hero-circle"
         style={{

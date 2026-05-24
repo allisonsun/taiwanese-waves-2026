@@ -44,11 +44,11 @@ html {
 .hero-mask-layer {
   position: absolute;
   inset: 0;
-  -webkit-mask-image: url(/hero/double-circle.svg);
+  -webkit-mask-image: url(/hero/double-circle.png);
   -webkit-mask-size: 100vw auto;
   -webkit-mask-position: 0 0;
   -webkit-mask-repeat: no-repeat;
-  mask-image: url(/hero/double-circle.svg);
+  mask-image: url(/hero/double-circle.png);
   mask-size: 100vw auto;
   mask-position: 0 0;
   mask-repeat: no-repeat;
@@ -73,6 +73,10 @@ html {
 }
 
 @media (max-width: 768px) {
+  html, body {
+    background: #000;
+  }
+
   .hero-circle {
     width: 100vw;
     height: 100vh;
