@@ -145,6 +145,18 @@ html {
   }
 }
 
+/* Surface Duo (540×720) */
+@media (min-width: 480px) and (max-width: 540px) {
+  :root {
+    --spinner-top: 27vh;
+    --spinner-size: 72vw;
+    --hero-font-large: 40px;
+    --hero-font-large-line: 46px;
+    --hero-font-small: 26px;
+    --hero-font-small-line: 30px;
+  }
+}
+
 /* Samsung Galaxy S8 (360×740) */
 @media (max-width: 360px) {
   :root {
