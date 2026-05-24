@@ -192,7 +192,7 @@ html {
 
 @media (min-width: 769px) and (max-width: 1180px) {
   :root {
-    --spinner-top: 42%;
+    --spinner-top: 37vw;
     --spinner-size: 60vw;
     --hero-font-large: 44px;
     --hero-font-large-line: 48px;
