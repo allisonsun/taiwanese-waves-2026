@@ -9,10 +9,12 @@ import History from './components/History'
 import TimelineStories from './components/TimelineStories'
 import Sponsors from './components/Sponsors'
 import Footer from './components/Footer'
+import Loader from './components/Loader'
 
 export default function Home() {
   return (
     <ParallaxProvider>
+      <Loader />
       <Nav />
       <Hero />
       <About />
