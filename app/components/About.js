@@ -33,6 +33,7 @@ export default function About() {
           muted
           loop
           playsInline
+          preload="none"
           style={{
             position: 'absolute',
             top: '50%',
