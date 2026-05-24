@@ -73,10 +73,6 @@ html {
 }
 
 @media (max-width: 768px) {
-  html, body {
-    background: #000;
-  }
-
   .hero-circle {
     width: 100vw;
     height: 100vh;
@@ -99,10 +95,10 @@ html {
   :root {
     --spinner-top: 27vh;
     --spinner-size: 96vw;
-    --hero-font-large: 36px;
-    --hero-font-large-line: 40px;
-    --hero-font-small: 22px;
-    --hero-font-small-line: 26px;
+    --hero-font-large: 40px;
+    --hero-font-large-line: 50px;
+    --hero-font-small: 24px;
+    --hero-font-small-line: 28px;
   }
 }
 
@@ -119,9 +115,9 @@ html {
     --spinner-top: 26vh;
     --spinner-size: 65vw;
     --hero-font-large: 52px;
-    --hero-font-large-line: 56px;
+    --hero-font-large-line: 60px;
     --hero-font-small: 34px;
-    --hero-font-small-line: 38px;
+    --hero-font-small-line: 40px;
   }
 }
 
@@ -142,10 +138,10 @@ html {
   :root {
     --spinner-top: 26vh;
     --spinner-size: 80vw;
-    --hero-font-large: 28px;
-    --hero-font-large-line: 32px;
-    --hero-font-small: 18px;
-    --hero-font-small-line: 22px;
+    --hero-font-large: 32px;
+    --hero-font-large-line: 40px;
+    --hero-font-small: 22px;
+    --hero-font-small-line: 28px;
   }
 }
 
@@ -154,10 +150,10 @@ html {
   :root {
     --spinner-top: 26vh;
     --spinner-size: 92vw;
-    --hero-font-large: 26px;
-    --hero-font-large-line: 36px;
+    --hero-font-large: 32px;
+    --hero-font-large-line: 44px;
     --hero-font-small: 24px;
-    --hero-font-small-line: 21px;
+    --hero-font-small-line: 28px;
   }
 }
 
