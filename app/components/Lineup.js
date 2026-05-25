@@ -60,12 +60,6 @@ const trioArtists = [
 ]
 
 const ICON_MAP = { Instagram: '/socials/instagram.svg', Spotify: '/socials/spotify.svg', YouTube: '/socials/youtube.svg', Website: '/socials/globe.svg' }
-const ICON_SIZE_MAP = {
-  Instagram: { width: 32, height: 32 },
-  Spotify:   { width: 28, height: 32 },
-  YouTube:   { width: 35, height: 35 },
-  Website:   { width: 30, height: 30 },
-}
 
 const MOTION_PROPS = {
   initial: { opacity: 0, y: 20 },
@@ -76,32 +70,25 @@ const MOTION_PROPS = {
 
 function ArtistName({ nameEn, nameZh, inline }) {
   return (
-    <div>
-      <h3 style={{ fontSize: 40, fontWeight: 800, lineHeight: '40px', color: '#fff', margin: 0 }}>
+    <div className="lineup-artist-name">
+      <h3>
         {nameEn}
-        {inline && nameZh && <span style={{ fontSize: 24, fontWeight: 500, color: '#fff', marginLeft: 10 }}>{nameZh}</span>}
+        {inline && nameZh && <span className="lineup-artist-name-zh-inline">{nameZh}</span>}
       </h3>
-      {!inline && nameZh && <p style={{ fontSize: 24, fontWeight: 500, lineHeight: '24px', color: '#fff', margin: '4px 0 0' }}>{nameZh}</p>}
+      {!inline && nameZh && <p className="lineup-artist-name-zh">{nameZh}</p>}
     </div>
   )
 }
 
-function SocialLinks({ links, style }) {
+function SocialLinks({ links }) {
   return (
-    <div className="lineup-social" style={{ display: 'flex', gap: 6, alignItems: 'center', margin: '16px 0', ...style }}>
+    <div className="lineup-social">
       {links.map(link => {
         const src = ICON_MAP[link.icon]
         if (!src) return null
         return (
-          <a key={link.icon} href={link.url} target="_blank" rel="noopener noreferrer"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, flexShrink: 0 }}
-          >
-            <img
-              src={src}
-              alt={link.icon}
-              className={`social-icon social-icon-${link.icon.toLowerCase()}`}
-              style={{ ...(ICON_SIZE_MAP[link.icon] ?? { width: 24, height: 24 }), display: 'block' }}
-            />
+          <a key={link.icon} href={link.url} target="_blank" rel="noopener noreferrer" className="lineup-social-link">
+            <img src={src} alt={link.icon} className={`social-icon social-icon-${link.icon.toLowerCase()}`} />
           </a>
         )
       })}
@@ -125,88 +112,67 @@ export default function Lineup() {
     window.addEventListener('resize', equalize)
     return () => window.removeEventListener('resize', equalize)
   }, [isMobile])
+
   return (
-    <section
-      id="lineup"
-      className="snap-section"
-      style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '4rem 0', background: '#000', color: '#fff' }}
-    >
-        <h2 style={{ fontSize: 32, fontWeight: 600, lineHeight: '32px', letterSpacing: 'normal', color: '#fff', marginBottom: '3rem', textAlign: 'center' }}>
-          Lineup
-        </h2>
+    <section id="lineup" className="snap-section">
+      <h2 className="lineup-heading">Lineup</h2>
 
-        {/* Trio row: 9m88, ØZI, Yellow */}
-          <motion.div {...MOTION_PROPS} className="lineup-trio" style={{ display: 'flex', gap: 2, padding: '0 0 3rem', width: '85vw', margin: '0 auto' }}>
-            {trioArtists.map((artist, i) => (
-              <div
-                key={artist.id}
-                className="lineup-trio-item"
-                style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}
-              >
-                <div className="lineup-trio-img-wrapper" style={{ width: '100%', aspectRatio: '3 / 3.3', overflow: 'hidden', background: '#111' }}>
-                  <Image src={artist.photo} alt={artist.nameEn} width={600} height={660} sizes="(max-width: 768px) 100vw, 33vw" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} priority />
-                </div>
-                <div className="lineup-trio-info" style={{ padding: '2rem 1.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: 16, position: 'relative' }}>
-                  <div
-                    className="lineup-trio-text"
-                    ref={el => { nameRefs.current[i] = el }}
-                    style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', textAlign: 'center' }}
-                  >
-                    <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} inline={!isMobile} />
-                    {i < trioArtists.length - 1 && (
-                      <span className="lineup-trio-plus" style={{ position: 'absolute', right: 0, top: 'calc(2rem - 6px)', fontSize: 40, fontWeight: 700, color: '#fff', lineHeight: '40px', transform: 'translateX(50%)', zIndex: 1 }}>+</span>
-                    )}
-                  </div>
-                  <div className="lineup-trio-socials" style={{ textAlign: 'center' }}>
-                    <SocialLinks links={artist.socialLinks} style={{ justifyContent: 'center', margin: 0 }} />
-                  </div>
-                  <div className="lineup-trio-bio" style={{ textAlign: 'left' }}>
-                    <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '24px', color: '#ffffffd9' }}>{artist.shortBio}</p>
-                  </div>
-                </div>
+      {/* Trio row: 9m88, ØZI, Yellow */}
+      <motion.div {...MOTION_PROPS} className="lineup-trio">
+        {trioArtists.map((artist, i) => (
+          <div key={artist.id} className="lineup-trio-item">
+            <div className="lineup-trio-img-wrapper">
+              <Image src={artist.photo} alt={artist.nameEn} width={600} height={660} sizes="(max-width: 768px) 100vw, 33vw" className="lineup-trio-img" priority />
+            </div>
+            <div className="lineup-trio-info">
+              <div className="lineup-trio-text" ref={el => { nameRefs.current[i] = el }}>
+                <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} inline={!isMobile} />
+                {i < trioArtists.length - 1 && <span className="lineup-trio-plus">+</span>}
               </div>
-            ))}
-          </motion.div>
+              <div className="lineup-trio-socials">
+                <SocialLinks links={artist.socialLinks} />
+              </div>
+              <div className="lineup-trio-bio">
+                <p>{artist.shortBio}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </motion.div>
 
-        <div style={{ maxWidth: 1400, margin: '0 auto', width: '100%', padding: '12rem 4rem 10rem' }} className="lineup-solo-container">
-        <div className="lineup-solo-list" style={{ display: 'flex', flexDirection: 'column', gap: '12rem' }}>
+      <div className="lineup-solo-container">
+        <div className="lineup-solo-list">
           {soloArtists.map((artist, i) => {
             const isSquare = i === 1
             return (
               <div key={artist.id}>
-              <motion.div
-                {...MOTION_PROPS}
-                className="lineup-solo-row"
-                style={{
-                  display: 'flex',
-                  flexDirection: i % 2 === 0 ? 'row' : 'row-reverse',
-                  alignItems: 'flex-start',
-                  gap: '3rem',
-                }}
-              >
-                <Image
-                  src={artist.photo}
-                  alt={artist.nameEn}
-                  width={isSquare ? 560 : i === 0 ? 800 : 640}
-                  height={isSquare ? 560 : i === 0 ? 420 : 420}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="lineup-solo-img"
-                  style={{ objectFit: 'cover', flexShrink: 0, display: 'block', ...(i === 0 && !isMobile && { marginLeft: 'calc(-4rem - max(0px, (100vw - 1400px) / 2))', height: 600 }), ...(i === 1 && { marginRight: '4rem' }) }}
-                />
-                <div className="lineup-solo-text" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '0.5rem', gap: 16 }}>
-                  <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} />
-                  <SocialLinks links={artist.socialLinks} style={{ margin: 0 }} />
-                  <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '26px', color: '#ffffffd9', maxWidth: 440, whiteSpace: 'pre-line' }}>{artist.shortBio}</p>
-                </div>
-              </motion.div>
+                <motion.div
+                  {...MOTION_PROPS}
+                  className={`lineup-solo-row${i % 2 !== 0 ? ' lineup-solo-row-reverse' : ''}`}
+                >
+                  <Image
+                    src={artist.photo}
+                    alt={artist.nameEn}
+                    width={isSquare ? 560 : i === 0 ? 800 : 640}
+                    height={isSquare ? 560 : i === 0 ? 420 : 420}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="lineup-solo-img"
+                    style={{
+                      ...(i === 0 && !isMobile && { marginLeft: 'calc(-4rem - max(0px, (100vw - 1400px) / 2))', height: 600 }),
+                      ...(i === 1 && { marginRight: '4rem' }),
+                    }}
+                  />
+                  <div className="lineup-solo-text">
+                    <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} />
+                    <SocialLinks links={artist.socialLinks} />
+                    <p>{artist.shortBio}</p>
+                  </div>
+                </motion.div>
               </div>
             )
           })}
-
         </div>
-        </div>
-
-
+      </div>
     </section>
   )
 }
