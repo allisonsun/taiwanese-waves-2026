@@ -105,6 +105,7 @@ export default function Lineup() {
       const els = nameRefs.current.filter(Boolean)
       if (!els.length) return
       els.forEach(el => { el.style.minHeight = '' })
+      if (isMobile) return
       const max = Math.max(...els.map(el => el.offsetHeight))
       els.forEach(el => { el.style.minHeight = `${max}px` })
     }
@@ -165,7 +166,7 @@ export default function Lineup() {
                   <div className="lineup-solo-text">
                     <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} />
                     <SocialLinks links={artist.socialLinks} />
-                    <p>{artist.shortBio}</p>
+                    <p className="lineup-solo-bio">{artist.shortBio}</p>
                   </div>
                 </motion.div>
               </div>

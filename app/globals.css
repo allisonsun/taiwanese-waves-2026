@@ -328,7 +328,7 @@ html {
   gap: 16px;
 }
 
-.lineup-solo-text p {
+.lineup-solo-bio {
   font-size: 17px;
   font-weight: 400;
   line-height: 26px;
@@ -433,7 +433,7 @@ html {
   .lineup-trio { flex-direction: column; width: 100%; padding: 0 1.5rem 2rem; gap: 4rem; }
   .lineup-trio-item { flex: none; width: 100%; gap: 16px; }
   .lineup-trio-info { padding: 0; }
-  .lineup-trio-text { text-align: left; min-height: unset; }
+  .lineup-trio-text { text-align: left; min-height: unset; justify-content: flex-start; }
   .lineup-trio-socials { text-align: left; }
   .lineup-trio-socials .lineup-social { justify-content: flex-start; }
   .lineup-trio-text h3, .lineup-solo-text h3 { font-size: 28px; line-height: 28px; }
