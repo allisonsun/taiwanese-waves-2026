@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useRef, useEffect } from 'react'
 import useIsMobile from '../hooks/useIsMobile'
 
 const soloArtists = [
@@ -24,7 +25,7 @@ const soloArtists = [
   {
     id: 4,
     nameEn: 'Chinatown Records',
-    nameZh: '唐人街唱片',
+    nameZh: '華埠錄音',
     photo: '/artists/chinatown-records.jpg',
     shortBio: 'Chinatown Records is a homegrown community effort to celebrate the sonic tapestry of music, memory, & history that comes with inherited family collections. Homebased in NYC\'s Manhattan Chinatown, DJ historian yiuyiu 瑶瑶 takes on her childhood name to care for & activate the Chinatown Records archive of over 30 record/CD/tape collections inherited from her family & neighbors.\n\nyiuyiu 瑶瑶 has the most fun playing records of golden songs at senior centers, leading karaoke dance floors with families & neighbors on the streets of Chinatown, & heating up club nights – as a dancer & DJ – with all genres of Chinese dance music. Spanning across Chinatown block parties, sonic histories, living room listenings, and beyond, Chinatown Records 華埠錄音 is an ever-growing record of the people we love, who bring all this music to life with us.',
     socialLinks: [{ icon: 'Instagram', url: 'https://www.instagram.com/chinatownrecordsproject/' }, { icon: 'Website', url: 'https://www.chinatownrecords.us/' }],
@@ -75,19 +76,19 @@ const MOTION_PROPS = {
 
 function ArtistName({ nameEn, nameZh, inline }) {
   return (
-    <>
+    <div>
       <h3 style={{ fontSize: 40, fontWeight: 800, lineHeight: '40px', color: '#fff', margin: 0 }}>
         {nameEn}
         {inline && nameZh && <span style={{ fontSize: 24, fontWeight: 500, color: '#fff', marginLeft: 10 }}>{nameZh}</span>}
       </h3>
       {!inline && nameZh && <p style={{ fontSize: 24, fontWeight: 500, lineHeight: '24px', color: '#fff', margin: '4px 0 0' }}>{nameZh}</p>}
-    </>
+    </div>
   )
 }
 
 function SocialLinks({ links, style }) {
   return (
-    <div className="lineup-social" style={{ display: 'flex', gap: 8, alignItems: 'center', margin: '16px 0', ...style }}>
+    <div className="lineup-social" style={{ display: 'flex', gap: 6, alignItems: 'center', margin: '16px 0', ...style }}>
       {links.map(link => {
         const src = ICON_MAP[link.icon]
         if (!src) return null
@@ -110,6 +111,20 @@ function SocialLinks({ links, style }) {
 
 export default function Lineup() {
   const isMobile = useIsMobile()
+  const nameRefs = useRef([])
+
+  useEffect(() => {
+    const equalize = () => {
+      const els = nameRefs.current.filter(Boolean)
+      if (!els.length) return
+      els.forEach(el => { el.style.minHeight = '' })
+      const max = Math.max(...els.map(el => el.offsetHeight))
+      els.forEach(el => { el.style.minHeight = `${max}px` })
+    }
+    equalize()
+    window.addEventListener('resize', equalize)
+    return () => window.removeEventListener('resize', equalize)
+  }, [isMobile])
   return (
     <section
       id="lineup"
@@ -122,26 +137,35 @@ export default function Lineup() {
 
         {/* Trio row: 9m88, ØZI, Yellow */}
           <motion.div {...MOTION_PROPS} className="lineup-trio" style={{ display: 'flex', gap: 2, padding: '0 0 3rem', width: '85vw', margin: '0 auto' }}>
-            {trioArtists.map((artist, i) => {
-              return (
+            {trioArtists.map((artist, i) => (
               <div
                 key={artist.id}
                 className="lineup-trio-item"
-                style={{ flex: 1, minWidth: 0 }}
+                style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}
               >
                 <div className="lineup-trio-img-wrapper" style={{ width: '100%', aspectRatio: '3 / 3.3', overflow: 'hidden', background: '#111' }}>
                   <Image src={artist.photo} alt={artist.nameEn} width={600} height={660} sizes="(max-width: 768px) 100vw, 33vw" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} priority />
                 </div>
-                <div className="lineup-trio-text" style={{ position: 'relative', padding: '2.5rem 1.5rem 1.5rem', textAlign: 'center' }}>
-                  <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} inline />
-                  <SocialLinks links={artist.socialLinks} style={{ justifyContent: 'center' }} />
-                  <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '24px', color: '#ffffffd9', textAlign: 'left' }}>{artist.shortBio}</p>
-                  {i < trioArtists.length - 1 && (
-                    <span className="lineup-trio-plus" style={{ position: 'absolute', right: 0, top: 'calc(2.5rem - 6px)', fontSize: 40, fontWeight: 700, color: '#fff', lineHeight: '40px', transform: 'translateX(50%)', zIndex: 1 }}>+</span>
-                  )}
+                <div className="lineup-trio-info" style={{ padding: '2rem 1.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: 16, position: 'relative' }}>
+                  <div
+                    className="lineup-trio-text"
+                    ref={el => { nameRefs.current[i] = el }}
+                    style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', textAlign: 'center' }}
+                  >
+                    <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} inline={!isMobile} />
+                    {i < trioArtists.length - 1 && (
+                      <span className="lineup-trio-plus" style={{ position: 'absolute', right: 0, top: 'calc(2rem - 6px)', fontSize: 40, fontWeight: 700, color: '#fff', lineHeight: '40px', transform: 'translateX(50%)', zIndex: 1 }}>+</span>
+                    )}
+                  </div>
+                  <div className="lineup-trio-socials" style={{ textAlign: 'center' }}>
+                    <SocialLinks links={artist.socialLinks} style={{ justifyContent: 'center', margin: 0 }} />
+                  </div>
+                  <div className="lineup-trio-bio" style={{ textAlign: 'left' }}>
+                    <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '24px', color: '#ffffffd9' }}>{artist.shortBio}</p>
+                  </div>
                 </div>
               </div>
-            )})}
+            ))}
           </motion.div>
 
         <div style={{ maxWidth: 1400, margin: '0 auto', width: '100%', padding: '12rem 4rem 10rem' }} className="lineup-solo-container">
@@ -169,9 +193,9 @@ export default function Lineup() {
                   className="lineup-solo-img"
                   style={{ objectFit: 'cover', flexShrink: 0, display: 'block', ...(i === 0 && !isMobile && { marginLeft: 'calc(-4rem - max(0px, (100vw - 1400px) / 2))', height: 600 }), ...(i === 1 && { marginRight: '4rem' }) }}
                 />
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '0.5rem' }}>
+                <div className="lineup-solo-text" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '0.5rem', gap: 16 }}>
                   <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} />
-                  <SocialLinks links={artist.socialLinks} />
+                  <SocialLinks links={artist.socialLinks} style={{ margin: 0 }} />
                   <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '26px', color: '#ffffffd9', maxWidth: 440, whiteSpace: 'pre-line' }}>{artist.shortBio}</p>
                 </div>
               </motion.div>

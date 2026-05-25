@@ -82,7 +82,7 @@ html {
 
   :root {
     --spinner-top: 27vh;
-    --spinner-size: 96vw;
+    --spinner-size: 78vw;
     --hero-font-large: 40px;
     --hero-font-large-line: 44px;
     --hero-font-small: 26px;
@@ -173,8 +173,8 @@ html {
   /* Lineup trio — show as 3 columns since 744px can fit them */
   .lineup-trio { flex-direction: row !important; padding: 0 1.5rem 2rem !important; gap: 4px !important; }
   .lineup-trio-item { flex: 1 !important; width: auto !important; }
-  .lineup-trio-text { padding: 1rem 1rem !important; text-align: center !important; }
-  .lineup-trio-text .lineup-social { justify-content: center !important; }
+  .lineup-trio-info { padding: 1rem !important; }
+  .lineup-trio-socials .lineup-social { justify-content: center !important; }
   .lineup-trio-text h3 { font-size: 22px !important; line-height: 22px !important; }
 
   /* Lineup solo — show as row */
@@ -204,7 +204,7 @@ html {
 @media (min-width: 769px) and (max-width: 1200px) {
   /* Lineup */
   .lineup-trio { padding: 0 1.5rem 3rem !important; }
-  .lineup-trio-text { padding: 1.5rem 1.25rem 1rem !important; }
+  .lineup-trio-info { padding: 1.5rem 1.25rem 1.5rem !important; }
   .lineup-trio-text h3 { font-size: 28px !important; line-height: 28px !important; }
   .lineup-solo-container { padding: 6rem 2rem 6rem !important; }
   .lineup-solo-list { gap: 8rem !important; }
@@ -217,27 +217,38 @@ html {
 }
 
 @media (max-width: 768px) {
+  html, body {
+    background: #000;
+  }
+
+  .footer-link {
+    font-size: 17px !important;
+  }
+
   h2 {
-    font-size: 22px !important;
+    font-size: 24px !important;
   }
 
   /* Lineup */
   .lineup-trio { flex-direction: column !important; width: 100% !important; padding: 0 1.5rem 2rem !important; gap: 4rem !important; }
-  .lineup-trio-item { flex: none !important; width: 100% !important; }
-  .lineup-trio-text { padding: 2rem 0.5rem 1rem !important; text-align: left !important; }
+  .lineup-trio-item { flex: none !important; width: 100% !important; gap: 16px !important; }
+  .lineup-trio-info { padding: 0 !important; }
+  .lineup-trio-text { padding: 0 !important; text-align: left !important; min-height: unset !important; }
+  .lineup-trio-socials { text-align: left !important; }
+  .lineup-trio-socials .lineup-social { justify-content: flex-start !important; }
   .lineup-trio-text h3, .lineup-solo-row h3 { font-size: 28px !important; line-height: 28px !important; }
-  .lineup-trio-text .lineup-social { justify-content: flex-start !important; }
-  .lineup-social { gap: 12px !important; margin: 12px 0 !important; }
+  .lineup-social { gap: 8px !important; margin: 0 !important; }
   .lineup-social a { width: auto !important; height: auto !important; }
   .social-icon { width: 28px !important; height: 28px !important; }
-  .social-icon-spotify { width: 24px !important; height: 28px !important; }
+  .social-icon-instagram { width: 32px !important; height: 32px !important; }
+  .social-icon-spotify { width: 28px !important; height: 28px !important; padding: 0 2px !important; }
   .social-icon-youtube { width: 32px !important; height: 32px !important; }
   .lineup-solo-container { padding: 0 1.5rem 0 !important; }
   .lineup-solo-list { gap: 0 !important; }
 
   /* About */
   .about-video-container { width: 100vw !important; aspect-ratio: 1 / 2 !important; border-radius: 32px !important; }
-  .about-video-title { font-size: 28px !important; line-height: 34px !important; width: 80vw !important; -webkit-text-stroke: 2px #000 !important; }
+  .about-video-title { font-size: 32px !important; line-height: 38px !important; width: 80vw !important; -webkit-text-stroke: 2px #000 !important; }
 
   /* History */
   #history { padding: 40px 0 !important; }
@@ -252,7 +263,8 @@ html {
   .history-year-inner { gap: 8px !important; }
   .history-year-inner svg { margin-right: 4px !important; }
   .history-section-inner { padding: 0 1.5rem !important; }
-  .lineup-solo-row { flex-direction: column !important; gap: 1.5rem !important; padding: 40px 0 !important; }
+  .lineup-solo-row { flex-direction: column !important; gap: 16px !important; padding: 40px 0 !important; }
+  .lineup-solo-text { padding-top: 0 !important; }
   .lineup-solo-img { width: 100% !important; height: auto !important; aspect-ratio: 4 / 3; }
   .lineup-trio-plus { display: none !important; }
 }
