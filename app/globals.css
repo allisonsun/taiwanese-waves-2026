@@ -361,7 +361,218 @@ html {
 .social-icon-website   { width: 30px; height: 30px; }
 
 /* ============================================================
-   Lineup — tablet breakpoints (600–768px, 769–1200px)
+   About — base styles
+   ============================================================ */
+
+#about {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: #000;
+  overflow: hidden;
+}
+
+.about-video-container {
+  position: relative;
+  width: 100vw;
+  max-width: 1800px;
+  aspect-ratio: 2 / 1;
+  border-radius: 80px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.about-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-video-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 60% at center, transparent 35%, rgba(0,0,0,0.95) 78%, #000 100%);
+  pointer-events: none;
+}
+
+.about-video-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  text-align: center;
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 68px;
+  letter-spacing: normal;
+  color: #fdf108;
+  -webkit-text-stroke: 3px #000;
+  paint-order: stroke fill;
+  margin: 0;
+  z-index: 2;
+}
+
+/* ============================================================
+   History — base styles
+   ============================================================ */
+
+#history {
+  background: url('/hero/background.jpg') center / cover no-repeat;
+  padding: 5rem 0;
+}
+
+.history-header-pad {
+  padding: 0 4rem 24px;
+  text-align: center;
+}
+
+.history-heading {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: normal;
+  color: #000;
+}
+
+.history-section-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.history-year-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  cursor: pointer;
+  transition: padding-left 0.2s;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+.history-year-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.history-wave-svg {
+  flex-shrink: 0;
+  margin-right: 6px;
+  overflow: hidden;
+}
+
+.history-year-num {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: 0.8px;
+}
+
+.history-tagline {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  letter-spacing: 0.3px;
+}
+
+.history-artists-desktop {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  letter-spacing: 0.3px;
+}
+
+.history-carousel-motion {
+  overflow: hidden;
+  padding-bottom: 8px;
+}
+
+.history-artists-mobile {
+  display: none;
+  padding-bottom: 10px;
+}
+
+.history-artists-mobile span {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  letter-spacing: 0.3px;
+}
+
+.history-carousel {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+.history-poster {
+  flex-shrink: 0;
+  aspect-ratio: 1000 / 1428;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #000;
+}
+
+.history-poster-media {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.history-photo {
+  flex-shrink: 0;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.history-divider {
+  height: 1px;
+  background: #000;
+}
+
+/* ============================================================
+   Footer — base styles
+   ============================================================ */
+
+#footer {
+  padding: 1rem 2rem;
+  background: #fdf108;
+  text-align: center;
+}
+
+#footer > div {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.footer-link {
+  color: #000;
+  font-size: 18px;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+/* ============================================================
+   Tablet breakpoints (600–768px, 769–1200px)
    ============================================================ */
 
 @media (min-width: 600px) and (max-width: 768px) {
@@ -381,11 +592,11 @@ html {
   .lineup-solo-row-reverse { flex-direction: row-reverse; }
   .lineup-solo-img { width: 45%; height: auto; aspect-ratio: unset; }
   .lineup-solo-row h3 { font-size: 24px; line-height: 24px; }
-  .lineup-solo-text p { max-width: none; }
+  .lineup-solo-bio { max-width: none; }
 
   /* About */
-  .about-video-container { aspect-ratio: 2 / 1 !important; border-radius: 48px !important; }
-  .about-video-title { font-size: 36px !important; line-height: 42px !important; width: 75vw !important; }
+  .about-video-container { aspect-ratio: 2 / 1; border-radius: 48px; }
+  .about-video-title { font-size: 36px; line-height: 42px; width: 75vw; }
 }
 
 @media (min-width: 769px) and (max-width: 1180px) {
@@ -411,7 +622,7 @@ html {
   .lineup-solo-row h3 { font-size: 28px; line-height: 28px; }
 
   /* About */
-  .about-video-title { font-size: 44px !important; line-height: 50px !important; }
+  .about-video-title { font-size: 44px; line-height: 50px; }
 }
 
 /* ============================================================
@@ -423,13 +634,11 @@ html {
     background: #000;
   }
 
-  .footer-link {
-    font-size: 17px !important;
-  }
+  /* Headings */
+  .lineup-heading, .history-heading { font-size: 24px; }
 
-  h2 {
-    font-size: 24px !important;
-  }
+  /* Footer */
+  .footer-link { font-size: 17px; }
 
   /* Lineup */
   .lineup-trio { flex-direction: column; width: 100%; padding: 0 1.5rem 2rem; gap: 4rem; }
@@ -454,20 +663,20 @@ html {
   .lineup-solo-img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
 
   /* About */
-  .about-video-container { width: 100vw !important; aspect-ratio: 1 / 2 !important; border-radius: 32px !important; }
-  .about-video-title { font-size: 32px !important; line-height: 38px !important; width: 80vw !important; -webkit-text-stroke: 2px #000 !important; }
+  .about-video-container { width: 100vw; aspect-ratio: 1 / 2; border-radius: 32px; }
+  .about-video-title { font-size: 32px; line-height: 38px; width: 80vw; -webkit-text-stroke: 2px #000; }
 
   /* History */
-  #history { padding: 40px 0 !important; }
-  .history-header-pad { padding: 0 1.5rem 12px !important; }
-  .history-year-row { flex-direction: column !important; align-items: flex-start !important; gap: 0; padding: 18px 0 !important; }
-  .history-year-row .history-year-num { font-size: 18px !important; }
-  .history-year-row .history-tagline { font-size: 18px !important; }
-  .history-artists-desktop { display: none !important; }
-  .history-artists-mobile { display: block !important; }
-  .history-artists-mobile span { font-size: 16px !important; }
-  .history-carousel-motion { padding-bottom: 4px !important; }
-  .history-year-inner { gap: 8px !important; }
-  .history-year-inner svg { margin-right: 4px !important; }
-  .history-section-inner { padding: 0 1.5rem !important; }
+  #history { padding: 40px 0; }
+  .history-header-pad { padding: 0 1.5rem 12px; }
+  .history-year-row { flex-direction: column; align-items: flex-start; gap: 0; padding: 18px 0; }
+  .history-year-row .history-year-num { font-size: 18px; }
+  .history-year-row .history-tagline { font-size: 18px; }
+  .history-artists-desktop { display: none; }
+  .history-artists-mobile { display: block; }
+  .history-artists-mobile span { font-size: 16px; }
+  .history-carousel-motion { padding-bottom: 4px; }
+  .history-year-inner { gap: 8px; }
+  .history-wave-svg { margin-right: 4px; }
+  .history-section-inner { padding: 0 1.5rem; }
 }

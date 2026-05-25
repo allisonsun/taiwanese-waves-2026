@@ -2,10 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
 import useIsMobile from '../hooks/useIsMobile'
 
-function AutoScrollCarousel({ children, style }) {
+function AutoScrollCarousel({ children, className, style }) {
   const ref = useRef(null)
   const isPaused = useRef(false)
 
@@ -54,11 +53,12 @@ function AutoScrollCarousel({ children, style }) {
   return (
     <div
       ref={ref}
+      className={className}
+      style={style}
       onMouseEnter={() => { isPaused.current = true }}
       onMouseLeave={() => { isPaused.current = false }}
       onTouchStart={() => { isPaused.current = true }}
       onTouchEnd={() => { isPaused.current = false }}
-      style={style}
     >
       {children}
     </div>
@@ -77,7 +77,7 @@ const WAVE_PATH = (() => {
 
 function AnimatedWave() {
   return (
-    <svg width="52" height="16" style={{ flexShrink: 0, marginRight: 6, overflow: 'hidden' }}>
+    <svg className="history-wave-svg" width="52" height="16">
       <motion.path
         d={WAVE_PATH}
         fill="none"
@@ -142,58 +142,33 @@ export default function History() {
   const carouselHeight = isMobile ? 220 : CAROUSEL_HEIGHT
 
   return (
-    <section id="history" style={{ background: `url('/hero/background.jpg') center / cover no-repeat`, padding: '5rem 0' }}>
-      {/* Header */}
-      <div className="history-header-pad" style={{ padding: '0 4rem 24px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: 32, fontWeight: 600, lineHeight: '32px', letterSpacing: 'normal', color: '#000' }}>
-          A look back at the past 10 years
-        </h2>
+    <section id="history">
+      <div className="history-header-pad">
+        <h2 className="history-heading">A look back at the past 10 years</h2>
       </div>
 
-      {/* Accordion list */}
-      <div className="history-section-inner" style={{ maxWidth: 1400, margin: '0 auto', padding: '0 3rem' }}>
-
+      <div className="history-section-inner">
         {YEARS.map((y, i) => {
           const isActive = activeIndex === i
           return (
             <div key={y.year}>
-              {/* Year row */}
               <button
                 type="button"
                 onClick={() => setActiveIndex(i)}
                 className="history-year-row"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '20px 0',
-                  cursor: 'pointer',
-                  transition: 'padding-left 0.2s',
-                  width: '100%',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                }}
                 onMouseEnter={e => { if (!isActive) e.currentTarget.style.paddingLeft = '12px' }}
                 onMouseLeave={e => { e.currentTarget.style.paddingLeft = '0px' }}
               >
-                <div className="history-year-inner" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div className="history-year-inner">
                   {isActive && <AnimatedWave />}
-                  <span className="history-year-num" style={{ fontSize: 24, fontWeight: 700, color: '#000', letterSpacing: '0.8px' }}>
-                    {y.year}
-                  </span>
-                  <span className="history-tagline" style={{ fontSize: 18, fontWeight: 400, color: '#000', letterSpacing: '0.3px' }}>
-                    {y.tagline}
-                  </span>
+                  <span className="history-year-num">{y.year}</span>
+                  <span className="history-tagline">{y.tagline}</span>
                 </div>
                 {y.artists?.length > 0 && (
-                  <span className="history-artists-desktop" style={{ fontSize: 18, fontWeight: 400, color: '#000', letterSpacing: '0.3px' }}>
-                    {y.artists.join(' • ')}
-                  </span>
+                  <span className="history-artists-desktop">{y.artists.join(' • ')}</span>
                 )}
               </button>
 
-              {/* Carousel — expands when active */}
               <AnimatePresence initial={false}>
                 {isActive && (
                   <motion.div
@@ -201,46 +176,32 @@ export default function History() {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.35, ease: 'easeInOut' }}
-                    style={{ overflow: 'hidden', paddingBottom: 8 }}
                     className="history-carousel-motion"
                   >
                     {y.artists?.length > 0 && (
-                      <div className="history-artists-mobile" style={{ display: 'none', paddingBottom: 10 }}>
-                        <span style={{ fontSize: 18, fontWeight: 400, color: '#000', letterSpacing: '0.3px' }}>
-                          {y.artists.join(' • ')}
-                        </span>
+                      <div className="history-artists-mobile">
+                        <span>{y.artists.join(' • ')}</span>
                       </div>
                     )}
-                    <AutoScrollCarousel
-                      style={{
-                        display: 'flex',
-                        gap: 4,
-                        overflowX: 'auto',
-                        height: carouselHeight,
-                        paddingBottom: 12,
-                        boxSizing: 'border-box',
-                        scrollbarWidth: 'none',
-                      }}
-                    >
+                    <AutoScrollCarousel className="history-carousel" style={{ height: carouselHeight }}>
                       {y.poster && (
-                        <div style={{ flexShrink: 0, aspectRatio: '1000 / 1428', height: '100%', overflow: 'hidden', border: '1px solid #000' }}>
+                        <div className="history-poster">
                           {y.poster.endsWith('.mp4') ? (
-                            <video src={y.poster} autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                            <video src={y.poster} autoPlay muted loop playsInline className="history-poster-media" />
                           ) : (
-                            <img src={y.poster} alt={`${y.year} poster`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                            <img src={y.poster} alt={`${y.year} poster`} loading="lazy" className="history-poster-media" />
                           )}
                         </div>
                       )}
                       {y.photos?.map((photo, pi) => (
-                        <img key={pi} src={photo} alt="" loading="lazy" style={{ flexShrink: 0, height: '100%', width: 'auto', objectFit: 'cover', display: 'block' }} />
+                        <img key={pi} src={photo} alt="" loading="lazy" className="history-photo" />
                       ))}
                     </AutoScrollCarousel>
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              {/* Divider */}
-              {i < YEARS.length - 1 && <div style={{ height: 1, background: '#000' }} />}
+              {i < YEARS.length - 1 && <div className="history-divider" />}
             </div>
           )
         })}

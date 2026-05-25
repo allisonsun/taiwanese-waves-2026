@@ -6,22 +6,15 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer
-      id="footer"
-      style={{
-        padding: '1rem 2rem',
-        background: '#fdf108',
-        textAlign: 'center',
-      }}
-    >
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
+    <footer id="footer">
+      <div>
         {LINKS.map(({ label, href }) => (
           <a
             key={label}
             href={href}
             target={href.startsWith('mailto') ? undefined : '_blank'}
             rel="noopener noreferrer"
-            style={{ color: '#000', fontSize: 18, letterSpacing: '0.3px', textDecoration: 'none', transition: 'opacity 0.2s' }}
+            className="footer-link"
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
           >
