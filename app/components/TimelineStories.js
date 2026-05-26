@@ -141,7 +141,7 @@ export default function TimelineStories() {
             Stories we carry
           </h2>
           <p style={{ fontSize: 16, color: '#fdf108', lineHeight: '24px', marginBottom: '1.25rem' }}>
-            Each year, each performance feels like a wave. Some you catch, some that move you, some that leave something behind. We're collecitng these little moments. If you were there, we'd love to hear yours.
+            Each year, each performance feels like a wave. Some you catch, some move you, some leave something behind. We're collecting these little moments. If you were there, we'd love to hear yours.
           </p>
           <ShareButton fontSize={14} iconSize={16} padding="10px 18px" />
         </div>
@@ -209,7 +209,7 @@ export default function TimelineStories() {
               Stories we carry
             </h2>
             <p style={{ fontSize: 18, color: '#fff', lineHeight: '26px', letterSpacing: '0.3px', marginBottom: '1.5rem' }}>
-              Each year, each performance feels like a wave. Some you catch, some that move you, some that leave something behind. We're collecting these little moments. If you were there, we'd love to hear yours.
+              Each year, each performance feels like a wave. Some you catch, some move you, some leave something behind. We're collecting these little moments. If you were there, we'd love to hear yours.
             </p>
           </div>
           <div style={{ pointerEvents: 'auto' }}>
