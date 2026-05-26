@@ -29,7 +29,7 @@ export default function Sponsors() {
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: 32, fontWeight: 600, lineHeight: '32px', letterSpacing: 'normal', color: '#fff' }}>
-            Partners &amp; sponsors
+            Thank you to our sponsors
           </h2>
         </div>
 

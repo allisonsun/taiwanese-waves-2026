@@ -16,12 +16,14 @@ export default function Nav() {
   const isMobile = useIsMobile()
 
   useEffect(() => {
-    const handleScroll = () => {
-      const next = window.scrollY > window.innerHeight * 0.8
-      setScrolled(next)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const el = document.getElementById('hero')
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0.05 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
   useEffect(() => {
@@ -59,11 +61,13 @@ export default function Nav() {
           justifyContent: 'space-between',
         }}
       >
-        <img
-          src="/logo.svg"
-          alt="Taiwanese Waves"
-          style={{ height: 32, width: 'auto', display: 'block' }}
-        />
+        <a href="#" aria-label="Back to top">
+          <img
+            src="/logo.svg"
+            alt="Taiwanese Waves"
+            style={{ height: 32, width: 'auto', display: 'block' }}
+          />
+        </a>
 
         {isMobile ? (
           <button
@@ -82,7 +86,7 @@ export default function Nav() {
                 key={label}
                 href={href}
                 style={{
-                  color: textColor,
+                  color: scrolled ? textColor : '#000',
                   textDecoration: 'none',
                   fontSize: 14,
                   lineHeight: '20px',
@@ -98,7 +102,40 @@ export default function Nav() {
             ))}
           </div>
         )}
+        {/* White masked links — position: absolute so mask aligns with nav's top-left = viewport origin */}
+        {!isMobile && (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              padding: '1rem',
+              pointerEvents: 'none',
+              opacity: scrolled ? 0 : 1,
+              transition: 'opacity 0.3s',
+              WebkitMaskImage: 'url(/hero/double-circle.png)',
+              WebkitMaskSize: '100vw auto',
+              WebkitMaskPosition: '0 0',
+              WebkitMaskRepeat: 'no-repeat',
+              maskImage: 'url(/hero/double-circle.png)',
+              maskSize: '100vw auto',
+              maskPosition: '0 0',
+              maskRepeat: 'no-repeat',
+            }}
+          >
+            <div style={{ display: 'flex', gap: '1.25rem' }}>
+              {NAV_LINKS.map(({ label }) => (
+                <span key={label} style={{ color: '#fff', fontSize: 14, lineHeight: '20px', letterSpacing: '.25px' }}>
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
+
 
       {/* Mobile fullscreen menu */}
       {isMobile && (
