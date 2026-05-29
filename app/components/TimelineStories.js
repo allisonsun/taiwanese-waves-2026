@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import StoryModal from './StoryModal'
-import useIsMobile from '../hooks/useIsMobile'
 
 const PLACEHOLDER_STORIES = [
   { name: 'Angela C.', photo: '/photos/2016/2016-1.jpg', story: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.' },
@@ -111,7 +110,6 @@ export default function TimelineStories() {
   const [displayedStories, setDisplayedStories] = useState(null)
   const [scrollVw, setScrollVw] = useState(0)
   const [activeIndex, setActiveIndex] = useState(null)
-  const isMobile = useIsMobile()
 
   useEffect(() => {
     const controller = new AbortController()
@@ -132,9 +130,10 @@ export default function TimelineStories() {
   const handleModalNext = useCallback(() => setActiveIndex(i => (i + 1) % displayStories.length), [displayStories.length])
   const handleModalPrev = useCallback(() => setActiveIndex(i => (i - 1 + displayStories.length) % displayStories.length), [displayStories.length])
 
-  if (isMobile) {
-    return (
-      <section id="stories" className="snap-section" style={{ background: '#000', height: '100dvh', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '3rem 0 2.5rem' }}>
+  return (
+    <section id="stories" className="snap-section stories-section">
+      {/* Mobile layout — shown via CSS on ≤768px */}
+      <div className="stories-mobile">
         {/* CTA */}
         <div style={{ textAlign: 'center', padding: '0 2rem 2.5rem' }}>
           <h2 style={{ fontSize: 28, fontWeight: 800, color: '#fdf108', marginBottom: '0.75rem', fontFamily: 'var(--font-archivo), sans-serif' }}>
@@ -156,94 +155,92 @@ export default function TimelineStories() {
             </div>
           ))}
         </div>
-        <StoryModal story={activeStory} onClose={handleClose} onNext={handleModalNext} onPrev={handleModalPrev} />
-      </section>
-    )
-  }
+      </div>
 
-  return (
-    <section id="stories" className="snap-section" style={{ background: '#000', height: '100dvh', overflow: 'hidden' }}>
-      {/* Continuous collage strip with centered CTA overlay */}
-      <div style={{ position: 'relative', width: '100%', height: '100dvh', overflow: 'hidden' }}>
-        <motion.div
-          animate={{ x: `${-scrollVw}vw` }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-          style={{ position: 'absolute', top: 0, left: 0, width: `${STRIP_VW}vw`, height: '100%' }}
-        >
-          {displayStories.map((story, i) => {
-            const slot = ALL_SLOTS[i]
-            if (!slot) return null
-            return (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.04, zIndex: 10 }}
-                onClick={() => setActiveIndex(i)}
-                style={{
-                  position: 'absolute',
-                  top: slot.top,
-                  left: `${slot.leftVw}vw`,
-                  width: slot.width,
-                  height: slot.height,
-                  zIndex: slot.zIndex,
-                  cursor: 'pointer',
-                  overflow: 'hidden',
-                }}
-              >
-                {story.photo
-                  ? <Image src={story.photo} alt="" fill sizes={`${slot.width}px`} style={{ objectFit: 'cover' }} />
-                  : <div style={{ width: '100%', height: '100%', background: '#222' }} />}
-              </motion.div>
-            )
-          })}
-        </motion.div>
+      {/* Desktop layout — shown via CSS on >768px */}
+      <div className="stories-desktop">
+        {/* Continuous collage strip with centered CTA overlay */}
+        <div style={{ position: 'relative', width: '100%', height: '100dvh', overflow: 'hidden' }}>
+          <motion.div
+            animate={{ x: `${-scrollVw}vw` }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            style={{ position: 'absolute', top: 0, left: 0, width: `${STRIP_VW}vw`, height: '100%' }}
+          >
+            {displayStories.map((story, i) => {
+              const slot = ALL_SLOTS[i]
+              if (!slot) return null
+              return (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.04, zIndex: 10 }}
+                  onClick={() => setActiveIndex(i)}
+                  style={{
+                    position: 'absolute',
+                    top: slot.top,
+                    left: `${slot.leftVw}vw`,
+                    width: slot.width,
+                    height: slot.height,
+                    zIndex: slot.zIndex,
+                    cursor: 'pointer',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {story.photo
+                    ? <Image src={story.photo} alt="" fill sizes={`${slot.width}px`} style={{ objectFit: 'cover' }} />
+                    : <div style={{ width: '100%', height: '100%', background: '#222' }} />}
+                </motion.div>
+              )
+            })}
+          </motion.div>
 
-        {/* Centered CTA overlay */}
-        <div style={{
-          position: 'absolute', top: '50%', left: '50%',
-          transform: 'translate(-50%, -50%)',
-          textAlign: 'center', zIndex: 20, pointerEvents: 'none',
-          width: '40vw',
-        }}>
-          <div style={{ mixBlendMode: 'difference' }}>
-            <h2 style={{ fontSize: 40, fontWeight: 800, lineHeight: '44px', color: '#fff', marginBottom: '1rem', fontFamily: 'var(--font-archivo), sans-serif' }}>
-              Stories we carry
-            </h2>
-            <p style={{ fontSize: 18, color: '#fff', lineHeight: '26px', letterSpacing: '0.3px', marginBottom: '1.5rem' }}>
-              Each year, each performance feels like a wave. Some you catch, some move you, some leave something behind. We're collecting these little moments. If you were there, we'd love to hear yours.
-            </p>
+          {/* Centered CTA overlay */}
+          <div style={{
+            position: 'absolute', top: '50%', left: '50%',
+            transform: 'translate(-50%, -50%)',
+            textAlign: 'center', zIndex: 20, pointerEvents: 'none',
+            width: '40vw',
+          }}>
+            <div style={{ mixBlendMode: 'difference' }}>
+              <h2 style={{ fontSize: 40, fontWeight: 800, lineHeight: '44px', color: '#fff', marginBottom: '1rem', fontFamily: 'var(--font-archivo), sans-serif' }}>
+                Stories we carry
+              </h2>
+              <p style={{ fontSize: 18, color: '#fff', lineHeight: '26px', letterSpacing: '0.3px', marginBottom: '1.5rem' }}>
+                Each year, each performance feels like a wave. Some you catch, some move you, some leave something behind. We're collecting these little moments. If you were there, we'd love to hear yours.
+              </p>
+            </div>
+            <div style={{ pointerEvents: 'auto' }}>
+              <ShareButton />
+            </div>
           </div>
-          <div style={{ pointerEvents: 'auto' }}>
-            <ShareButton />
-          </div>
+
+          {/* Arrows */}
+          <button
+            onClick={handleScrollPrev}
+            disabled={scrollVw === 0}
+            style={{
+              position: 'absolute', bottom: 16, right: 88, zIndex: 10,
+              background: 'none', border: '1.5px solid #fff', borderRadius: '50%',
+              width: 40, height: 40, cursor: scrollVw === 0 ? 'not-allowed' : 'pointer',
+              opacity: scrollVw === 0 ? 0.25 : 0.7,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button
+            onClick={handleScrollNext}
+            disabled={scrollVw >= MAX_SCROLL_VW}
+            style={{
+              position: 'absolute', bottom: 16, right: 40, zIndex: 10,
+              background: 'none', border: '1.5px solid #fff', borderRadius: '50%',
+              width: 40, height: 40, cursor: scrollVw >= MAX_SCROLL_VW ? 'not-allowed' : 'pointer',
+              opacity: scrollVw >= MAX_SCROLL_VW ? 0.25 : 0.7,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
-
-        {/* Arrows */}
-        <button
-          onClick={handleScrollPrev}
-          disabled={scrollVw === 0}
-          style={{
-            position: 'absolute', bottom: 16, right: 88, zIndex: 10,
-            background: 'none', border: '1.5px solid #fff', borderRadius: '50%',
-            width: 40, height: 40, cursor: scrollVw === 0 ? 'not-allowed' : 'pointer',
-            opacity: scrollVw === 0 ? 0.25 : 0.7,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button
-          onClick={handleScrollNext}
-          disabled={scrollVw >= MAX_SCROLL_VW}
-          style={{
-            position: 'absolute', bottom: 16, right: 40, zIndex: 10,
-            background: 'none', border: '1.5px solid #fff', borderRadius: '50%',
-            width: 40, height: 40, cursor: scrollVw >= MAX_SCROLL_VW ? 'not-allowed' : 'pointer',
-            opacity: scrollVw >= MAX_SCROLL_VW ? 0.25 : 0.7,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
       </div>
 
       <StoryModal story={activeStory} onClose={handleClose} onNext={handleModalNext} onPrev={handleModalPrev} />

@@ -1,23 +1,21 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import useIsMobile from '../hooks/useIsMobile'
 import { useRef } from 'react'
 
 const LIGHT = { fontFamily: 'var(--font-rational-light), sans-serif', fontWeight: 300 }
 const BOLD  = { fontFamily: 'var(--font-rational), sans-serif' }
 
-const dateContent = (color, isMobile) => {
+const dateContent = (color) => {
   const SMALL = { ...LIGHT, fontSize: 'var(--hero-font-small)', lineHeight: 'var(--hero-font-small-line)', display: 'block' }
-  const BASE  = { position: 'absolute', fontSize: 'var(--hero-font-large)', lineHeight: 'var(--hero-font-large-line)', margin: 0 }
   return (
     <>
-      <p style={{ ...BASE, ...BOLD, bottom: isMobile ? '8rem' : '2rem', left: isMobile ? '1rem' : '2rem', color }}>
+      <p className="hero-date-left" style={{ ...BOLD, color }}>
         2026 <span style={LIGHT}>Aug 16</span>
         <br />
         <span style={SMALL}>Rumsey Playfield, Central Park</span>
       </p>
-      <p style={{ ...BASE, ...LIGHT, bottom: '2rem', right: isMobile ? '1rem' : '2rem', color, textAlign: 'right' }}>
+      <p className="hero-date-right" style={{ ...LIGHT, color }}>
         SummerStage
         <br />
         <span style={SMALL}>NYC</span>
@@ -27,7 +25,6 @@ const dateContent = (color, isMobile) => {
 }
 
 export default function Hero() {
-  const isMobile = useIsMobile()
   const sectionRef = useRef(null)
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
   const circleScale = useTransform(scrollYProgress, [0, 1], [1, 1.6])
@@ -98,7 +95,7 @@ export default function Hero() {
         style={{ position: 'absolute', inset: 0, zIndex: 10, pointerEvents: 'none' }}
       >
         {/* Black text — always visible */}
-        {dateContent('#000', isMobile)}
+        {dateContent('#000')}
 
         {/* White text — mask tracks circle scale, text stays unscaled */}
         <motion.div
@@ -110,7 +107,7 @@ export default function Hero() {
             WebkitMaskPosition: 'center top',
           }}
         >
-          {dateContent('#fff', isMobile)}
+          {dateContent('#fff')}
         </motion.div>
       </motion.div>
 

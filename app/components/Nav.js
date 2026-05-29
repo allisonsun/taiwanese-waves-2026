@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import useIsMobile from '../hooks/useIsMobile'
 
 const NAV_LINKS = [
   { label: 'Lineup', href: '#lineup' },
@@ -13,7 +12,6 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [overHistory, setOverHistory] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const isMobile = useIsMobile()
 
   useEffect(() => {
     const el = document.getElementById('hero')
@@ -69,111 +67,107 @@ export default function Nav() {
           />
         </a>
 
-        {isMobile ? (
-          <button
-            onClick={() => setMenuOpen(o => !o)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', flexDirection: 'column', gap: 5 }}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          >
-            <span style={{ display: 'block', width: 24, height: 2, background: menuOpen ? '#fff' : textColor, transition: 'background 0.3s, transform 0.3s', transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
-            <span style={{ display: 'block', width: 24, height: 2, background: menuOpen ? '#fff' : textColor, transition: 'background 0.3s, opacity 0.3s', opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ display: 'block', width: 24, height: 2, background: menuOpen ? '#fff' : textColor, transition: 'background 0.3s, transform 0.3s', transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
-          </button>
-        ) : (
-          <div style={{ display: 'flex', gap: '1.25rem' }}>
-            {NAV_LINKS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                style={{
-                  color: scrolled ? textColor : '#000',
-                  textDecoration: 'none',
-                  fontSize: 14,
-                  lineHeight: '20px',
-                  letterSpacing: '.25px',
-                  opacity: 0.8,
-                  transition: 'color 0.3s, opacity 0.2s',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = 1)}
-                onMouseLeave={e => (e.currentTarget.style.opacity = 0.8)}
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-        )}
-        {/* White masked links — position: absolute so mask aligns with nav's top-left = viewport origin */}
-        {!isMobile && (
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              padding: '1rem',
-              pointerEvents: 'none',
-              opacity: scrolled ? 0 : 1,
-              transition: 'opacity 0.3s',
-              WebkitMaskImage: 'url(/hero/double-circle.png)',
-              WebkitMaskSize: '100vw auto',
-              WebkitMaskPosition: '0 0',
-              WebkitMaskRepeat: 'no-repeat',
-              maskImage: 'url(/hero/double-circle.png)',
-              maskSize: '100vw auto',
-              maskPosition: '0 0',
-              maskRepeat: 'no-repeat',
-            }}
-          >
-            <div style={{ display: 'flex', gap: '1.25rem' }}>
-              {NAV_LINKS.map(({ label }) => (
-                <span key={label} style={{ color: '#fff', fontSize: 14, lineHeight: '20px', letterSpacing: '.25px' }}>
-                  {label}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-      </nav>
-
-
-      {/* Mobile fullscreen menu */}
-      {isMobile && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 49,
-            background: '#000',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '2.5rem',
-            opacity: menuOpen ? 1 : 0,
-            pointerEvents: menuOpen ? 'auto' : 'none',
-            transition: 'opacity 0.3s',
-          }}
+        {/* Hamburger — mobile only (hidden on desktop via CSS) */}
+        <button
+          className="nav-hamburger"
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         >
+          <span style={{ display: 'block', width: 24, height: 2, background: menuOpen ? '#fff' : textColor, transition: 'background 0.3s, transform 0.3s', transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
+          <span style={{ display: 'block', width: 24, height: 2, background: menuOpen ? '#fff' : textColor, transition: 'background 0.3s, opacity 0.3s', opacity: menuOpen ? 0 : 1 }} />
+          <span style={{ display: 'block', width: 24, height: 2, background: menuOpen ? '#fff' : textColor, transition: 'background 0.3s, transform 0.3s', transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
+        </button>
+
+        {/* Desktop links — hidden on mobile via CSS */}
+        <div className="nav-desktop-links" style={{ gap: '1.25rem' }}>
           {NAV_LINKS.map(({ label, href }) => (
             <a
               key={label}
               href={href}
-              onClick={() => setMenuOpen(false)}
               style={{
-                color: '#fff',
+                color: scrolled ? textColor : '#000',
                 textDecoration: 'none',
-                fontSize: 36,
-                fontWeight: 700,
-                letterSpacing: '0.5px',
-                fontFamily: 'var(--font-rational), sans-serif',
+                fontSize: 14,
+                lineHeight: '20px',
+                letterSpacing: '.25px',
+                opacity: 0.8,
+                transition: 'color 0.3s, opacity 0.2s',
               }}
+              onMouseEnter={e => (e.currentTarget.style.opacity = 1)}
+              onMouseLeave={e => (e.currentTarget.style.opacity = 0.8)}
             >
               {label}
             </a>
           ))}
         </div>
-      )}
+
+        {/* White masked links — position: absolute so mask aligns with nav's top-left = viewport origin */}
+        {/* Hidden on mobile via CSS */}
+        <div
+          className="nav-desktop-mask"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            padding: '1rem',
+            pointerEvents: 'none',
+            opacity: scrolled ? 0 : 1,
+            transition: 'opacity 0.3s',
+            WebkitMaskImage: 'url(/hero/double-circle.png)',
+            WebkitMaskSize: '100vw auto',
+            WebkitMaskPosition: '0 0',
+            WebkitMaskRepeat: 'no-repeat',
+            maskImage: 'url(/hero/double-circle.png)',
+            maskSize: '100vw auto',
+            maskPosition: '0 0',
+            maskRepeat: 'no-repeat',
+          }}
+        >
+          <div style={{ display: 'flex', gap: '1.25rem' }}>
+            {NAV_LINKS.map(({ label }) => (
+              <span key={label} style={{ color: '#fff', fontSize: 14, lineHeight: '20px', letterSpacing: '.25px' }}>
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile fullscreen overlay — always in DOM, shown/hidden via CSS + opacity */}
+      <div
+        className="nav-mobile-overlay"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 49,
+          background: '#000',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '2.5rem',
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? 'auto' : 'none',
+          transition: 'opacity 0.3s',
+        }}
+      >
+        {NAV_LINKS.map(({ label, href }) => (
+          <a
+            key={label}
+            href={href}
+            onClick={() => setMenuOpen(false)}
+            style={{
+              color: '#fff',
+              textDecoration: 'none',
+              fontSize: 36,
+              fontWeight: 700,
+              letterSpacing: '0.5px',
+              fontFamily: 'var(--font-rational), sans-serif',
+            }}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
     </>
   )
 }

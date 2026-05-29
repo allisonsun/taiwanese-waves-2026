@@ -6,6 +6,13 @@
   --background: #fdf108;
   --foreground: #fff;
   --accent: #fdf108;
+  --text-muted: #ffffffd9;
+  --spinner-top: 50%;
+  --spinner-size: 55vw;
+  --hero-font-large: 64px;
+  --hero-font-large-line: 68px;
+  --hero-font-small: 44px;
+  --hero-font-small-line: 48px;
 }
 
 h2 {
@@ -22,7 +29,7 @@ html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
   overflow-x: hidden;
-  background: #fdf108;
+  background: var(--background);
 }
 
 .snap-section {
@@ -61,15 +68,6 @@ html {
     mask-size: cover;
     mask-position: center top;
   }
-}
-
-:root {
-  --spinner-top: 50%;
-  --spinner-size: 55vw;
-  --hero-font-large: 64px;
-  --hero-font-large-line: 68px;
-  --hero-font-small: 44px;
-  --hero-font-small-line: 48px;
 }
 
 @media (max-width: 768px) {
@@ -180,15 +178,19 @@ html {
   justify-content: center;
   padding: 4rem 0;
   background: #000;
-  color: #fff;
+  color: var(--foreground);
 }
 
-.lineup-heading {
+.lineup-heading,
+.history-heading {
   font-size: 32px;
   font-weight: 600;
   line-height: 32px;
   letter-spacing: normal;
-  color: #fff;
+}
+
+.lineup-heading {
+  color: var(--foreground);
   margin-bottom: 3rem;
   text-align: center;
 }
@@ -243,7 +245,7 @@ html {
   font-size: 40px;
   font-weight: 800;
   line-height: 40px;
-  color: #fff;
+  color: var(--foreground);
   margin: 0;
 }
 
@@ -254,10 +256,11 @@ html {
 }
 
 .lineup-artist-name-zh {
+  display: none;
   font-size: 24px;
   font-weight: 500;
   line-height: 24px;
-  color: #fff;
+  color: var(--foreground);
   margin: 4px 0 0;
 }
 
@@ -267,7 +270,7 @@ html {
   top: calc(2rem - 6px);
   font-size: 40px;
   font-weight: 700;
-  color: #fff;
+  color: var(--foreground);
   line-height: 40px;
   transform: translateX(50%);
   z-index: 1;
@@ -285,7 +288,7 @@ html {
   font-size: 17px;
   font-weight: 400;
   line-height: 24px;
-  color: #ffffffd9;
+  color: var(--text-muted);
   margin: 0;
 }
 
@@ -332,7 +335,7 @@ html {
   font-size: 17px;
   font-weight: 400;
   line-height: 26px;
-  color: #ffffffd9;
+  color: var(--text-muted);
   max-width: 440px;
   white-space: pre-line;
   margin: 0;
@@ -413,7 +416,7 @@ html {
   font-weight: 600;
   line-height: 68px;
   letter-spacing: normal;
-  color: #fdf108;
+  color: var(--accent);
   -webkit-text-stroke: 3px #000;
   paint-order: stroke fill;
   margin: 0;
@@ -435,10 +438,6 @@ html {
 }
 
 .history-heading {
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 32px;
-  letter-spacing: normal;
   color: #000;
 }
 
@@ -480,14 +479,9 @@ html {
   letter-spacing: 0.8px;
 }
 
-.history-tagline {
-  font-size: 18px;
-  font-weight: 400;
-  color: #000;
-  letter-spacing: 0.3px;
-}
-
-.history-artists-desktop {
+.history-tagline,
+.history-artists-desktop,
+.history-artists-mobile span {
   font-size: 18px;
   font-weight: 400;
   color: #000;
@@ -502,13 +496,6 @@ html {
 .history-artists-mobile {
   display: none;
   padding-bottom: 10px;
-}
-
-.history-artists-mobile span {
-  font-size: 18px;
-  font-weight: 400;
-  color: #000;
-  letter-spacing: 0.3px;
 }
 
 .history-carousel {
@@ -553,7 +540,7 @@ html {
 
 #footer {
   padding: 1rem 2rem;
-  background: #fdf108;
+  background: var(--background);
   text-align: center;
 }
 
@@ -679,4 +666,164 @@ html {
   .history-year-inner { gap: 8px; }
   .history-wave-svg { margin-right: 4px; }
   .history-section-inner { padding: 0 1.5rem; }
+}
+
+/* ============================================================
+   Nav — responsive show/hide
+   ============================================================ */
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nav-desktop-links {
+  display: flex;
+}
+
+.nav-desktop-mask {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-desktop-links,
+  .nav-desktop-mask {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Nav — mobile fullscreen overlay
+   ============================================================ */
+
+.nav-mobile-overlay {
+  display: none;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .nav-mobile-overlay {
+    display: flex;
+  }
+}
+
+/* ============================================================
+   Hero — date label positioning
+   ============================================================ */
+
+.hero-date-left,
+.hero-date-right {
+  position: absolute;
+  bottom: 2rem;
+  margin: 0;
+  font-size: var(--hero-font-large);
+  line-height: var(--hero-font-large-line);
+}
+
+.hero-date-left  { left: 2rem; }
+.hero-date-right { right: 2rem; text-align: right; }
+
+@media (max-width: 768px) {
+  .hero-date-left  { bottom: 8rem; left: 1rem; }
+  .hero-date-right { right: 1rem; }
+}
+
+/* ============================================================
+   Lineup — artist name inline vs. stacked
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .lineup-artist-name-zh-inline {
+    display: none;
+  }
+
+  .lineup-artist-name-zh {
+    display: block;
+  }
+}
+
+/* ============================================================
+   Lineup — first solo image desktop bleed
+   ============================================================ */
+
+.lineup-solo-bleed {
+  margin-left: calc(-4rem - max(0px, (100vw - 1400px) / 2));
+  height: 600px;
+}
+
+@media (max-width: 768px) {
+  .lineup-solo-bleed {
+    margin-left: 0;
+    height: auto;
+  }
+}
+
+/* ============================================================
+   History — carousel height
+   ============================================================ */
+
+.history-carousel {
+  height: 420px;
+}
+
+@media (max-width: 768px) {
+  .history-carousel {
+    height: 220px;
+  }
+}
+
+/* ============================================================
+   Loader — wave width
+   ============================================================ */
+
+.loader-wave {
+  width: 20vw;
+  height: 32px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .loader-wave { width: 40vw; }
+}
+
+/* ============================================================
+   Stories — responsive layout
+   ============================================================ */
+
+.stories-section {
+  background: #000;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.stories-mobile {
+  display: none;
+}
+
+.stories-desktop {
+  display: block;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .stories-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 3rem 0 2.5rem;
+  }
+
+  .stories-desktop {
+    display: none;
+  }
 }

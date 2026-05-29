@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import useIsMobile from '../hooks/useIsMobile'
 
 function AutoScrollCarousel({ children, className, style }) {
   const ref = useRef(null)
@@ -128,7 +127,6 @@ const CAROUSEL_HEIGHT = 420
 
 export default function History() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const isMobile = useIsMobile()
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -138,8 +136,6 @@ export default function History() {
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
   }, [])
-
-  const carouselHeight = isMobile ? 220 : CAROUSEL_HEIGHT
 
   return (
     <section id="history">
@@ -183,7 +179,7 @@ export default function History() {
                         <span>{y.artists.join(' • ')}</span>
                       </div>
                     )}
-                    <AutoScrollCarousel className="history-carousel" style={{ height: carouselHeight }}>
+                    <AutoScrollCarousel className="history-carousel">
                       {y.poster && (
                         <div className="history-poster">
                           {y.poster.endsWith('.mp4') ? (

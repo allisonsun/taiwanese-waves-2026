@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import useIsMobile from '../hooks/useIsMobile'
 
 const WAVE_PERIOD = 52
 const NUM_PERIODS = 16
@@ -17,7 +16,6 @@ const WAVE_PATH = (() => {
 
 export default function Loader() {
   const [done, setDone] = useState(false)
-  const isMobile = useIsMobile()
 
   useEffect(() => {
     let imgDone = false
@@ -51,7 +49,7 @@ export default function Loader() {
             overflow: 'hidden',
           }}
         >
-          <div style={{ width: isMobile ? '40vw' : '20vw', height: 32, overflow: 'hidden' }}>
+          <div className="loader-wave">
             <svg
               width={WAVE_PERIOD * NUM_PERIODS}
               height="32"

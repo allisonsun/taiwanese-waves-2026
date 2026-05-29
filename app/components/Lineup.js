@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
-import useIsMobile from '../hooks/useIsMobile'
 
 const soloArtists = [
   {
@@ -68,14 +67,14 @@ const MOTION_PROPS = {
   transition: { duration: 0.5 },
 }
 
-function ArtistName({ nameEn, nameZh, inline }) {
+function ArtistName({ nameEn, nameZh }) {
   return (
     <div className="lineup-artist-name">
       <h3>
         {nameEn}
-        {inline && nameZh && <span className="lineup-artist-name-zh-inline">{nameZh}</span>}
+        {nameZh && <span className="lineup-artist-name-zh-inline">{nameZh}</span>}
       </h3>
-      {!inline && nameZh && <p className="lineup-artist-name-zh">{nameZh}</p>}
+      {nameZh && <p className="lineup-artist-name-zh">{nameZh}</p>}
     </div>
   )
 }
@@ -97,7 +96,6 @@ function SocialLinks({ links }) {
 }
 
 export default function Lineup() {
-  const isMobile = useIsMobile()
   const nameRefs = useRef([])
 
   useEffect(() => {
@@ -105,14 +103,14 @@ export default function Lineup() {
       const els = nameRefs.current.filter(Boolean)
       if (!els.length) return
       els.forEach(el => { el.style.minHeight = '' })
-      if (isMobile) return
+      if (window.innerWidth <= 768) return
       const max = Math.max(...els.map(el => el.offsetHeight))
       els.forEach(el => { el.style.minHeight = `${max}px` })
     }
     equalize()
     window.addEventListener('resize', equalize)
     return () => window.removeEventListener('resize', equalize)
-  }, [isMobile])
+  }, [])
 
   return (
     <section id="lineup" className="snap-section">
@@ -127,7 +125,7 @@ export default function Lineup() {
             </div>
             <div className="lineup-trio-info">
               <div className="lineup-trio-text" ref={el => { nameRefs.current[i] = el }}>
-                <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} inline={!isMobile} />
+                <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} />
                 {i < trioArtists.length - 1 && <span className="lineup-trio-plus">+</span>}
               </div>
               <div className="lineup-trio-socials">
@@ -157,11 +155,8 @@ export default function Lineup() {
                     width={isSquare ? 560 : i === 0 ? 800 : 640}
                     height={isSquare ? 560 : i === 0 ? 420 : 420}
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="lineup-solo-img"
-                    style={{
-                      ...(i === 0 && !isMobile && { marginLeft: 'calc(-4rem - max(0px, (100vw - 1400px) / 2))', height: 600 }),
-                      ...(i === 1 && { marginRight: '4rem' }),
-                    }}
+                    className={`lineup-solo-img${i === 0 ? ' lineup-solo-bleed' : ''}`}
+                    style={{ ...(i === 1 && { marginRight: '4rem' }) }}
                   />
                   <div className="lineup-solo-text">
                     <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} />
