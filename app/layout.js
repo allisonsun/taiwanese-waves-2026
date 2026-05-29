@@ -33,7 +33,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${archivo.variable} ${rationalDisplay.variable} ${rationalDisplayLight.variable}`}>
-      <body style={{ color: '#fff', fontFamily: 'var(--font-archivo), sans-serif' }}>
+      <body>
         {children}
       </body>
     </html>

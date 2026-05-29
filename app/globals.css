@@ -22,7 +22,7 @@ h2 {
 body {
   color: var(--foreground);
   background: var(--background);
-  overflow-x: hidden;
+  font-family: var(--font-archivo), sans-serif;
 }
 
 html {
@@ -45,7 +45,6 @@ html {
 .hero-circle {
   width: 100vw;
   height: auto;
-  object-fit: unset;
 }
 
 .hero-mask-layer {
@@ -558,6 +557,48 @@ html {
   transition: opacity 0.2s;
 }
 
+.footer-link:hover {
+  opacity: 0.6;
+}
+
+/* ============================================================
+   Share button
+   ============================================================ */
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  border-radius: 999px;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: #000;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.share-btn:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+/* ============================================================
+   Story modal close button
+   ============================================================ */
+
+.story-modal-close:hover {
+  opacity: 0.7;
+}
+
+/* ============================================================
+   History — year row hover indent
+   ============================================================ */
+
+.history-year-row:hover:not(.history-year-row--active) {
+  padding-left: 12px;
+}
+
 /* ============================================================
    Tablet breakpoints (600–768px, 769–1200px)
    ============================================================ */
@@ -684,6 +725,19 @@ html {
 
 .nav-desktop-links {
   display: flex;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: .25px;
+  opacity: 0.8;
+  transition: color 0.3s, opacity 0.2s;
+}
+
+.nav-link:hover {
+  opacity: 1;
 }
 
 .nav-desktop-mask {

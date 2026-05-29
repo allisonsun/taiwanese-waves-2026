@@ -64,6 +64,7 @@ export default function StoryModal({ story, onClose, onNext, onPrev }) {
             <button
               aria-label="Close"
               onClick={onClose}
+              className="story-modal-close"
               style={{
                 position: 'absolute',
                 top: '1.5rem',
@@ -76,8 +77,6 @@ export default function StoryModal({ story, onClose, onNext, onPrev }) {
                 lineHeight: 1,
                 zIndex: 10,
               }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = 0.7)}
-              onMouseLeave={e => (e.currentTarget.style.opacity = 1)}
             >
               ×
             </button>

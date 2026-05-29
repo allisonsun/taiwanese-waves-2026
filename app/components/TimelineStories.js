@@ -80,22 +80,8 @@ function ShareButton({ fontSize = 18, iconSize = 22, padding = '12px 25px' }) {
       href={process.env.NEXT_PUBLIC_GOOGLE_FORM_URL || '#'}
       target="_blank"
       rel="noopener noreferrer"
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        whiteSpace: 'nowrap',
-        padding,
-        borderRadius: 999,
-        background: '#fdf108',
-        border: '1px solid #fdf108',
-        color: '#000',
-        textDecoration: 'none',
-        fontSize,
-        letterSpacing: '0.3px',
-        transition: 'background 0.2s, color 0.2s',
-      }}
-      onMouseEnter={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#fdf108' }}
-      onMouseLeave={e => { e.currentTarget.style.background = '#fdf108'; e.currentTarget.style.color = '#000' }}
+      className="share-btn"
+      style={{ fontSize, padding }}
     >
       Share yours
       <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 8 }}>

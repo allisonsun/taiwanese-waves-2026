@@ -84,17 +84,8 @@ export default function Nav() {
             <a
               key={label}
               href={href}
-              style={{
-                color: scrolled ? textColor : '#000',
-                textDecoration: 'none',
-                fontSize: 14,
-                lineHeight: '20px',
-                letterSpacing: '.25px',
-                opacity: 0.8,
-                transition: 'color 0.3s, opacity 0.2s',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = 1)}
-              onMouseLeave={e => (e.currentTarget.style.opacity = 0.8)}
+              className="nav-link"
+              style={{ color: scrolled ? textColor : '#000' }}
             >
               {label}
             </a>

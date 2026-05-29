@@ -151,9 +151,7 @@ export default function History() {
               <button
                 type="button"
                 onClick={() => setActiveIndex(i)}
-                className="history-year-row"
-                onMouseEnter={e => { if (!isActive) e.currentTarget.style.paddingLeft = '12px' }}
-                onMouseLeave={e => { e.currentTarget.style.paddingLeft = '0px' }}
+                className={`history-year-row${isActive ? ' history-year-row--active' : ''}`}
               >
                 <div className="history-year-inner">
                   {isActive && <AnimatedWave />}

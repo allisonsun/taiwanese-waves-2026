@@ -55,6 +55,7 @@ export default function Hero() {
       <motion.img
         src="/hero/double-circle.png"
         alt=""
+        fetchPriority="high"
         className="hero-circle"
         style={{
           position: 'absolute',
@@ -72,6 +73,7 @@ export default function Hero() {
       <motion.img
         src="/hero/spinner.png"
         alt=""
+        fetchPriority="high"
         animate={{ rotate: 360 }}
         transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
         style={{

@@ -1,6 +1,4 @@
-'use client'
-
-import { ParallaxProvider } from 'react-scroll-parallax'
+import ParallaxWrapper from './components/ParallaxWrapper'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -13,7 +11,7 @@ import Loader from './components/Loader'
 
 export default function Home() {
   return (
-    <ParallaxProvider>
+    <ParallaxWrapper>
       <Loader />
       <Nav />
       <Hero />
@@ -23,6 +21,6 @@ export default function Home() {
       <TimelineStories />
       <Sponsors />
       <Footer />
-    </ParallaxProvider>
+    </ParallaxWrapper>
   )
 }

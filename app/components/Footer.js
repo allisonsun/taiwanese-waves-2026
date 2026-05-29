@@ -15,8 +15,6 @@ export default function Footer() {
             target={href.startsWith('mailto') ? undefined : '_blank'}
             rel="noopener noreferrer"
             className="footer-link"
-            onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
-            onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
           >
             {label}
           </a>
