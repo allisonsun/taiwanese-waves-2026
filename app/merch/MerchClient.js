@@ -24,6 +24,7 @@ export default function MerchClient() {
 
   return (
     <div className="merch-page">
+      <div className="merch-bg" />
       <nav className="merch-nav">
         <Link href="/" aria-label="Back to home">
           <img src="/logo.svg" alt="Taiwanese Waves" style={{ height: 32, display: 'block' }} />
