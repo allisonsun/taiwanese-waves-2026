@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { label: 'Lineup', href: '#lineup' },
   { label: 'History', href: '#history' },
   { label: 'Memories', href: '#stories' },
+  { label: 'Merch', href: '/merch' },
 ]
 
 export default function Nav() {
