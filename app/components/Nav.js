@@ -6,7 +6,7 @@ const NAV_LINKS = [
   { label: 'Lineup', href: '#lineup' },
   { label: 'History', href: '#history' },
   { label: 'Memories', href: '#stories' },
-  { label: 'Merch', href: '/merch' },
+  { label: 'Merch', href: 'https://shop.taiwanesewaves.com' },
 ]
 
 export default function Nav() {
