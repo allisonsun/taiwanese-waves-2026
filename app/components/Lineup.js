@@ -142,6 +142,7 @@ export default function Lineup() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="lineup-solo-img"
                     style={{}}
+                    priority={i === 0}
                   />
                   <div className="lineup-solo-text">
                     <ArtistName nameEn={artist.nameEn} nameZh={artist.nameZh} />

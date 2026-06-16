@@ -33,6 +33,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${archivo.variable} ${rationalDisplay.variable} ${rationalDisplayLight.variable}`}>
+      <head>
+        <link rel="preload" as="image" href="/hero/background.jpg" />
+        <link rel="preload" as="image" href="/hero/double-circle.png" />
+        <link rel="preload" as="image" href="/hero/spinner.png" />
+      </head>
       <body>
         {children}
       </body>
