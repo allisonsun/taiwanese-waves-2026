@@ -212,7 +212,7 @@ html {
 
 .lineup-trio-img-wrapper {
   width: 100%;
-  aspect-ratio: 3 / 3.3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #111;
 }
@@ -239,6 +239,11 @@ html {
   text-align: center;
 }
 
+.lineup-trio-combined-name {
+  width: 85vw;
+  margin: 1.5rem auto 0;
+}
+
 .lineup-trio-text h3,
 .lineup-solo-text h3 {
   font-size: 40px;
@@ -248,10 +253,15 @@ html {
   margin: 0;
 }
 
+.lineup-name-line {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .lineup-artist-name-zh-inline {
   font-size: 24px;
   font-weight: 500;
-  margin-left: 10px;
 }
 
 .lineup-artist-name-zh {
@@ -260,7 +270,7 @@ html {
   font-weight: 500;
   line-height: 24px;
   color: var(--foreground);
-  margin: 4px 0 0;
+  margin: 0;
 }
 
 .lineup-trio-plus {
@@ -275,12 +285,35 @@ html {
   z-index: 1;
 }
 
+.lineup-trio-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--foreground);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  justify-content: center;
+}
+
+.lineup-trio-label-zh {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
 .lineup-trio-socials {
   text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .lineup-trio-socials .lineup-social {
   justify-content: center;
+}
+
+.lineup-trio-bio-container {
+  width: 40vw;
+  margin: 1rem auto 0;
 }
 
 .lineup-trio-bio p {
@@ -302,7 +335,7 @@ html {
 .lineup-solo-list {
   display: flex;
   flex-direction: column;
-  gap: 12rem;
+  gap: 8rem;
 }
 
 .lineup-solo-row {
@@ -310,6 +343,8 @@ html {
   flex-direction: row;
   align-items: flex-start;
   gap: 3rem;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .lineup-solo-row-reverse {
@@ -326,8 +361,8 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 0.5rem;
-  gap: 16px;
+  padding-top: 2.5rem;
+  gap: 12px;
 }
 
 .lineup-solo-bio {
@@ -640,14 +675,17 @@ html {
 
 @media (min-width: 769px) and (max-width: 1200px) {
   /* Lineup */
-  .lineup-trio { padding: 0 1.5rem 3rem; }
-  .lineup-trio-info { padding: 1.5rem 1.25rem 1.5rem; }
+  .lineup-trio { padding: 0 1.5rem 3rem; width: 95vw; }
+  .lineup-trio-info { padding: 1rem 1.25rem 1rem; }
   .lineup-trio-text h3 { font-size: 28px; line-height: 28px; }
+  .lineup-trio-bio-container { width: 60vw; }
+  .lineup-trio-socials { margin-top: 0.25rem; margin-bottom: 0; }
   .lineup-solo-container { padding: 6rem 2rem 6rem; }
   .lineup-solo-list { gap: 8rem; }
   .lineup-solo-row { gap: 2rem; }
-  .lineup-solo-img { max-width: 45%; height: auto; }
+  .lineup-solo-img { max-width: 35%; height: auto; }
   .lineup-solo-row h3 { font-size: 28px; line-height: 28px; }
+  .lineup-solo-text { padding-top: 1rem; }
 
   /* About */
   .about-video-title { font-size: 44px; line-height: 50px; }
@@ -669,12 +707,13 @@ html {
   .footer-link { font-size: 17px; }
 
   /* Lineup */
-  .lineup-trio { flex-direction: column; width: 100%; padding: 0 1.5rem 2rem; gap: 4rem; }
-  .lineup-trio-item { flex: none; width: 100%; gap: 16px; }
+  .lineup-trio { flex-direction: column; width: 100%; padding: 0 2rem 1.5rem; gap: 0.25rem; }
+  .lineup-trio-item { flex: none; width: 100%; }
   .lineup-trio-info { padding: 0; }
   .lineup-trio-text { text-align: left; min-height: unset; justify-content: flex-start; }
-  .lineup-trio-socials { text-align: left; }
-  .lineup-trio-socials .lineup-social { justify-content: flex-start; }
+  .lineup-trio-combined-name { width: 100%; padding: 0 2rem; margin: 1.5rem 0 0; box-sizing: border-box; }
+  .lineup-trio-socials { text-align: center; }
+  .lineup-trio-socials .lineup-social { justify-content: center; }
   .lineup-trio-text h3, .lineup-solo-text h3 { font-size: 28px; line-height: 28px; }
   .lineup-social { gap: 8px; }
   .lineup-social-link { width: auto; height: auto; }
@@ -683,12 +722,14 @@ html {
   .social-icon-spotify { width: 28px; height: 28px; padding: 0 2px; }
   .social-icon-youtube { width: 32px; height: 32px; }
   .lineup-trio-plus { display: none; }
-  .lineup-solo-container { padding: 0 1.5rem; }
+  .lineup-solo-container { padding: 0 2rem; }
+  .lineup-solo-row { width: 100%; margin: 0; }
+  .lineup-trio-bio-container { width: 100%; padding: 0 2rem; box-sizing: border-box; }
   .lineup-solo-list { gap: 0; }
   .lineup-solo-row { flex-direction: column; gap: 16px; padding: 40px 0; }
   .lineup-solo-row-reverse { flex-direction: column; }
   .lineup-solo-text { padding-top: 0; }
-  .lineup-solo-img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+  .lineup-solo-img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
 
   /* About */
   .about-video-container { width: 100vw; aspect-ratio: 1 / 2; border-radius: 32px; }
@@ -958,15 +999,6 @@ html {
    Lineup — artist name inline vs. stacked
    ============================================================ */
 
-@media (max-width: 768px) {
-  .lineup-artist-name-zh-inline {
-    display: none;
-  }
-
-  .lineup-artist-name-zh {
-    display: block;
-  }
-}
 
 /* ============================================================
    Lineup — first solo image desktop bleed
