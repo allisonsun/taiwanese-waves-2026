@@ -225,7 +225,7 @@ html {
 }
 
 .lineup-trio-info {
-  padding: 2rem 1.5rem 1.5rem;
+  padding: 1rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -303,8 +303,8 @@ html {
 
 .lineup-trio-socials {
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .lineup-trio-socials .lineup-social {
