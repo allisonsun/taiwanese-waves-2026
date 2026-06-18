@@ -1076,3 +1076,16 @@ html {
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+  .sponsor-logo {
+    height: auto !important;
+    max-height: 32px !important;
+  }
+  .sponsor-logo-mobile-lg {
+    max-height: var(--mobile-height, 48px) !important;
+  }
+  .sponsor-logos-row {
+    row-gap: 1.5rem !important;
+  }
+}
