@@ -672,7 +672,7 @@ html {
   .lineup-trio-info { padding: 0; }
   .lineup-trio-text { text-align: left; min-height: unset; justify-content: flex-start; }
   .lineup-trio-combined-name { width: 100%; padding: 0 2rem; margin: 1.5rem 0 0; box-sizing: border-box; }
-  .lineup-trio-socials { text-align: center; }
+  .lineup-trio-socials { text-align: center; margin-top: 1rem; margin-bottom: 1.5rem; }
   .lineup-trio-socials .lineup-social { justify-content: center; }
   .lineup-trio-text h3, .lineup-solo-text h3 { font-size: 28px; line-height: 28px; }
   .lineup-social { gap: 8px; }
