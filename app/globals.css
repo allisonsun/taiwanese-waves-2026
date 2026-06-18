@@ -264,42 +264,6 @@ html {
   font-weight: 500;
 }
 
-.lineup-artist-name-zh {
-  display: none;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 24px;
-  color: var(--foreground);
-  margin: 0;
-}
-
-.lineup-trio-plus {
-  position: absolute;
-  right: 0;
-  top: calc(2rem - 6px);
-  font-size: 40px;
-  font-weight: 700;
-  color: var(--foreground);
-  line-height: 40px;
-  transform: translateX(50%);
-  z-index: 1;
-}
-
-.lineup-trio-label {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--foreground);
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  justify-content: center;
-}
-
-.lineup-trio-label-zh {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--text-muted);
-}
 
 .lineup-trio-socials {
   text-align: center;
@@ -347,9 +311,6 @@ html {
   margin: 0 auto;
 }
 
-.lineup-solo-row-reverse {
-  flex-direction: row-reverse;
-}
 
 .lineup-solo-img {
   object-fit: cover;
@@ -652,7 +613,6 @@ html {
   .lineup-solo-container { padding: 4rem 1.5rem 2rem; }
   .lineup-solo-list { gap: 4rem; }
   .lineup-solo-row { flex-direction: row; gap: 1.5rem; padding: 0; }
-  .lineup-solo-row-reverse { flex-direction: row-reverse; }
   .lineup-solo-img { width: 45%; height: auto; aspect-ratio: unset; }
   .lineup-solo-row h3 { font-size: 24px; line-height: 24px; }
   .lineup-solo-bio { max-width: none; }
@@ -721,13 +681,11 @@ html {
   .social-icon-instagram { width: 32px; height: 32px; }
   .social-icon-spotify { width: 28px; height: 28px; padding: 0 2px; }
   .social-icon-youtube { width: 32px; height: 32px; }
-  .lineup-trio-plus { display: none; }
   .lineup-solo-container { padding: 0 2rem; }
   .lineup-solo-row { width: 100%; margin: 0; }
   .lineup-trio-bio-container { width: 100%; padding: 0 2rem; box-sizing: border-box; }
   .lineup-solo-list { gap: 0; }
   .lineup-solo-row { flex-direction: column; gap: 16px; padding: 40px 0; }
-  .lineup-solo-row-reverse { flex-direction: column; }
   .lineup-solo-text { padding-top: 0; }
   .lineup-solo-img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
 

@@ -1,19 +1,16 @@
 const TIERS = [
   {
     label: '主辦單位',
-    count: 1,
     logos: ['/sponsors/woozi.svg'],
     names: ['物子巡演工作室'],
   },
   {
     label: '指導單位',
-    count: 3,
     logos: ['/sponsors/TCC-white.png', '/sponsors/taiwan-pop.png'],
     heights: [56, 64],
   },
   {
     label: '贊助單位',
-    count: 4,
     logos: ['/sponsors/china-airlines.svg', '/sponsors/taipei-music-center.svg', '/sponsors/chiayi-city.png', '/sponsors/chiayi-cultural-affairs.png', '/sponsors/贊助單位 - 財團法人嘉義市文化基金會LOGO-03.png'],
     heights: [60, 40, 48, 48, 60],
     mobileHeights: [null, null, null, null, 48],
