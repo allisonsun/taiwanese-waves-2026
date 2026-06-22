@@ -45,7 +45,7 @@ function StoryCard({ story }) {
 function ShareButton({ bordered }) {
   return (
     <a
-      href={process.env.NEXT_PUBLIC_GOOGLE_FORM_URL || '#'}
+      href={"https://form.jotform.com/261384063284054"}
       target="_blank"
       rel="noopener noreferrer"
       className="share-btn"
