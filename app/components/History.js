@@ -4,6 +4,16 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AnimatedWave } from '../design-system'
 
+function AutoPlayVideo({ src, className }) {
+  const ref = useRef(null)
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.play().catch(() => {})
+    }
+  }, [])
+  return <video ref={ref} src={src} muted loop playsInline className={className} />
+}
+
 function AutoScrollCarousel({ children, className, style }) {
   const ref = useRef(null)
   const isPaused = useRef(false)
@@ -157,7 +167,7 @@ export default function History() {
                       {y.poster && (
                         <div className="history-poster">
                           {y.poster.endsWith('.mp4') ? (
-                            <video src={y.poster} autoPlay muted loop playsInline className="history-poster-media" />
+                            <AutoPlayVideo src={y.poster} className="history-poster-media" />
                           ) : (
                             <img src={y.poster} alt={`${y.year} poster`} loading="lazy" className="history-poster-media" />
                           )}
