@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatedWave } from '../design-system'
 
 function AutoScrollCarousel({ children, className, style }) {
   const ref = useRef(null)
@@ -64,31 +65,6 @@ function AutoScrollCarousel({ children, className, style }) {
   )
 }
 
-const WAVE_PERIOD = 26
-const WAVE_PATH = (() => {
-  let d = 'M 0,8'
-  for (let i = 0; i < 8; i++) {
-    const x = i * WAVE_PERIOD
-    d += ` C ${x+4},3 ${x+9},3 ${x+13},8 C ${x+17},13 ${x+22},13 ${x+26},8`
-  }
-  return d
-})()
-
-function AnimatedWave() {
-  return (
-    <svg className="history-wave-svg" width="52" height="16">
-      <motion.path
-        d={WAVE_PATH}
-        fill="none"
-        stroke="#000"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        animate={{ x: [0, -WAVE_PERIOD] }}
-        transition={{ duration: 0.9, repeat: Infinity, ease: 'linear' }}
-      />
-    </svg>
-  )
-}
 
 const YEARS = [
   {
@@ -154,7 +130,7 @@ export default function History() {
                 className={`history-year-row${isActive ? ' history-year-row--active' : ''}`}
               >
                 <div className="history-year-inner">
-                  {isActive && <AnimatedWave />}
+                  {isActive && <AnimatedWave period={26} numPeriods={8} midY={8} amplitude={5} stroke="#000" strokeWidth={2.5} className="history-wave-svg" width={52} height={16} />}
                   <span className="history-year-num">{y.year}</span>
                   <span className="history-tagline">{y.tagline}</span>
                 </div>

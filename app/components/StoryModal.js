@@ -73,30 +73,38 @@ export default function StoryModal({ story, onClose, onNext, onPrev }) {
                 border: 'none',
                 fontSize: '2rem',
                 cursor: 'pointer',
-                color: story.photo ? '#fdf108' : '#000',
+                color: '#000',
                 lineHeight: 1,
                 zIndex: 10,
               }}
             >
               ×
             </button>
-            {story.photo ? (
+            {story.photo && (
               <img
                 src={story.photo}
                 alt=""
                 style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block', marginBottom: '1rem' }}
               />
-            ) : (
-              <div style={{ width: '100%', aspectRatio: '4/3', background: '#fdf108', marginBottom: '1rem' }} />
             )}
-            {story.name && (
-              <p style={{ fontSize: 12, letterSpacing: '0.3px', color: '#999', marginBottom: '0.4rem' }}>
-                {story.name}
+            <blockquote style={{ fontSize: 17, fontWeight: 400, lineHeight: '26px', color: '#222', margin: '0 0 1rem' }}>
+              {story.story.split('\n\n').map((para, i) => (
+                <p key={i} style={{ margin: i === 0 ? 0 : '1em 0 0' }}>{para}</p>
+              ))}
+            </blockquote>
+            <div>
+              {story.name && (
+                <p style={{ fontSize: 13, fontWeight: 600, color: '#111', margin: '0 0 2px' }}>{story.name}</p>
+              )}
+              <p style={{ fontSize: 12, color: '#111', margin: 0 }}>
+                {[
+                  story.location,
+                  story.years
+                    ? `${story.years.split(',').length > 1 ? 'Years' : 'Year'} attended: ${story.years}`
+                    : ''
+                ].filter(Boolean).join(' · ')}
               </p>
-            )}
-            <p style={{ fontSize: 17, fontWeight: 400, lineHeight: '24px', color: '#222' }}>
-              {story.story}
-            </p>
+            </div>
           </motion.div>
 
           <button aria-label="Next" onClick={e => { e.stopPropagation(); onNext() }} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '2rem', cursor: 'pointer', padding: '0.5rem' }}>›</button>

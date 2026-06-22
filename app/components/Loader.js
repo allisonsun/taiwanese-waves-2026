@@ -2,17 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-const WAVE_PERIOD = 52
-const NUM_PERIODS = 16
-const WAVE_PATH = (() => {
-  let d = 'M 0,16'
-  for (let i = 0; i < NUM_PERIODS; i++) {
-    const x = i * WAVE_PERIOD
-    d += ` C ${x+8},4 ${x+18},4 ${x+26},16 C ${x+34},28 ${x+44},28 ${x+52},16`
-  }
-  return d
-})()
+import { AnimatedWave } from '../design-system'
 
 export default function Loader() {
   const [done, setDone] = useState(false)
@@ -50,21 +40,7 @@ export default function Loader() {
           }}
         >
           <div className="loader-wave">
-            <svg
-              width={WAVE_PERIOD * NUM_PERIODS}
-              height="32"
-              viewBox={`0 0 ${WAVE_PERIOD * NUM_PERIODS} 32`}
-            >
-              <motion.path
-                d={WAVE_PATH}
-                fill="none"
-                stroke="#000"
-                strokeWidth="3"
-                strokeLinecap="round"
-                animate={{ x: [0, -WAVE_PERIOD] }}
-                transition={{ duration: 0.9, repeat: Infinity, ease: 'linear' }}
-              />
-            </svg>
+            <AnimatedWave period={52} numPeriods={16} midY={16} amplitude={12} stroke="#000" strokeWidth={3} width={52 * 16} height={32} />
           </div>
         </motion.div>
       )}

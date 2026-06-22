@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { SocialLinks } from '../design-system'
 
 const soloArtists = [
   {
@@ -57,8 +58,6 @@ const trioArtists = [
   },
 ]
 
-const ICON_MAP = { Instagram: '/socials/instagram.svg', Spotify: '/socials/spotify.svg', YouTube: '/socials/youtube.svg', Website: '/socials/globe.svg' }
-
 const MOTION_PROPS = {
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
@@ -77,21 +76,6 @@ function ArtistName({ nameEn, nameZh }) {
   )
 }
 
-function SocialLinks({ links }) {
-  return (
-    <div className="lineup-social">
-      {links.map(link => {
-        const src = ICON_MAP[link.icon]
-        if (!src) return null
-        return (
-          <a key={link.icon} href={link.url} target="_blank" rel="noopener noreferrer" className="lineup-social-link">
-            <img src={src} alt={link.icon} className={`social-icon social-icon-${link.icon.toLowerCase()}`} />
-          </a>
-        )
-      })}
-    </div>
-  )
-}
 
 export default function Lineup() {
   return (

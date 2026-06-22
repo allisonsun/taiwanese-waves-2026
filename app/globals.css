@@ -566,6 +566,7 @@ html {
   align-items: center;
   white-space: nowrap;
   border-radius: 999px;
+  padding: 0.5rem 1.25rem;
   background: var(--accent);
   border: 1px solid var(--accent);
   color: #000;
@@ -576,7 +577,6 @@ html {
 
 .share-btn:hover {
   background: transparent;
-  color: var(--accent);
 }
 
 /* ============================================================
@@ -1008,8 +1008,6 @@ html {
 
 .stories-section {
   background: #000;
-  height: 100dvh;
-  overflow: hidden;
 }
 
 .stories-mobile {
@@ -1021,13 +1019,9 @@ html {
   height: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .stories-mobile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding: 3rem 0 2.5rem;
+    display: block;
   }
 
   .stories-desktop {
