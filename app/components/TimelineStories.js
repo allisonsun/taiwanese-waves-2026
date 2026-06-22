@@ -105,19 +105,19 @@ export default function TimelineStories() {
             <StoryCard story={displayedStories[1]} />
             <StoryCard story={displayedStories[6]} />
           </div>
-          {/* Ahuhu + Brenda */}
+          {/* Fan + Ahuhu */}
           <div style={{ flexShrink: 0, width: '85vw', scrollSnapAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <StoryCard story={displayedStories[2]} />
-            <StoryCard story={displayedStories[3]} />
-          </div>
-          {/* Brian + Fan */}
-          <div style={{ flexShrink: 0, width: '85vw', scrollSnapAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <StoryCard story={displayedStories[4]} />
             <StoryCard story={displayedStories[5]} />
+            <StoryCard story={displayedStories[2]} />
           </div>
           {/* Alice */}
           <div style={{ flexShrink: 0, width: '85vw', scrollSnapAlign: 'center' }}>
             <StoryCard story={displayedStories[7]} />
+          </div>
+          {/* Brian + Brenda */}
+          <div style={{ flexShrink: 0, width: '85vw', scrollSnapAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <StoryCard story={displayedStories[4]} />
+            <StoryCard story={displayedStories[3]} />
           </div>
         </div>
       </div>
