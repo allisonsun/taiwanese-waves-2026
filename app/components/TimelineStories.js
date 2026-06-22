@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 const STORIES = [
   { name: 'Summer', location: 'Brooklyn, NYC', years: '2017, 2018, 2023', photo: '/memories/summer.jpeg', story: '第一次去Taiwanese wave是跟我的台灣好朋友，一起坐在野餐墊上感受夏夜晚風。黃玠輕輕柔柔唱著歌，張懸悄悄躲在鍵盤後。那個時候覺得，紐約真美好啊。我一定要每年都來這個活動。不知不覺就十年過去了，我跟當時的好朋友依然是好朋友而且一起在Brooklyn分別組建了家庭。' },
@@ -15,13 +14,14 @@ const STORIES = [
 ]
 
 function StoryCard({ story }) {
+  const prefersReducedMotion = useReducedMotion()
   const yearsLabel = story.years
     ? `${story.years.split(',').length > 1 ? 'Years' : 'Year'} attended: ${story.years}`
     : ''
 
   return (
     <motion.div
-      whileHover={{ scale: 1.02, zIndex: 10 }}
+      whileHover={prefersReducedMotion ? {} : { scale: 1.02, zIndex: 10 }}
       style={{ background: '#fff', borderRadius: 16, padding: '1rem', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' }}
     >
       {story.photo && (
@@ -61,16 +61,7 @@ function ShareButton({ bordered }) {
 }
 
 export default function TimelineStories() {
-  const [displayedStories, setDisplayedStories] = useState(STORIES)
-
-  useEffect(() => {
-    const controller = new AbortController()
-    fetch('/api/stories', { signal: controller.signal })
-      .then(r => r.json())
-      .then(data => { if (data.length > 0) setDisplayedStories(data) })
-      .catch(() => {})
-    return () => controller.abort()
-  }, [])
+  const displayedStories = STORIES
 
   return (
     <section id="stories" className="stories-section">

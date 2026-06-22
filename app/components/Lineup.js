@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { SocialLinks } from '../design-system'
 
 const soloArtists = [
@@ -58,13 +58,6 @@ const trioArtists = [
   },
 ]
 
-const MOTION_PROPS = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 },
-}
-
 function ArtistName({ nameEn, nameZh }) {
   return (
     <div className="lineup-artist-name">
@@ -78,13 +71,20 @@ function ArtistName({ nameEn, nameZh }) {
 
 
 export default function Lineup() {
+  const prefersReducedMotion = useReducedMotion()
+  const motionProps = prefersReducedMotion ? {} : {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.5 },
+  }
+
   return (
-    <section id="lineup" className="snap-section">
+    <section id="lineup">
       <h2 className="lineup-heading">Lineup</h2>
 
       {/* Trio row: 9m88, ØZI, Yellow */}
-      <motion.div {...MOTION_PROPS}>
-        {/* Images + socials per artist */}
+      <motion.div {...motionProps}>
         <div className="lineup-trio" style={{ paddingBottom: '0' }}>
           {trioArtists.map((artist) => (
             <div key={artist.id} className="lineup-trio-item">
@@ -99,6 +99,8 @@ export default function Lineup() {
             </div>
           ))}
         </div>
+      </motion.div>
+      <motion.div {...motionProps}>
         {/* Combined name */}
         <div className="lineup-trio-text lineup-trio-combined-name">
           <h3>9m88 + ØZI + YELLOW <span className="lineup-artist-name-zh-inline">黃宣</span></h3>
@@ -115,7 +117,7 @@ export default function Lineup() {
             return (
               <div key={artist.id}>
                 <motion.div
-                  {...MOTION_PROPS}
+                  {...motionProps}
                   className="lineup-solo-row"
                 >
                   <Image

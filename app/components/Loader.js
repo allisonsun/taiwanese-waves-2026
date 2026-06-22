@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { AnimatedWave } from '../design-system'
 
 export default function Loader() {
+  const prefersReducedMotion = useReducedMotion()
   const [done, setDone] = useState(false)
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function Loader() {
       {!done && (
         <motion.div
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: 'easeInOut' }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.6, ease: 'easeInOut' }}
           style={{
             position: 'fixed',
             inset: 0,

@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { useRef, useEffect } from 'react'
 
 const LIGHT = { fontFamily: 'var(--font-rational-light), sans-serif', fontWeight: 300 }
 const BOLD  = { fontFamily: 'var(--font-rational), sans-serif' }
@@ -25,23 +25,32 @@ const dateContent = (color) => {
 }
 
 export default function Hero() {
+  const prefersReducedMotion = useReducedMotion()
   const sectionRef = useRef(null)
+  const isDesktopRef = useRef(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1181px)')
+    isDesktopRef.current = mq.matches
+    const handler = (e) => { isDesktopRef.current = e.matches }
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
   const circleScale = useTransform(scrollYProgress, [0, 1], [1, 1.6])
   const spinnerScale = useTransform(scrollYProgress, [0, 1], [1, 0.4])
-  const maskSize = useTransform(circleScale, s => {
-    if (typeof window === 'undefined') return 'cover'
-    return window.innerWidth > 1180
-      ? `${(s * 100).toFixed(1)}vw auto`   // desktop: width-constrained
-      : `auto ${(s * 100).toFixed(1)}vh`    // mobile/tablet: height-constrained
-  })
+  const maskSize = useTransform(circleScale, s =>
+    isDesktopRef.current
+      ? `${(s * 100).toFixed(1)}vw auto`
+      : `auto ${(s * 100).toFixed(1)}vh`
+  )
 
   return (
     <section
       ref={sectionRef}
       id="hero"
-      className="snap-section"
-      style={{
+style={{
         position: 'relative',
         height: '100vh',
         overflow: 'hidden',
@@ -74,8 +83,8 @@ export default function Hero() {
         src="/hero/spinner.png"
         alt=""
         fetchPriority="high"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+        animate={prefersReducedMotion ? {} : { rotate: 360 }}
+        transition={prefersReducedMotion ? {} : { duration: 25, repeat: Infinity, ease: 'linear' }}
         style={{
           position: 'absolute',
           top: 'var(--spinner-top)',

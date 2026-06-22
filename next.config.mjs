@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     formats: ['image/webp'],
+    unoptimized: process.env.NODE_ENV === 'development',
   },
 };
 

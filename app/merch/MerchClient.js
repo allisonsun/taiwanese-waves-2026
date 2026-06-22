@@ -32,37 +32,39 @@ export default function MerchClient() {
         <Link href="/" className="merch-nav-link">Return to site</Link>
       </nav>
 
-      <div className="merch-header">
-        <h1>Shop Taiwanese Waves merch</h1>
-      </div>
+      <div className="merch-content">
+        <div className="merch-header">
+          <h1>Shop Taiwanese Waves merch</h1>
+        </div>
 
-      <div className="merch-filters">
-        {FILTERS.map(f => (
-          <button
-            key={f}
-            onClick={() => setActive(f)}
-            className={`merch-filter-btn${active === f ? ' merch-filter-btn--active' : ''}`}
-          >
-            {f}
-          </button>
-        ))}
-      </div>
+        <div className="merch-filters">
+          {FILTERS.map(f => (
+            <button
+              key={f}
+              onClick={() => setActive(f)}
+              className={`merch-filter-btn${active === f ? ' merch-filter-btn--active' : ''}`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
 
-      <div className="merch-grid">
-        {filtered.map(item => (
-          <div key={item.id} className="merch-card">
-            <div className="merch-card-img">
-              <span>Photo</span>
-            </div>
-            <div className="merch-card-info">
-              <div className="merch-card-meta">
-                <span>{item.name}</span>
-                <span>{item.price}</span>
+        <div className="merch-grid">
+          {filtered.map(item => (
+            <div key={item.id} className="merch-card">
+              <div className="merch-card-img">
+                <span>Photo</span>
               </div>
-              <button className="merch-card-btn">Add to cart</button>
+              <div className="merch-card-info">
+                <div className="merch-card-meta">
+                  <span>{item.name}</span>
+                  <span>{item.price}</span>
+                </div>
+                <button className="merch-card-btn">Add to cart</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

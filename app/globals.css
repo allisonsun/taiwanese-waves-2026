@@ -7,12 +7,14 @@
   --foreground: #fff;
   --accent: #fdf108;
   --text-muted: #ffffffd9;
+  --color-black: #000;
   --spinner-top: 50%;
   --spinner-size: 55vw;
-  --hero-font-large: 64px;
-  --hero-font-large-line: 68px;
-  --hero-font-small: 44px;
-  --hero-font-small-line: 48px;
+  /* Fluid hero typography — scales smoothly across all screen sizes */
+  --hero-font-large: clamp(32px, 5.5vw, 64px);
+  --hero-font-large-line: clamp(40px, 5.8vw, 68px);
+  --hero-font-small: clamp(22px, 3.4vw, 44px);
+  --hero-font-small-line: clamp(28px, 3.75vw, 48px);
 }
 
 h2 {
@@ -27,13 +29,8 @@ body {
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
-  overflow-x: hidden;
+overflow-x: hidden;
   background: var(--background);
-}
-
-.snap-section {
-  scroll-snap-align: start;
 }
 
 @layer utilities {
@@ -79,90 +76,7 @@ html {
 
   :root {
     --spinner-top: 27vh;
-    --spinner-size: 78vw;
-    --hero-font-large: 40px;
-    --hero-font-large-line: 44px;
-    --hero-font-small: 26px;
-    --hero-font-small-line: 30px;
-  }
-}
-
-/* iPhone 12 Pro (390×844) */
-@media (min-width: 376px) and (max-width: 390px) {
-  :root {
-    --spinner-top: 27vh;
-    --spinner-size: 96vw;
-    --hero-font-large: 40px;
-    --hero-font-large-line: 50px;
-    --hero-font-small: 24px;
-    --hero-font-small-line: 28px;
-  }
-}
-
-/* iPad Mini (744×1133, 768×1024) */
-@media (min-width: 744px) and (max-width: 768px) {
-  .hero-circle {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    object-position: center top;
-  }
-
-  :root {
-    --spinner-top: 26vh;
-    --spinner-size: 65vw;
-    --hero-font-large: 52px;
-    --hero-font-large-line: 60px;
-    --hero-font-small: 34px;
-    --hero-font-small-line: 40px;
-  }
-}
-
-/* iPad Air (820×1180) — refines the iPad Pro breakpoint */
-@media (min-width: 800px) and (max-width: 850px) {
-  :root {
-    --spinner-top: 22vh;
-    --spinner-size: 64vw;
-    --hero-font-large: 52px;
-    --hero-font-large-line: 56px;
-    --hero-font-small: 34px;
-    --hero-font-small-line: 38px;
-  }
-}
-
-/* iPhone SE (375×667) */
-@media (min-width: 361px) and (max-width: 375px) {
-  :root {
-    --spinner-top: 26vh;
-    --spinner-size: 80vw;
-    --hero-font-large: 32px;
-    --hero-font-large-line: 40px;
-    --hero-font-small: 22px;
-    --hero-font-small-line: 28px;
-  }
-}
-
-/* Surface Duo (540×720) */
-@media (min-width: 480px) and (max-width: 540px) {
-  :root {
-    --spinner-top: 26vh;
-    --spinner-size: 65vw;
-    --hero-font-large: 40px;
-    --hero-font-large-line: 46px;
-    --hero-font-small: 26px;
-    --hero-font-small-line: 30px;
-  }
-}
-
-/* Samsung Galaxy S8 (360×740) */
-@media (max-width: 360px) {
-  :root {
-    --spinner-top: 26vh;
-    --spinner-size: 92vw;
-    --hero-font-large: 32px;
-    --hero-font-large-line: 44px;
-    --hero-font-small: 24px;
-    --hero-font-small-line: 28px;
+    --spinner-size: 85vw;
   }
 }
 
@@ -176,7 +90,7 @@ html {
   flex-direction: column;
   justify-content: center;
   padding: 4rem 0;
-  background: #000;
+  background: var(--color-black);
   color: var(--foreground);
 }
 
@@ -264,7 +178,6 @@ html {
   font-weight: 500;
 }
 
-
 .lineup-trio-socials {
   text-align: center;
   margin-top: 0.25rem;
@@ -310,7 +223,6 @@ html {
   width: fit-content;
   margin: 0 auto;
 }
-
 
 .lineup-solo-img {
   object-fit: cover;
@@ -369,7 +281,7 @@ html {
   align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
-  background: #000;
+  background: var(--color-black);
   overflow: hidden;
 }
 
@@ -396,7 +308,7 @@ html {
 .about-video-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 55% 60% at center, transparent 35%, rgba(0,0,0,0.95) 78%, #000 100%);
+  background: radial-gradient(ellipse 55% 60% at center, transparent 35%, rgba(0,0,0,0.95) 78%, var(--color-black) 100%);
   pointer-events: none;
 }
 
@@ -412,7 +324,7 @@ html {
   line-height: 68px;
   letter-spacing: normal;
   color: var(--accent);
-  -webkit-text-stroke: 3px #000;
+  -webkit-text-stroke: 3px var(--color-black);
   paint-order: stroke fill;
   margin: 0;
   z-index: 2;
@@ -433,7 +345,7 @@ html {
 }
 
 .history-heading {
-  color: #000;
+  color: var(--color-black);
 }
 
 .history-section-inner {
@@ -470,7 +382,7 @@ html {
 .history-year-num {
   font-size: 24px;
   font-weight: 700;
-  color: #000;
+  color: var(--color-black);
   letter-spacing: 0.8px;
 }
 
@@ -479,7 +391,7 @@ html {
 .history-artists-mobile span {
   font-size: 18px;
   font-weight: 400;
-  color: #000;
+  color: var(--color-black);
   letter-spacing: 0.3px;
 }
 
@@ -507,7 +419,7 @@ html {
   aspect-ratio: 1000 / 1428;
   height: 100%;
   overflow: hidden;
-  border: 1px solid #000;
+  border: 1px solid var(--color-black);
 }
 
 .history-poster-media {
@@ -526,7 +438,7 @@ html {
 
 .history-divider {
   height: 1px;
-  background: #000;
+  background: var(--color-black);
 }
 
 /* ============================================================
@@ -539,14 +451,14 @@ html {
   text-align: center;
 }
 
-#footer > div {
+.footer-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
 }
 
 .footer-link {
-  color: #000;
+  color: var(--color-black);
   font-size: 18px;
   letter-spacing: 0.3px;
   text-decoration: none;
@@ -569,7 +481,7 @@ html {
   padding: 0.5rem 1.25rem;
   background: var(--accent);
   border: 1px solid var(--accent);
-  color: #000;
+  color: var(--color-black);
   text-decoration: none;
   letter-spacing: 0.3px;
   transition: background 0.2s, color 0.2s;
@@ -626,10 +538,6 @@ html {
   :root {
     --spinner-top: 37vw;
     --spinner-size: 60vw;
-    --hero-font-large: 44px;
-    --hero-font-large-line: 48px;
-    --hero-font-small: 28px;
-    --hero-font-small-line: 32px;
   }
 }
 
@@ -657,7 +565,7 @@ html {
 
 @media (max-width: 768px) {
   html, body {
-    background: #000;
+    background: var(--color-black);
   }
 
   /* Headings */
@@ -691,7 +599,7 @@ html {
 
   /* About */
   .about-video-container { width: 100vw; aspect-ratio: 1 / 2; border-radius: 32px; }
-  .about-video-title { font-size: 32px; line-height: 38px; width: 80vw; -webkit-text-stroke: 2px #000; }
+  .about-video-title { font-size: 32px; line-height: 38px; width: 80vw; -webkit-text-stroke: 2px var(--color-black); }
 
   /* History */
   #history { padding: 40px 0; }
@@ -715,7 +623,7 @@ html {
 .merch-page {
   min-height: 100vh;
   position: relative;
-  color: #000;
+  color: var(--color-black);
 }
 
 .merch-bg {
@@ -725,7 +633,7 @@ html {
   z-index: 0;
 }
 
-.merch-page > *:not(.merch-bg):not(.merch-nav) {
+.merch-content {
   position: relative;
   z-index: 1;
 }
@@ -743,7 +651,7 @@ html {
 }
 
 .merch-nav-link {
-  color: #000;
+  color: var(--color-black);
   text-decoration: none;
   font-size: 14px;
   letter-spacing: .25px;
@@ -766,7 +674,7 @@ html {
   font-size: 48px;
   font-weight: 600;
   margin: 0;
-  color: #000;
+  color: var(--color-black);
 }
 
 .merch-filters {
@@ -780,9 +688,9 @@ html {
 
 .merch-filter-btn {
   padding: 0.4rem 1rem;
-  border: 1px solid #000;
+  border: 1px solid var(--color-black);
   background: transparent;
-  color: #000;
+  color: var(--color-black);
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
@@ -792,7 +700,7 @@ html {
 }
 
 .merch-filter-btn--active {
-  background: #000;
+  background: var(--color-black);
   color: #fdf108;
 }
 
@@ -844,9 +752,9 @@ html {
 .merch-card-btn {
   width: 100%;
   padding: 0.65rem;
-  background: #000;
+  background: var(--color-black);
   color: #fdf108;
-  border: 1px solid #000;
+  border: 1px solid var(--color-black);
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -856,7 +764,7 @@ html {
 
 .merch-card-btn:hover {
   background: transparent;
-  color: #000;
+  color: var(--color-black);
 }
 
 @media (max-width: 768px) {
@@ -954,11 +862,6 @@ html {
 }
 
 /* ============================================================
-   Lineup — artist name inline vs. stacked
-   ============================================================ */
-
-
-/* ============================================================
    Lineup — first solo image desktop bleed
    ============================================================ */
 
@@ -1007,7 +910,7 @@ html {
    ============================================================ */
 
 .stories-section {
-  background: #000;
+  background: var(--color-black);
 }
 
 .stories-mobile {
@@ -1029,15 +932,44 @@ html {
   }
 }
 
+/* ============================================================
+   Sponsors — logo sizing
+   ============================================================ */
+
+.sponsor-logos-row {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.sponsor-logo {
+  height: var(--logo-height, 40px);
+  width: auto;
+}
+
 @media (max-width: 768px) {
   .sponsor-logo {
-    height: auto !important;
-    max-height: 32px !important;
+    height: auto;
+    max-height: 32px;
   }
   .sponsor-logo-mobile-lg {
-    max-height: var(--mobile-height, 48px) !important;
+    max-height: var(--logo-mobile-height, 48px);
   }
   .sponsor-logos-row {
-    row-gap: 1.5rem !important;
+    row-gap: 1.5rem;
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -7,7 +7,7 @@ const LINKS = [
 export default function Footer() {
   return (
     <footer id="footer">
-      <div>
+      <div className="footer-links">
         {LINKS.map(({ label, href }) => (
           <a
             key={label}

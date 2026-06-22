@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 
 export default function StoryModal({ story, onClose, onNext, onPrev }) {
+  const prefersReducedMotion = useReducedMotion()
+
   useEffect(() => {
     if (!story) return
     const handleKey = (e) => {
@@ -45,10 +47,10 @@ export default function StoryModal({ story, onClose, onNext, onPrev }) {
 
           <motion.div
             key="panel"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+            exit={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.9 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', damping: 20, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
             style={{
               background: '#fff',

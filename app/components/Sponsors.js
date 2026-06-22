@@ -53,16 +53,7 @@ export default function Sponsors() {
                 {tier.label}
               </p>
 
-              <div
-                className="sponsor-logos-row"
-                style={{
-                  display: 'flex',
-                  gap: '3rem',
-                  justifyContent: 'center',
-                  flexWrap: 'wrap',
-                  alignItems: 'center',
-                }}
-              >
+              <div className="sponsor-logos-row">
                 {Array.from({ length: tier.logos?.length ?? tier.count }).map((_, i) => (
                   <div
                     key={i}
@@ -75,7 +66,7 @@ export default function Sponsors() {
                     }}
                   >
                     {tier.logos?.[i] && (
-                      <img src={tier.logos[i]} alt="" className={`sponsor-logo${tier.mobileHeights?.[i] ? ' sponsor-logo-mobile-lg' : ''}`} style={{ height: tier.heights?.[i] ?? 40, width: 'auto', filter: tier.filters?.[i] ?? 'none', '--mobile-height': tier.mobileHeights?.[i] ? `${tier.mobileHeights[i]}px` : undefined }} />
+                      <img src={tier.logos[i]} alt="" className={`sponsor-logo${tier.mobileHeights?.[i] ? ' sponsor-logo-mobile-lg' : ''}`} style={{ '--logo-height': `${tier.heights?.[i] ?? 40}px`, '--logo-mobile-height': tier.mobileHeights?.[i] ? `${tier.mobileHeights[i]}px` : undefined, filter: tier.filters?.[i] ?? 'none' }} />
                     )}
                     {tier.names?.[i] && (
                       <span style={{ color: '#fff', fontSize: 18, whiteSpace: 'nowrap' }}>{tier.names[i]}</span>

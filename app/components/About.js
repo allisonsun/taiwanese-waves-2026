@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <section id="about" className="snap-section">
+    <section id="about">
       <div className="about-video-container">
         <video
           src="/2016-video.mp4"
@@ -8,7 +8,7 @@ export default function About() {
           muted
           loop
           playsInline
-          preload="none"
+          preload="metadata"
           className="about-video"
         />
         <div className="about-video-vignette" />

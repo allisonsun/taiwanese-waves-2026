@@ -4,16 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AnimatedWave } from '../design-system'
 
-function AutoPlayVideo({ src, className }) {
-  const ref = useRef(null)
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.play().catch(() => {})
-    }
-  }, [])
-  return <video ref={ref} src={src} muted loop playsInline className={className} />
-}
-
 function AutoScrollCarousel({ children, className, style }) {
   const ref = useRef(null)
   const isPaused = useRef(false)
@@ -73,6 +63,16 @@ function AutoScrollCarousel({ children, className, style }) {
       {children}
     </div>
   )
+}
+
+function AutoPlayVideo({ src, className }) {
+  const ref = useRef(null)
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.play().catch(() => {})
+    }
+  }, [])
+  return <video ref={ref} src={src} muted loop playsInline className={className} />
 }
 
 
