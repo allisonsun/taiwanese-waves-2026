@@ -24,52 +24,34 @@ const TIERS = [
 
 export default function Sponsors() {
   return (
-    <section
-      id="sponsors"
-      style={{
-        padding: '6rem 2rem',
-        background: '#000',
-      }}
-    >
-      <div style={{ maxWidth: '80vw', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: 32, fontWeight: 600, lineHeight: '32px', letterSpacing: 'normal', color: '#fff' }}>
-            Thank you to our sponsors
-          </h2>
+    <section id="sponsors" className="sponsors-section">
+      <div className="sponsors-inner">
+        <div className="sponsors-heading-wrap">
+          <h2 className="sponsors-heading">Thank you to our sponsors</h2>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '3.5rem' }}>
+        <div className="sponsors-tiers">
           {TIERS.map((tier) => (
-            <div key={tier.label} style={{ textAlign: 'center' }}>
-              <p
-                style={{
-                  fontSize: 20,
-                  fontWeight: 500,
-                  lineHeight: '20px',
-                  color: '#fff',
-                  marginBottom: '1.5rem',
-                }}
-              >
-                {tier.label}
-              </p>
+            <div key={tier.label} className="sponsors-tier">
+              <p className="sponsors-tier-label">{tier.label}</p>
 
               <div className="sponsor-logos-row">
                 {Array.from({ length: tier.logos?.length ?? tier.count }).map((_, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      ...(tier.logos?.[i] || tier.names?.[i] ? {} : { width: 120, height: 60, background: 'rgba(255,255,255,0.05)' }),
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '0.5rem',
-                    }}
-                  >
+                  <div key={i} className={tier.logos?.[i] || tier.names?.[i] ? 'sponsor-logo-wrap' : 'sponsor-placeholder'}>
                     {tier.logos?.[i] && (
-                      <img src={tier.logos[i]} alt="" className={`sponsor-logo${tier.mobileHeights?.[i] ? ' sponsor-logo-mobile-lg' : ''}`} style={{ '--logo-height': `${tier.heights?.[i] ?? 40}px`, '--logo-mobile-height': tier.mobileHeights?.[i] ? `${tier.mobileHeights[i]}px` : undefined, filter: tier.filters?.[i] ?? 'none' }} />
+                      <img
+                        src={tier.logos[i]}
+                        alt=""
+                        className={`sponsor-logo${tier.mobileHeights?.[i] ? ' sponsor-logo-mobile-lg' : ''}`}
+                        style={{
+                          '--logo-height': `${tier.heights?.[i] ?? 40}px`,
+                          '--logo-mobile-height': tier.mobileHeights?.[i] ? `${tier.mobileHeights[i]}px` : undefined,
+                          filter: tier.filters?.[i] ?? 'none',
+                        }}
+                      />
                     )}
                     {tier.names?.[i] && (
-                      <span style={{ color: '#fff', fontSize: 18, whiteSpace: 'nowrap' }}>{tier.names[i]}</span>
+                      <span className="sponsor-name">{tier.names[i]}</span>
                     )}
                   </div>
                 ))}

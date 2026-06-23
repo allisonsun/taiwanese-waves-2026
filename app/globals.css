@@ -933,8 +933,68 @@ overflow-x: hidden;
 }
 
 /* ============================================================
-   Sponsors — logo sizing
+   Sponsors — layout and logo sizing
    ============================================================ */
+
+.sponsors-section {
+  padding: 6rem 2rem;
+  background: var(--color-black);
+}
+
+.sponsors-inner {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.sponsors-heading-wrap {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sponsors-heading {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: normal;
+  color: var(--foreground);
+}
+
+.sponsors-tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.sponsors-tier {
+  text-align: center;
+}
+
+.sponsors-tier-label {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+}
+
+.sponsor-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.sponsor-placeholder {
+  width: 120px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sponsor-name {
+  color: var(--foreground);
+  font-size: 18px;
+  white-space: nowrap;
+}
 
 .sponsor-logos-row {
   display: flex;
