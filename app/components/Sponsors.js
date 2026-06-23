@@ -18,7 +18,7 @@ const TIERS = [
   },
   {
     label: '特別感謝',
-    count: 3,
+    count: 2,
   },
 ]
 
