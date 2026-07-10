@@ -6,10 +6,11 @@ import About from './components/About'
 import Lineup from './components/Lineup'
 import Loader from './components/Loader'
 
+import Sponsors from './components/Sponsors'
+import Footer from './components/Footer'
+
 const History = dynamic(() => import('./components/History'))
 const TimelineStories = dynamic(() => import('./components/TimelineStories'))
-const Sponsors = dynamic(() => import('./components/Sponsors'))
-const Footer = dynamic(() => import('./components/Footer'))
 
 export default function Home() {
   return (
