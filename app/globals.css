@@ -228,6 +228,8 @@ overflow-x: hidden;
   object-fit: cover;
   flex-shrink: 0;
   display: block;
+  width: 560px;
+  height: 560px;
 }
 
 .lineup-solo-text {
@@ -984,12 +986,6 @@ overflow-x: hidden;
   gap: 0.5rem;
 }
 
-.sponsor-placeholder {
-  width: 120px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.05);
-}
-
 .sponsor-name {
   color: var(--foreground);
   font-size: 18px;
@@ -1018,7 +1014,7 @@ overflow-x: hidden;
     max-height: var(--logo-mobile-height, 48px);
   }
   .sponsor-logos-row {
-    row-gap: 1.5rem;
+    gap: 1.5rem 2rem;
   }
 }
 

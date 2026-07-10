@@ -11,7 +11,7 @@ const TIERS = [
   },
   {
     label: '贊助單位',
-    logos: ['/sponsors/china-airlines.svg', '/sponsors/taipei-music-center.svg', '/sponsors/chiayi-city.png', '/sponsors/chiayi-cultural-affairs.png', '/sponsors/贊助單位 - 財團法人嘉義市文化基金會LOGO-03.png', '/sponsors/贊助單位 - CoCo Bubble Tea.png', '/sponsors/贊助單位 - FAPA logo_no background.PNG', '/sponsors/tla-law.svg', '/sponsors/贊助單位 - Interline.png'],
+    logos: ['/sponsors/china-airlines.svg', '/sponsors/taipei-music-center.svg', '/sponsors/chiayi-city.png', '/sponsors/chiayi-cultural-affairs.png', '/sponsors/chiayi-cultural-foundation.png', '/sponsors/coco-bubble-tea.png', '/sponsors/fapa.png', '/sponsors/tla-law.svg', '/sponsors/interline.png'],
     heights: [60, 40, 48, 48, 60, 56, 72, 64, 40],
     mobileHeights: [null, null, null, null, 48, null, null, null, null],
     filters: [null, null, 'brightness(0) invert(1)', 'brightness(0) invert(1)', 'brightness(0) invert(1)', 'brightness(0) invert(1)', 'grayscale(1) invert(1) contrast(20)', null, 'invert(1)'],
