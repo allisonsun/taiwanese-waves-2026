@@ -45,24 +45,23 @@ overflow-x: hidden;
 }
 
 .hero-mask-layer {
+  --mask-scale: 100;
   position: absolute;
   inset: 0;
   -webkit-mask-image: url(/hero/double-circle.png);
-  -webkit-mask-size: 100vw auto;
-  -webkit-mask-position: 0 0;
+  -webkit-mask-size: calc(var(--mask-scale) * 1vw) auto;
+  -webkit-mask-position: center top;
   -webkit-mask-repeat: no-repeat;
   mask-image: url(/hero/double-circle.png);
-  mask-size: 100vw auto;
-  mask-position: 0 0;
+  mask-size: calc(var(--mask-scale) * 1vw) auto;
+  mask-position: center top;
   mask-repeat: no-repeat;
 }
 
 @media (max-width: 1180px) {
   .hero-mask-layer {
-    -webkit-mask-size: cover;
-    -webkit-mask-position: center top;
-    mask-size: cover;
-    mask-position: center top;
+    -webkit-mask-size: auto calc(var(--mask-scale) * 1vh);
+    mask-size: auto calc(var(--mask-scale) * 1vh);
   }
 }
 

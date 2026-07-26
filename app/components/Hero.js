@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
 const LIGHT = { fontFamily: 'var(--font-rational-light), sans-serif', fontWeight: 300 }
 const BOLD  = { fontFamily: 'var(--font-rational), sans-serif' }
@@ -27,24 +27,13 @@ const dateContent = (color) => {
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion()
   const sectionRef = useRef(null)
-  const isDesktopRef = useRef(false)
-
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1181px)')
-    isDesktopRef.current = mq.matches
-    const handler = (e) => { isDesktopRef.current = e.matches }
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
   const circleScale = useTransform(scrollYProgress, [0, 1], [1, 1.6])
   const spinnerScale = useTransform(scrollYProgress, [0, 1], [1, 0.4])
-  const maskSize = useTransform(circleScale, s =>
-    isDesktopRef.current
-      ? `${(s * 100).toFixed(1)}vw auto`
-      : `auto ${(s * 100).toFixed(1)}vh`
-  )
+  // Expose the raw scale as a number; CSS picks the mask axis (vw vs vh) via
+  // media query, so the initial paint is correct without any JS measurement.
+  const maskScale = useTransform(circleScale, s => (s * 100).toFixed(1))
 
   return (
     <section
@@ -108,15 +97,11 @@ style={{
         {/* Black text — always visible */}
         {dateContent('#000')}
 
-        {/* White text — mask tracks circle scale, text stays unscaled */}
+        {/* White text — mask tracks circle scale, text stays unscaled.
+            The scale is passed as --mask-scale; CSS chooses the vw/vh axis. */}
         <motion.div
           className="hero-mask-layer"
-          style={{
-            maskSize,
-            WebkitMaskSize: maskSize,
-            maskPosition: 'center top',
-            WebkitMaskPosition: 'center top',
-          }}
+          style={{ '--mask-scale': maskScale }}
         >
           {dateContent('#fff')}
         </motion.div>
