@@ -25,10 +25,10 @@ const TIERS = [
   },
   {
     label: '特別感謝',
-    logos: ['/sponsors/teresa.svg', '/sponsors/mumu-bath.png', '/sponsors/winson.png', '/sponsors/yumpling.png', '/sponsors/yunhai.png', '/sponsors/taiwan-bear-house.png', '/sponsors/929.png', '/sponsors/boomipop-mono.png', '/sponsors/dae.png', '/sponsors/bagel-joint.jpg', '/sponsors/formosa.jpg', '/sponsors/unnecessary.png'],
-    heights: [40, 48, 96, 64, 52, 80, 44, 84, 80, 72, 96, 32],
-    mobileHeights: [null, 38, 76, 52, 42, 64, null, 64, 60, 56, 72, 28],
-    filters: [null, null, null, null, null, null, 'brightness(0) invert(1)', null, 'brightness(0) invert(1)', 'invert(1)', 'invert(1)', 'brightness(0) invert(1)'],
+    logos: ['/sponsors/teresa.svg', '/sponsors/mumu-bath.png', '/sponsors/winson.png', '/sponsors/yumpling.png', '/sponsors/yunhai.png', '/sponsors/taiwan-bear-house.png', '/sponsors/929.png', '/sponsors/boomipop-mono.png', '/sponsors/dae.png', '/sponsors/bagel-joint-mono.png', '/sponsors/formosa.jpg', '/sponsors/unnecessary.png'],
+    heights: [40, 48, 96, 64, 52, 80, 44, 84, 80, 72, 44, 22],
+    mobileHeights: [null, 38, 76, 52, 42, 64, null, 64, 60, 56, 36, 18],
+    filters: [null, null, null, null, null, null, 'brightness(0) invert(1)', null, 'brightness(0) invert(1)', null, 'invert(1)', 'brightness(0) invert(1)'],
     textNames: ['BK Hsieh', 'Minxuan Hu', '志祺', 'Quake Hsu', 'Xiu-Wei Lin', 'R&M Music & Jeff', 'Yi-Xuan Lu', 'Leo Chang', 'Yu-Chien Liu', 'Sunny Lin', 'Alex Hu', 'Will Hsu', 'Yuwen Chang', 'Chieh Hsiung', 'Sabrina Wu', 'Michael Yu', 'Lei Chiu', 'Yu-Ting Feng', 'Katie Chen', 'Eric Sze', 'Thomas Liu', 'Linda', 'Nina', 'Mimi Lin'],
   },
 ]
