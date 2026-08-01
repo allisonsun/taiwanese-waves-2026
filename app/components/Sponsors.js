@@ -11,8 +11,8 @@ const TIERS = [
   },
   {
     label: '合作單位',
-    logos: ['/sponsors/chiayi-cultural-affairs.png', '/sponsors/chiayi-city.png', '/sponsors/chiayi-cultural-foundation.png'],
-    heights: [46, 48, 60],
+    logos: ['/sponsors/chiayi-city.png', '/sponsors/chiayi-cultural-affairs.png', '/sponsors/chiayi-cultural-foundation.png'],
+    heights: [48, 46, 60],
     mobileHeights: [null, null, 48],
     filters: ['brightness(0) invert(1)', 'brightness(0) invert(1)', 'brightness(0) invert(1)'],
   },
@@ -28,6 +28,7 @@ const TIERS = [
     logos: ['/sponsors/teresa.svg', '/sponsors/mumu-bath.png', '/sponsors/winson.png', '/sponsors/yumpling.png', '/sponsors/yunhai.png', '/sponsors/taiwan-bear-house.png'],
     heights: [40, 48, 96, 64, 52, 80],
     mobileHeights: [null, 38, 76, 52, 42, 64],
+    textNames: ['BK Hsieh', 'Minxuan Hu', '志祺', 'Quake Hsu', 'Xiu-Wei Lin', 'R&M Music & Jeff', 'Yi-Xuan Lu', 'Leo Chang', 'Yu-Chien Liu', 'Sunny Lin', 'Alex Hu', 'Will Hsu', 'Yuwen Chang', 'Chieh Hsiung', 'Sabrina Wu', 'Michael Yu', 'Lei Chiu', 'Yu-Ting Feng', 'Katie Chen', 'Eric Sze', 'Thomas Liu', 'Linda', 'Nina', 'Mimi Lin'],
   },
 ]
 
@@ -45,12 +46,14 @@ export default function Sponsors() {
               <p className="sponsors-tier-label">{tier.label}</p>
 
               <div className="sponsor-logos-row">
-                {Array.from({ length: tier.logos?.length ?? tier.count }).map((_, i) => (
-                  <div key={i} className={tier.logos?.[i] || tier.names?.[i] ? 'sponsor-logo-wrap' : 'sponsor-placeholder'}>
-                    {tier.logos?.[i] && (
+                {tier.logos.map((logo, i) => (
+                  <div key={i} className="sponsor-logo-wrap">
+                    {logo && (
                       <img
-                        src={tier.logos[i]}
+                        src={logo}
                         alt=""
+                        loading="lazy"
+                        decoding="async"
                         className={`sponsor-logo${tier.mobileHeights?.[i] ? ' sponsor-logo-mobile-lg' : ''}`}
                         style={{
                           '--logo-height': `${tier.heights?.[i] ?? 40}px`,
@@ -65,6 +68,14 @@ export default function Sponsors() {
                   </div>
                 ))}
               </div>
+
+              {tier.textNames && (
+                <div className="sponsor-text-names">
+                  {tier.textNames.map((name) => (
+                    <span key={name} className="sponsor-name">{name}</span>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
