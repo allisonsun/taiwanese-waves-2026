@@ -1,5 +1,6 @@
 import localFont from 'next/font/local'
 import './globals.css'
+import { Analytics } from '@vercel/analytics/next'
 
 const archivo = localFont({
   src: './fonts/Archivo-VariableFont.ttf',
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {children}
+        <Analytics />
       </body>
     </html>
   )
